@@ -17,11 +17,8 @@ article_categories:
         icon: "/logo/Rubik's_cube_v2.svg"
         link: "/group_theory"
 ---
-欢迎来到我的 Hugo 网站。
 
-这里是[rainboy](https://github.com/rainboylvx)写的文章
+![](https://avatars.githubusercontent.com/u/8732377?v=4)
 
+这里是[rainboy](https://github.com/rainboylvx)写的文章,[所在的GitHub仓库](https://github.com/Rainboylvx/hugo-blog)
 
-
-
-这里根据 article_categories 动态生成 grid icon link 点击跳转到对应的内容
