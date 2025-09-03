@@ -1,0 +1,3 @@
+- [x] 自动发送博客到 Vercel
+- [x] 自动发送博客到 服务器 bohai (通过github actions) 
+  -  参考 : https://www.bilibili.com/video/BV1bovfeaEtQx
