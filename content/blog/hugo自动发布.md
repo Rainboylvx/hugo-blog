@@ -4,6 +4,15 @@ draft: true
 title: 'Hugo自动发布'
 toc: true
 ---
+## 自动deploy blog 到github
+
+参考
+
+- https://letere-gzj.github.io/hugo-stack/p/hugo/custom-blog/#3-github%E9%83%A8%E7%BD%B2
+- 对应的视频教程: https://www.bilibili.com/video/BV1bovfeaEtQ
+
+## 另一个 可以 发布blog到vps服务器
+下面是新另外一个blog
 
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [blog.wjhwjhn.com](https://blog.wjhwjhn.com/posts/7f5297a/)
 
