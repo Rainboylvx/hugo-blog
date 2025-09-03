@@ -1,0 +1,36 @@
+{{ partial "header.html" . }}
+
+  <main class="home">
+    {{ if not .Site.Params.noSearch }}
+        {{ partial "search-form.html" . }}
+        <ul id="results"></ul>
+    {{ end }}
+    <p>{{ .Content }}</p>
+
+    <div class="category-grid">
+      {{ range .Params.article_categories }}
+        <div class="category-section">
+          <h2 class="name">{{ .name }}
+          {{ with .desc }}
+            <span class="desc">{{ . }}</span>
+          {{ end }}
+          </h2>
+
+          {{ if .children }}
+            <div class="subcategory-grid">
+              {{ range .children }}
+                <div class="subcategory-card">
+                  <a href="{{ .link }}">
+                    <img src="{{ .icon }}" alt="{{ .name }}" />
+                    <span>{{ .name }}</span>
+                  </a>
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </main>
+
+{{ partial "footer.html" . }}

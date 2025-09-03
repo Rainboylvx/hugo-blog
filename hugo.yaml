@@ -1,0 +1,52 @@
+baseURL: "https://hugo-dead-simple.netlify.com/"
+languageCode: en-us
+title: "Rainboy's Blog"
+enableGitInfo: false
+theme: "hugo-dead-simple"
+menu:
+  main:
+    - name: "<u>H</u>ome"
+      url: /
+      weight: 1
+    - name: "<u>T</u>ags"
+      url: "/tags"
+      weight: 3
+
+params:
+  description: "Rainboy's Blog"
+  author: "Rainboy"
+  hideRSS: true
+  hideCredits: true
+  hideCopyright: true
+  noSearch: false
+  links:
+    - rel: "stylesheet"
+      href: "/grid.css"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true # Allow raw HTML in markdown
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['\[', '\]']
+            - ['$$', '$$']
+          inline:
+            - ['\(', '\)']
+            - ['$', '$']
+  highlight:
+    codeFences: true
+    style: bw
+    lineNumbersInTable: false
+    noClasses: false
+
+outputs:
+  home:
+    - html
+    - rss
+    - json
+  page:
+    - html

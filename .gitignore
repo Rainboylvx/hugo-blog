@@ -1,0 +1,36 @@
+# Hugo
+# The directory where Hugo builds the site.
+/public/
+
+# The directory where Hugo caches generated assets.
+/resources/
+
+# Hugo build lock file.
+.hugo_build.lock
+
+# Hugo build statistics
+hugo_stats.json
+
+# NPM dependencies
+/node_modules/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

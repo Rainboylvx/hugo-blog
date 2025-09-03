@@ -1,0 +1,14 @@
+{{ partial "header.html" . }}
+
+<main id="main" class="post">
+  <header>
+    <h1 id="search-title">{{ .Title }}</h1>
+  </header>
+
+  {{ partial "search-form.html" . }}
+
+  <ul id="search-results"></ul>
+</main>
+
+{{ partial "search-index.html" . }}
+{{ partial "footer.html" . }}
