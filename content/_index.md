@@ -18,7 +18,7 @@ article_categories:
         link: "/group_theory"
 ---
 
-![](https://avatars.githubusercontent.com/u/8732377?v=4)
+<img src="https://avatars.githubusercontent.com/u/8732377?v=4" alt="Rainboy Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
 
 这里是[rainboy](https://github.com/rainboylvx)写的文章,[所在的GitHub仓库](https://github.com/Rainboylvx/hugo-blog)
 
