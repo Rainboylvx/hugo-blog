@@ -19,6 +19,7 @@ params:
   hideCredits: true
   hideCopyright: true
   noSearch: false
+  # 下面的文件放到 static 里面
   links:
     - rel: "stylesheet"
       href: "/grid.css"
