@@ -28,7 +28,7 @@
     运行以下命令来启动 Hugo 的开发服务器：
 
     ```bash
-    hugo server -D
+    hugo server -D --bind 0.0.0.0
     ```
 
     `-D` 参数会同时渲染标记为草稿（draft）的页面。
