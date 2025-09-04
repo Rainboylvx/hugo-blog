@@ -6,8 +6,6 @@ toc: true
 ---
 
 
-{{< include "src/demo/void.ts" "ts" >}}
-
 * [首页](readme.md)
 * [如何调试](debug)
 * [笔记:ts编程](typescript_program)

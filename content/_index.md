@@ -13,6 +13,9 @@ article_categories:
       - name: mongodb
         icon: "devicon:mongodb"
         link: "/mongodb"
+      - name: TypeScript
+        icon: "logos:typescript-icon"
+        link: "/typescript"
   - name: 读书笔记
     desc: 各类笔记
     children:

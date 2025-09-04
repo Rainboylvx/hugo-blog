@@ -4,19 +4,19 @@
       <span class="date">{{ .Date.Format "2006-01-02" }}</span>
       {{ if .Params.bold }}
       <a class="bold-post-in-list" href="{{ .RelPermalink }}"
-        >{{ .Page.Title | markdownify }}</a
+        >{{ .Page.Title | default .File.Path | markdownify }}</a
       >
       {{ else }}
-      <a href="{{ .RelPermalink }}">{{ .Page.Title | markdownify }}</a>
+      <a href="{{ .RelPermalink }}">{{ .Page.Title | default .File.Path | markdownify }}</a>
       {{ end }}
     </div>
 {{ else }}
     {{ if .Params.bold }}
     <a class="bold-post-in-list" href="{{ .RelPermalink }}"
-      >{{ .Page.Title | markdownify }}</a
+      >{{ .Page.Title | default .File.Path | markdownify }}</a
     >
     {{ else }}
-    <a href="{{ .RelPermalink }}">{{ .Page.Title | markdownify }}</a>
+    <a href="{{ .RelPermalink }}">{{ .Page.Title | default .File.Path | markdownify }}</a>
     {{ end }}
 {{ end }}
 </li>
