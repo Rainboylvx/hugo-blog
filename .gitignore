@@ -34,3 +34,6 @@ Thumbs.db
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# c++ compiler out
+*.out

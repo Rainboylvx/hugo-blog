@@ -76,6 +76,8 @@
 
 .active-toc {
   font-weight: bold;
+  font-size: 1rem;
+  text-decoration: underline;
   transition-duration: 50ms;
 }
 

@@ -16,22 +16,22 @@
     padding: 0.5rem 1rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    border-left: 5px solid #00aaff;
-    background: linear-gradient(to right, rgba(0, 170, 255, 0.1), transparent);
+  border-left: 5px solid var(--accent-color);
+  background: linear-gradient(to right, var(--accent-color-light), transparent);
     position: relative;
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
     border-radius: 0 4px 4px 0;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow-color);
     width: 100%;
     box-sizing: border-box;
 }
 
 .category-section .desc {
     font-size: 1.0rem;
-    color: #666;
+  color: var(--text-dim);
     margin-left: 1rem
 }
 
@@ -48,25 +48,25 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #333;
+  background-color: var(--card-background);
   border-radius: 12px;
   padding: 10px;
   width: 100px;
   height: 100px;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px var(--shadow-color);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .subcategory-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  background-color: #555;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  background-color: var(--card-background-hover);
 }
 
 .subcategory-card a {
   text-decoration: none;
-  color: #fff;
+  color: var(--card-text-color);
   display: flex;
   flex-direction: column;
   align-items: center;

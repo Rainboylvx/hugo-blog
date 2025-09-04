@@ -24,6 +24,14 @@
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
 
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      (function() {
+        const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
     {{ if .IsHome }}
         <title>{{ .Site.Title }}</title>
     {{ else }}
@@ -79,6 +87,7 @@
             {{ range .Site.Menus.main }}
                 <li><a tabindex="-1" class="menu-link" href="{{ .URL | relURL }}">{{ safeHTML .Name }}</a></li>
             {{ end }}
+             <li><span style="cursor: pointer;" id="theme-switcher" class="menu-link" type="button">🌙</span></li>
           </ul>
         </nav>
         {{ end }}
