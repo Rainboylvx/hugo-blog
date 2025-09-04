@@ -78,7 +78,6 @@ html {
 
 body {
   margin: auto;
-  max-width: 65vw;
   padding: 0em 1em 2em 1em;
   @media (prefers-color-scheme: dark) {
     :root {
@@ -100,6 +99,20 @@ body {
       --output-background: #020202;
     --output-foreground: #815205;
     }
+  }
+}
+
+@media screen and (min-width: 760px) {
+  body {
+    margin: auto;
+    max-width: 68vw;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  body {
+    margin: auto;
+    max-width: 62vw;
   }
 }
 
