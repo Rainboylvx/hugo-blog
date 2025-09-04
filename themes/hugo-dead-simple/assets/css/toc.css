@@ -10,7 +10,7 @@
 @media screen and (min-width: 1150px) {
   #tableOfContentContainer {
     position: fixed;
-    left: 20px;
+    right: 20px;
     top: 46px;
     max-width: 15vw;
     width: 15vw;
