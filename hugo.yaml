@@ -40,9 +40,12 @@ markup:
             - ['$', '$']
   highlight:
     codeFences: true
-    style: bw
+    style: monokai
     lineNumbersInTable: false
     noClasses: false
+    guessSyntax: true
+    lineNos: true
+    tabWidth: 4
 
 outputs:
   home:
