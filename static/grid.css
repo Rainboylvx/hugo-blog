@@ -1,3 +1,10 @@
+.subcategory-card iconify-icon {
+  width: 48px;  /* 容器宽度 */
+  height: 48px; /* 容器高度 */
+  font-size: 48px; /* 控制Iconify图标的大小 */
+  margin-bottom: 0.5rem;
+  object-fit: contain;
+}
 
 .category-grid {
   display: grid;
