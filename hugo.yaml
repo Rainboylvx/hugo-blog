@@ -40,7 +40,7 @@ markup:
             - ['$', '$']
   highlight:
     codeFences: true
-    style: monokai
+    style: gruvbox
     lineNumbersInTable: false
     noClasses: false
     guessSyntax: true
