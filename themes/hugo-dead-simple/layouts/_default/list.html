@@ -1,6 +1,7 @@
 {{ partial "header.html" . }}
 
-<div class="home-content">{{ .Content }}</div>
+
+
 
 {{ if .IsHome }}
     <!--TODO: replace with faster search-->
@@ -20,7 +21,15 @@
         <ul id="results"></ul>
     {{ end }}
     <h2 class="section-title">{{ .CurrentSection.Title }}</h2>
-    {{ partial "post_list.html" . }}
+
+    <div class="home-content">{{ .Content }}</div>
+
+    {{ if not .Params.noList }}
+        {{ partial "post_list.html" . }}
+    {{ end }}
+
 {{ end }}
+
+
 
 {{ partial "footer.html" . }}
