@@ -19,7 +19,7 @@ toc: true
 
 ## 核心实现原理
 
-我们的主题切换功能主要依赖两大现代 Web 技术的结合`code`：
+我们的主题切换功能主要依赖两大现代 Web 技术的结合：
 
 1.  **CSS 自定义属性 (CSS Variables)**
 2.  **通过 JavaScript 操作 HTML 标签的 `data-*` 属性**
