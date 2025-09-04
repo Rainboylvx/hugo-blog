@@ -7,6 +7,12 @@ article_categories:
       - name: blog
         icon: "/logo/notepad.svg"
         link: "/blog"
+  - name: 项目学习
+    desc: 我学习的项目
+    children:
+      - name: mongodb
+        icon: "devicon:mongodb"
+        link: "/mongodb"
   - name: 读书笔记
     desc: 各类笔记
     children:
