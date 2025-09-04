@@ -10,12 +10,18 @@ article_categories:
   - name: 项目学习
     desc: 我学习的项目
     children:
+      - name: 前端
+        icon: "skill-icons:html"
+        link: "/frontend"
       - name: mongodb
         icon: "devicon:mongodb"
         link: "/mongodb"
       - name: TypeScript
         icon: "logos:typescript-icon"
         link: "/typescript"
+      - name: "linux网络编程"
+        icon: "mdi:ip-network"
+        link: "/linux_tcp_program"
   - name: 读书笔记
     desc: 各类笔记
     children:
