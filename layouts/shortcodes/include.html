@@ -1,0 +1,15 @@
+{{ $file := .Get 0 }}
+{{ $lang := .Get 1 }}
+
+{{ $path := "" }}
+{{ if strings.HasPrefix $file "/" }}
+    {{ $path = path.Join "content" (strings.TrimPrefix "/" $file) }}
+{{ else }}
+    {{ $path = path.Join "content" .Page.File.Dir $file }}
+{{ end }}
+
+{{ with readFile $path }}
+    {{ highlight . $lang "" }}
+{{ else }}
+    <p>Error reading file: <code>{{ $file }}</code>. Attempted path: <code>{{ $path }}</code></p>
+{{ end }}

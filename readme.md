@@ -46,3 +46,13 @@ hugo
 ```
 
 Hugo 会将完整的静态网站文件生成到 `public/` 目录下。你只需将此目录下的所有文件部署到任何静态网站托管服务（如 Netlify, Vercel, GitHub Pages 等）即可。
+
+
+## 使用
+
+### shortcodes
+
+- include 代码片段
+    ```
+    {{< include "src/demo/void.ts" "ts" >}}
+    ```
