@@ -51,8 +51,8 @@
   background-color: var(--card-background);
   border-radius: 12px;
   padding: 10px;
-  width: 100px;
-  height: 100px;
+  width: 95px;
+  height: 95px;
   justify-content: center;
   box-shadow: 0 2px 4px var(--shadow-color);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
