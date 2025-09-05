@@ -54,6 +54,9 @@ Hugo 会将完整的静态网站文件生成到 `public/` 目录下。你只需�
 
 - 代码高亮: `gruvbox`,如果想局部高亮某些行,参考这里:https://gohugo.io/content-management/syntax-highlighting/
 - 数学公式: katex
+- 使 [赫蹏](https://github.com/sivan/heti)排版样式增强
+- 使用 google font Roboto Mono 英文字体
+
 
 
 ### shortcodes
