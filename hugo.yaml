@@ -15,6 +15,7 @@ menu:
 params:
   description: "Rainboy's Blog"
   author: "Rainboy"
+  timeZone: "Asia/Shanghai" # 设置时区,footer 格式化时间的时候使用
   hideRSS: true
   hideCredits: true
   hideCopyright: true
