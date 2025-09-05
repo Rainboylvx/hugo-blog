@@ -1,42 +1,56 @@
 {{ partial "header.html" . }}
 
-  <main class="home">
-    {{ if not .Site.Params.noSearch }}
-        {{ partial "search-form.html" . }}
-        <ul id="results"></ul>
-    {{ end }}
-    <p>{{ .Content }}</p>
+<main class="home">
+  {{ if not .Site.Params.noSearch }}
+  {{ partial "search-form.html" . }}
+  <ul id="results"></ul>
+  {{ end }}
+  <p>{{ .Content }}</p>
 
-    <div class="category-grid">
-      {{ range .Params.article_categories }}
-        <div class="category-section">
-          <h2 class="name">{{ .name }}
-          {{ with .desc }}
-            <span class="desc">{{ . }}</span>
-          {{ end }}
-          </h2>
+  <div class="category-grid">
+    {{ range .Params.article_categories }}
+    <div class="category-section">
+      <h2 class="name">{{ .name }}
+        {{ with .desc }}
+        <span class="desc">{{ . }}</span>
+        {{ end }}
+      </h2>
 
-          {{ if .children }}
-            <div class="subcategory-grid">
-              {{ range .children }}
-                <div class="subcategory-card">
-                  <a href="{{ .link }}">
-                    {{ if strings.Contains .icon ":" }}
-                      {{ printf "<iconify-icon icon=\"%s\"></iconify-icon>" .icon | safeHTML }}
-                    {{ else }}
-                      <img src="{{ .icon }}" alt="{{ .name }}" />
-                    {{ end }}
-                    <span>{{ .name }}</span>
-                    
-                  </a>
-                </div>
-              {{ end }}
-            </div>
-          {{ end }}
+      {{ if .children }}
+      <div class="subcategory-grid">
+        {{ range .children }}
+        <div class="subcategory-card">
+          <a href="{{ .link }}">
+            {{ if strings.Contains .icon ":" }}
+            {{ printf "<iconify-icon icon=\"%s\"></iconify-icon>" .icon | safeHTML }}
+            {{ else }}
+            <img src="{{ .icon }}" alt="{{ .name }}" />
+            {{ end }}
+            <span>{{ .name }}</span>
+
+          </a>
         </div>
+        {{ end }}
+      </div>
       {{ end }}
     </div>
-  </main>
+
+
+    {{ end }}
+
+     <div class="category-section">
+      <h2 class="name">最近提交文章列表</h2>
+      <ul class="post-list">
+
+        {{ range first (or .Site.Params.recent_post_count 10) .Site.RegularPages }}
+        {{ partial "post_row.html" . }}
+        {{ end }}
+      </ul>
+  </div>
+  </div>
+
+
+</main>
 
 <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 {{ partial "footer.html" . }}

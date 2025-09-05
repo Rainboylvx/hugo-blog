@@ -16,6 +16,7 @@ params:
   description: "Rainboy's Blog"
   author: "Rainboy"
   timeZone: "Asia/Shanghai" # 设置时区,footer 格式化时间的时候使用
+  recent_post_count: 10 # 最近提交文章列表的数量
   hideRSS: true
   hideCredits: true
   hideCopyright: true
