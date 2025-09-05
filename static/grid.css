@@ -112,3 +112,28 @@
   background-color: var(--card-background-hover);
   transform: translateY(-2px);
 }
+
+/* Author Profile Styles */
+.author-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.author-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-color);
+}
+
+.author-info {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+}
