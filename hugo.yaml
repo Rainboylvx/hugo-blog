@@ -1,5 +1,5 @@
 baseURL: "https://hugo-dead-simple.netlify.com/"
-languageCode: en-us
+languageCode: zh-cn
 title: "Rainboy's Blog"
 enableGitInfo: false
 theme: "hugo-dead-simple"
@@ -29,7 +29,6 @@ params:
   links:
     - rel: "stylesheet"
       href: "/grid.css"
-
 markup:
   goldmark:
     renderer:
