@@ -3,16 +3,33 @@
   z-index: 9999;
   text-align: left;
   margin-bottom: 10px;
+  display:flex;
+  align-items: center;
+  list-style:none;
+  /* background:green; */
+  height:24px;
 }
 
 .menu li {
-  display: inline-block;
+  /* display: inline-block; */
+  display: grid;
+  place-items: center;
+  height:inherit;
 }
 
+.menu li svg {
+  height:18px;
+  display:block;
+  /* background:red; */
+}
 .menu a {
   margin-right: 1.1em;
+  height:inherit;
+  display:block;
   text-decoration: none;
-  border-radius: 5px;
+  vertical-align: middle;
+  /* border-radius: 5px; */
+  /* background:red; */
 }
 
 .menu a:visited {
