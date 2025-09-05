@@ -71,3 +71,14 @@
 .md-tabs input[type="radio"]:checked + label + .md-tabs-content {
   display: block;
 }
+
+
+.footer-info {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
