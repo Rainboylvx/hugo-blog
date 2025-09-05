@@ -38,7 +38,7 @@
 
     {{ end }}
 
-     <div class="category-section">
+    <div class="category-section">
       <h2 class="name">最近提交文章列表</h2>
       <ul class="post-list">
 
@@ -46,7 +46,21 @@
         {{ partial "post_row.html" . }}
         {{ end }}
       </ul>
-  </div>
+    </div>
+
+    <div class="category-section">
+      <h2 class="name">友链
+        <span class="desc">通过我的  <a href="mailto:{{ .Site.Params.mail }}">📧email</a> 交换友链</span>
+      </h2>
+      <ul class="friend-list">
+        {{ range .Site.Params.friends }}
+        <li>
+          <a href="{{ .url }}" target="_blank">{{ .name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+
   </div>
 
 

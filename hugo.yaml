@@ -21,6 +21,10 @@ params:
   hideCredits: true
   hideCopyright: true
   noSearch: false
+  mail: "rainboylvx@qq.com"
+  friends:
+    - name: "🏗️Rainboy's work"
+      url: "https://idx.roj.ac.cn"
   # 下面的文件放到 static 里面
   links:
     - rel: "stylesheet"
