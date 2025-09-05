@@ -41,4 +41,3 @@ article_categories:
     这里是<a href="https://github.com/rainboylvx">rainboy</a>写的文章, 托管在 <a href="https://github.com/Rainboylvx/hugo-blog">GitHub 仓库</a>
   </div>
 </div>
-

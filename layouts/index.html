@@ -2,10 +2,9 @@
 
 <main class="home">
   {{ if not .Site.Params.noSearch }}
-  {{ partial "search-form.html" . }}
-  <ul id="results"></ul>
+    {{ partial "search-form.html" . }}
   {{ end }}
-  <p>{{ .Content }}</p>
+  <div>{{ .Content }}</div>
 
   <div class="category-grid">
     {{ range .Params.article_categories }}
