@@ -68,6 +68,7 @@
         (resources.Get "css/misc.css")
         (resources.Get "css/syntax.css")
         (resources.Get "css/heti.min.css")
+        (resources.Get "css/fix_heti.css")
     | resources.Concat "style.css" | minify | fingerprint }}
     <link rel="stylesheet" type="text/css" href="{{ $CSS.RelPermalink }}" media="all">
 
