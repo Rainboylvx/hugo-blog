@@ -41,7 +41,7 @@
       <h2 class="name">最近提交文章列表</h2>
       <ul class="post-list">
 
-        {{ range first (or .Site.Params.recent_post_count 10) .Site.RegularPages }}
+        {{ range first (or .Site.Params.recent_post_count 10) (sort .Site.RegularPages "Lastmod" "desc") }}
         {{ partial "post_row.html" . }}
         {{ end }}
       </ul>

@@ -29,6 +29,13 @@ params:
   links:
     - rel: "stylesheet"
       href: "/grid.css"
+
+frontmatter:
+  lastmod: # 使用文件的最后修改时间作为 lastmod
+    - lastmod
+    - :fileModTime
+
+
 markup:
   goldmark:
     renderer:
