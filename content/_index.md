@@ -23,8 +23,11 @@ article_categories:
         icon: "mdi:ip-network"
         link: "/linux_tcp_program"
   - name: 读书笔记
-    desc: 各类笔记
+    desc: 我的读书笔记
     children:
+      - name: 算法竞赛进阶指南
+        icon: "算法竞赛进阶指南/images/cover.jpg"
+        link: "/算法竞赛进阶指南"
       - name: geogebra
         icon: "/logo/Geogebra.svg"
         link: "/gegebra"
