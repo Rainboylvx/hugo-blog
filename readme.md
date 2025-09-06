@@ -62,6 +62,13 @@ Hugo 会将完整的静态网站文件生成到 `public/` 目录下。你只需�
 ### shortcodes
 
 - include 代码片段
-    ```
+    ```html
     {{< include "src/demo/void.ts" "ts" >}}
+    ```
+- details
+    ```html
+    {{% details title="Title" open=true %}}
+    ## Markdown content
+    Lorem markdownum insigne...
+    {{% /details %}}
     ```
