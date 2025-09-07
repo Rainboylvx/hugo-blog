@@ -26,17 +26,17 @@ toc: true
 
 #### 小写希腊字母
 
-**注：部分希腊字母在数学公式中常以变量形式出现，例如 $\\epsilon$ 在数学中一般写法为 $\\varepsilon$，$\\phi$ 在数学中通常写作 $\\varphi$**
+**注：部分希腊字母在数学公式中常以变量形式出现，例如 $\epsilon$ 在数学中一般写法为 $\varepsilon$，$\phi$ 在数学中通常写作 $\varphi$**
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\alpha$ | `\alpha` | $\\beta$ | `\beta` | $\\gamma$ | `\gamma` |
-| $\\theta$ | `\theta` | $\\varepsilon$ | `\varepsilon` | $\\delta$ | `\delta` |
-| $\\mu$ | `\mu` | $\\nu$ | `\nu` | $\\eta$ | `\eta` |
-| $\\zeta$ | `\zeta` | $\\lambda$ | `\lambda` | $\\psi$ | `\psi` |
-| $\\sigma$ | `\sigma` | $\\xi$ | `\xi` | $\\tau$ | `\tau` |
-| $\\phi$ | `\phi` | $\\varphi$ | `\varphi` | $\\rho$ | `\rho` |
-| $\\chi$ | `\chi` | $\\omega$ | `\omega` | $\\pi$ | `\pi` |
+| $\alpha$ | `\alpha` | $\beta$ | `\beta` | $\gamma$ | `\gamma` |
+| $\theta$ | `\theta` | $\varepsilon$ | `\varepsilon` | $\delta$ | `\delta` |
+| $\mu$ | `\mu` | $\nu$ | `\nu` | $\eta$ | `\eta` |
+| $\zeta$ | `\zeta` | $\lambda$ | `\lambda` | $\psi$ | `\psi` |
+| $\sigma$ | `\sigma` | $\xi$ | `\xi` | $\tau$ | `\tau` |
+| $\phi$ | `\phi` | $\varphi$ | `\varphi` | $\rho$ | `\rho` |
+| $\chi$ | `\chi` | $\omega$ | `\omega` | $\pi$ | `\pi` |
 
 ### 大写希腊字母
 
@@ -44,10 +44,10 @@ toc: true
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\Sigma$ | `\Sigma` | $\\Pi$ | `\Pi` | $\\Delta$ | `\Delta` |
-| $\\Gamma$ | `\Gamma` | $\\Psi$ | `\Psi` | $\\Theta$ | `\Theta` |
-| $\\Lambda$ | `\Lambda` | $\\Omega$ | `\Omega` | $\\Phi$ | `\Phi` |
-| $\\Xi$ | `\Xi` | | | | |
+| $\Sigma$ | `\Sigma` | $\Pi$ | `\Pi` | $\Delta$ | `\Delta` |
+| $\Gamma$ | `\Gamma` | $\Psi$ | `\Psi` | $\Theta$ | `\Theta` |
+| $\Lambda$ | `\Lambda` | $\Omega$ | `\Omega` | $\Phi$ | `\Phi` |
+| $\Xi$ | `\Xi` | | | | |
 
 ### 常用字体
 
@@ -55,10 +55,10 @@ toc: true
 
 | 字体 | 语法 | 字体 | 语法 |
 | :--- | :--- | :--- | :--- |
-| $\\mathrm{ABCdef}$ | `\mathrm{ABCdef}` | $\\mathbf{ABCdef}$ | `\mathbf{ABCdef}` |
-| $\\mathit{ABCdef}$ | `\mathit{ABCdef}` | $\\pmb{ABCdef}$ | `\pmb{ABCdef}` |
-| $\\mathscr{ABCdef}$ | `\mathscr{ABCdef}` | $\\mathcal{ABCdef}$ | `\mathcal{ABCdef}` |
-| $\\mathfrak{ABCdef}$ | `\mathfrak{ABCdef}` | $\\mathbb{ABCdef}$ | `\mathbb{ABCdef}` |
+| $\mathrm{ABCdef}$ | `\mathrm{ABCdef}` | $\mathbf{ABCdef}$ | `\mathbf{ABCdef}` |
+| $\mathit{ABCdef}$ | `\mathit{ABCdef}` | $\pmb{ABCdef}$ | `\pmb{ABCdef}` |
+| $\mathscr{ABCdef}$ | `\mathscr{ABCdef}` | $\mathcal{ABCdef}$ | `\mathcal{ABCdef}` |
+| $\mathfrak{ABCdef}$ | `\mathfrak{ABCdef}` | $\mathbb{ABCdef}$ | `\mathbb{ABCdef}` |
 
 ### 常见运算符
 
