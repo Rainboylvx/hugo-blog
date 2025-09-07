@@ -14,6 +14,7 @@ toc: true
 1. katex document https://katex.org/docs/api
 2. [LaTeX公式手册(全网最全) - 樱花赞 - 博客园](https://www.cnblogs.com/1024th/p/11623258.html)
 3. 这个显示有问题，有时间的话，我会 fork 一下修改 https://1024th.github.io/MathJax_Tutorial_CN/#/quickstart
+4. 在线latex公式编辑器 https://www.latexlive.com/
 
 
 ## Latex 公式手册
@@ -535,3 +536,85 @@ $$
 $$
 
 注：`\quad` 表示空格。
+
+
+## 公式添加编号
+
+在 LaTeX 中，可以通过 `\tag{}` 命令为公式自定义编号。以下是如何在 LaTeX 中为公式添加自定义编号的示例：
+
+### 示例代码
+
+```latex
+% 无编号公式
+
+$$
+
+\dot{V}(x) \leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}}
+
+$$
+```
+
+$$
+\dot{V}(x) \leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}}
+$$
+
+
+```latex
+
+% 自定义编号公式
+
+$$
+
+\dot{V}(x) \leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}} \tag{1.1}
+
+$$
+
+```
+$$
+\dot{V}(x) \leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}} \tag{1.1}
+$$
+
+```latex
+
+% 多行公式自定义编号
+
+\begin{align}
+
+\dot{V}(x) &\leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}} \tag{1.2} \\
+
+&\leq -k_1 V(x)^{\frac{m}{n}} \quad \text{(忽略次线性项)} \tag{1.3}
+
+\end{align}
+
+\end{document}
+```
+
+
+$$
+\begin{align}
+
+\dot{V}(x) &\leq -k_1 V(x)^{\frac{m}{n}} - k_2 V(x)^{\frac{r}{s}} \tag{1.2} \\
+
+&\leq -k_1 V(x)^{\frac{m}{n}} \quad \text{(忽略次线性项)} \tag{1.3}
+
+\end{align}
+$$
+
+### 说明
+
+1.  **无编号公式**：  
+    
+
+*   使用 `$$ ... $$` 或 `[equation*]` 环境可以创建无编号公式。
+*   **自定义编号公式**：
+*   使用 `\tag{}` 命令可以为公式添加自定义编号，例如 `\tag{1.1}`。
+*   **多行公式自定义编号**：  
+*   在 `align` 环境中，可以为每一行公式单独添加自定义编号。
+
+
+### 注意事项
+
+*   `\tag{}` 命令会覆盖 LaTeX 自动生成的编号。
+*   如果需要在公式中引用自定义编号，可以使用 `\label{}` 和 `\[eqref]{}` 结合的方式。
+
+通过这种方式，可以灵活地为 LaTeX 公式添加自定义编号，满足特定文档的需求。
