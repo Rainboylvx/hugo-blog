@@ -26,17 +26,17 @@ toc: true
 
 #### 小写希腊字母
 
-**注：部分希腊字母在数学公式中常以变量形式出现，例如 $\epsilon$ 在数学中一般写法为 $\varepsilon$，$\phi$ 在数学中通常写作 $\varphi$**
+**注：部分希腊字母在数学公式中常以变量形式出现，例如 $\\epsilon$ 在数学中一般写法为 $\\varepsilon$，$\\phi$ 在数学中通常写作 $\\varphi$**
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\alpha$ | `\alpha` | $\beta$ | `\beta` | $\gamma$ | `\gamma` |
-| $\theta$ | `\theta` | $\varepsilon$ | `\varepsilon` | $\delta$ | `\delta` |
-| $\mu$ | `\mu` | $\nu$ | `\nu` | $\eta$ | `\eta` |
-| $\zeta$ | `\zeta` | $\lambda$ | `\lambda` | $\psi$ | `\psi` |
-| $\sigma$ | `\sigma` | $\xi$ | `\xi` | $\tau$ | `\tau` |
-| $\phi$ | `\phi` | $\varphi$ | `\varphi` | $\rho$ | `\rho` |
-| $\chi$ | `\chi` | $\omega$ | `\omega` | $\pi$ | `\pi` |
+| $\\alpha$ | `\alpha` | $\\beta$ | `\beta` | $\\gamma$ | `\gamma` |
+| $\\theta$ | `\theta` | $\\varepsilon$ | `\varepsilon` | $\\delta$ | `\delta` |
+| $\\mu$ | `\mu` | $\\nu$ | `\nu` | $\\eta$ | `\eta` |
+| $\\zeta$ | `\zeta` | $\\lambda$ | `\lambda` | $\\psi$ | `\psi` |
+| $\\sigma$ | `\sigma` | $\\xi$ | `\xi` | $\\tau$ | `\tau` |
+| $\\phi$ | `\phi` | $\\varphi$ | `\varphi` | $\\rho$ | `\rho` |
+| $\\chi$ | `\chi` | $\\omega$ | `\omega` | $\\pi$ | `\pi` |
 
 ### 大写希腊字母
 
@@ -44,10 +44,10 @@ toc: true
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\Sigma$ | `\Sigma` | $\Pi$ | `\Pi` | $\Delta$ | `\Delta` |
-| $\Gamma$ | `\Gamma` | $\Psi$ | `\Psi` | $\Theta$ | `\Theta` |
-| $\Lambda$ | `\Lambda` | $\Omega$ | `\Omega` | $\Phi$ | `\Phi` |
-| $\Xi$ | `\Xi` | | | | |
+| $\\Sigma$ | `\Sigma` | $\\Pi$ | `\Pi` | $\\Delta$ | `\Delta` |
+| $\\Gamma$ | `\Gamma` | $\\Psi$ | `\Psi` | $\\Theta$ | `\Theta` |
+| $\\Lambda$ | `\Lambda` | $\\Omega$ | `\Omega` | $\\Phi$ | `\Phi` |
+| $\\Xi$ | `\Xi` | | | | |
 
 ### 常用字体
 
@@ -64,13 +64,13 @@ toc: true
 
 | 运算符 | 语法 | 运算符 | 语法 | 运算符 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $+$ | `+` | $-$ | `-` | $\\times$ | `\times` |
-| $\\pm$ | `\pm` | $\\cdot$ | `\cdot` | $\\ast$ | `\ast` |
-| $\\cup$ | `\cup` | $\\cap$ | `\cap` | $\\circ$ | `\circ` |
-| $\\lor$ | `\lor` 或 `\vee` | $\\land$ | `\land` 或 `\wedge` | $\\lnot$ | `\lnot` |
-| $\\oplus$ | `\oplus` | $\\ominus$ | `\ominus` | $\\otimes$ | `\otimes` |
-| $\\odot$ | `\odot` | $\\oslash$ | `\oslash` | $\\bullet$ | `\bullet` |
-| $\\sqrt{x}$ | `\sqrt{x}` | $\\sqrt[n]{x}$ | `\sqrt[n]{x}` | | |
+| $+$ | `+` | $-$ | `-` | $\times$ | `\times` |
+| $\pm$ | `\pm` | $\cdot$ | `\cdot` | $\ast$ | `\ast` |
+| $\cup$ | `\cup` | $\cap$ | `\cap` | $\circ$ | `\circ` |
+| $\lor$ | `\lor` 或 `\vee` | $\land$ | `\land` 或 `\wedge` | $\lnot$ | `\lnot` |
+| $\oplus$ | `\oplus` | $\ominus$ | `\ominus` | $\otimes$ | `\otimes` |
+| $\odot$ | `\odot` | $\oslash$ | `\oslash` | $\bullet$ | `\bullet` |
+| $\sqrt{x}$ | `\sqrt{x}` | $\sqrt[n]{x}$ | `\sqrt[n]{x}` | | |
 
 ### 大尺寸运算符
 
@@ -100,37 +100,37 @@ toc: true
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\hat{a}$ | `\hat{a}` | $\\bar{a}$ | `\bar{a}` | $\\tilde{a}$ | `\tilde{a}` |
-| $\\vec{a}$ | `\vec{a}` | $\\dot{a}$ | `\dot{a}` | $\\ddot{a}$ | `\ddot{a}` |
-| $\\widehat{abc}$ | `\widehat{abc}` | $\\widetilde{abc}$ | `\widetilde{abc}` | $\\overline{abc}$ | `\overline{abc}` |
+| $\hat{a}$ | `\hat{a}` | $\bar{a}$ | `\bar{a}` | $\tilde{a}$ | `\tilde{a}` |
+| $\vec{a}$ | `\vec{a}` | $\dot{a}$ | `\dot{a}` | $\ddot{a}$ | `\ddot{a}` |
+| $\widehat{abc}$ | `\widehat{abc}` | $\widetilde{abc}$ | `\widetilde{abc}` | $\overline{abc}$ | `\overline{abc}` |
 
 ### 箭头
 
-如果需要长箭头，只需要在语法前面加上 `\long`，例如 `\longleftarrow` 即为 $\\longleftarrow$，如果加上 `\Long` 则变为双线长箭头，例如 `\Longleftarrow` 即为 $\\Longleftarrow$
+如果需要长箭头，只需要在语法前面加上 `\long`，例如 `\longleftarrow` 即为 $\longleftarrow$，如果加上 `\Long` 则变为双线长箭头，例如 `\Longleftarrow` 即为 $\Longleftarrow$
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\leftarrow$ | `\leftarrow` | $\\rightarrow$ | `\rightarrow` | $\\leftrightarrow$ | `\leftrightarrow` |
-| $\\Leftarrow$ | `\Leftarrow` | $\\Rightarrow$ | `\Rightarrow` | $\\Leftrightarrow$ | `\Leftrightarrow` |
-| $\\uparrow$ | `\uparrow` | $\\downarrow$ | `\downarrow` | $\\updownarrow$ | `\updownarrow` |
-| $\\Uparrow$ | `\Uparrow` | $\\Downarrow$ | `\Downarrow` | $\\Updownarrow$ | `\Updownarrow` |
-| $\\leftharpoonup$ | `\leftharpoonup` | $\\leftharpoondown$ | `\leftharpoondown` | $\\rightharpoonup$ | `\rightharpoonup` |
-| $\\rightharpoondown$ | `\rightharpoondown` | $\\rightleftharpoons$ | `\rightleftharpoons` | $\\leftrightharpoons$ | `\leftrightharpoons` |
-| $\\iff$ | `\iff` | $\\mapsto$ | `\mapsto` | | |
+| $\leftarrow$ | `\leftarrow` | $\rightarrow$ | `\rightarrow` | $\leftrightarrow$ | `\leftrightarrow` |
+| $\Leftarrow$ | `\Leftarrow` | $\Rightarrow$ | `\Rightarrow` | $\Leftrightarrow$ | `\Leftrightarrow` |
+| $\uparrow$ | `\uparrow` | $\downarrow$ | `\downarrow` | $\updownarrow$ | `\updownarrow` |
+| $\Uparrow$ | `\Uparrow` | $\Downarrow$ | `\Downarrow` | $\Updownarrow$ | `\Updownarrow` |
+| $\leftharpoonup$ | `\leftharpoonup` | $\leftharpoondown$ | `\leftharpoondown` | $\rightharpoonup$ | `\rightharpoonup` |
+| $\rightharpoondown$ | `\rightharpoondown` | $\rightleftharpoons$ | `\rightleftharpoons` | $\leftrightharpoons$ | `\leftrightharpoons` |
+| $\iff$ | `\iff` | $\mapsto$ | `\mapsto` | | |
 
 ### 括号
 
 | 括号 | 语法 | 括号 | 语法 | 括号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | $()$ | `()` | $[]$ | `[]` | ${}$ | `\{\}` |
-| $\\lfloor\\rfloor$ | `\lfloor\rfloor` | $\\lceil\\rceil$ | `\lceil\rceil` | $\\langle\\rangle$ | `\langle\rangle` |
+| $\lfloor\rfloor$ | `\lfloor\rfloor` | $\lceil\rceil$ | `\lceil\rceil` | $\langle\rangle$ | `\langle\rangle` |
 
 ### 大尺寸括号
 
 | 括号 | 语法 | 括号 | 语法 |
 | :--- | :--- | :--- | :--- |
-| $\\left(\\right)$ | `\left(\right)` | $\\left[ \\right]$ | `\left[\right]` |
-| $\\overbrace{x\_1x\_2\\ldots x\_n}^{n}$ | `\overbrace{x_1x_2\ldots x_n}^{n}` | $\\underbrace{x\_1x\_2\\ldots x\_n}\_{n}$ | `\underbrace{x_1x_2\ldots x_n}_{n}` |
+| $\left(\right)$ | `\left(\right)` | $\left[ \right]$ | `\left[\right]` |
+| $\overbrace{x\_1x\_2\ldots x\_n}^{n}$ | `\overbrace{x_1x_2\ldots x_n}^{n}` | $\underbrace{x\_1x\_2\ldots x\_n}\_{n}$ | `\underbrace{x_1x_2\ldots x_n}_{n}` |
 
 **注：大尺寸的 `()` 和 `[]` 是可以根据公式的高度自动调节的，例如**
 
