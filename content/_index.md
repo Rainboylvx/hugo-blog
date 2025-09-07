@@ -26,8 +26,11 @@ article_categories:
     desc: 我的读书笔记
     children:
       - name: 算法竞赛进阶指南
-        icon: "算法竞赛进阶指南/images/cover.jpg"
-        link: "/算法竞赛进阶指南"
+        icon: "books/算法竞赛进阶指南/images/cover.jpg"
+        link: "books/算法竞赛进阶指南"
+      - name: 算法新解-刘新宇
+        icon: "books/算法新解-刘新宇/cover.jpg"
+        link: "books/算法新解-刘新宇"
       - name: geogebra
         icon: "/logo/Geogebra.svg"
         link: "/gegebra"
