@@ -13,6 +13,9 @@ article_categories:
       - name: 前端
         icon: "skill-icons:html"
         link: "/frontend"
+      - name: geogebra
+        icon: "/logo/Geogebra.svg"
+        link: "/gegebra"
       - name: mongodb
         icon: "devicon:mongodb"
         link: "/mongodb"
@@ -31,9 +34,6 @@ article_categories:
       - name: 算法新解-刘新宇
         icon: "books/算法新解-刘新宇/cover.jpg"
         link: "books/算法新解-刘新宇"
-      - name: geogebra
-        icon: "/logo/Geogebra.svg"
-        link: "/gegebra"
       - name: 群论
         icon: "/logo/Rubik's_cube_v2.svg"
         link: "/group_theory"
