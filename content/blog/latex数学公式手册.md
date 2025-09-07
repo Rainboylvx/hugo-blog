@@ -31,13 +31,13 @@ toc: true
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\alpha$ | `\alpha` | $\\beta$ | `\beta` | $\\gamma$ | `\gamma` |
-| $\\theta$ | `\theta` | $\\varepsilon$ | `\varepsilon` | $\\delta$ | `\delta` |
-| $\\mu$ | `\mu` | $\\nu$ | `\nu` | $\\eta$ | `\eta` |
-| $\\zeta$ | `\zeta` | $\\lambda$ | `\lambda` | $\\psi$ | `\psi` |
-| $\\sigma$ | `\sigma` | $\\xi$ | `\xi` | $\\tau$ | `\tau` |
-| $\\phi$ | `\phi` | $\\varphi$ | `\varphi` | $\\rho$ | `\rho` |
-| $\\chi$ | `\chi` | $\\omega$ | `\omega` | $\\pi$ | `\pi` |
+| $\alpha$ | `\alpha` | $\beta$ | `\beta` | $\gamma$ | `\gamma` |
+| $\theta$ | `\theta` | $\varepsilon$ | `\varepsilon` | $\delta$ | `\delta` |
+| $\mu$ | `\mu` | $\nu$ | `\nu` | $\eta$ | `\eta` |
+| $\zeta$ | `\zeta` | $\lambda$ | `\lambda` | $\psi$ | `\psi` |
+| $\sigma$ | `\sigma` | $\xi$ | `\xi` | $\tau$ | `\tau` |
+| $\phi$ | `\phi` | $\varphi$ | `\varphi` | $\rho$ | `\rho` |
+| $\chi$ | `\chi` | $\omega$ | `\omega` | $\pi$ | `\pi` |
 
 ### 大写希腊字母
 
@@ -45,10 +45,10 @@ toc: true
 
 | 符号 | 语法 | 符号 | 语法 | 符号 | 语法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| $\\Sigma$ | `\Sigma` | $\\Pi$ | `\Pi` | $\\Delta$ | `\Delta` |
-| $\\Gamma$ | `\Gamma` | $\\Psi$ | `\Psi` | $\\Theta$ | `\Theta` |
-| $\\Lambda$ | `\Lambda` | $\\Omega$ | `\Omega` | $\\Phi$ | `\Phi` |
-| $\\Xi$ | `\Xi` | | | | |
+| $\Sigma$ | `\Sigma` | $\Pi$ | `\Pi` | $\Delta$ | `\Delta` |
+| $\Gamma$ | `\Gamma` | $\Psi$ | `\Psi` | $\Theta$ | `\Theta` |
+| $\Lambda$ | `\Lambda` | $\Omega$ | `\Omega` | $\Phi$ | `\Phi` |
+| $\Xi$ | `\Xi` | | | | |
 
 ### 常用字体
 
