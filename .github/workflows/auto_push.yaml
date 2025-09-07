@@ -15,7 +15,7 @@ jobs:
           with:
               fetch-depth: 0
 
-            # Fix timestamps
+        # Fix timestamps
         - name: restore timestamps
           uses: chetan/git-restore-mtime-action@v2
 
