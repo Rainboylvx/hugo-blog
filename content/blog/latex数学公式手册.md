@@ -130,7 +130,7 @@ toc: true
 | 括号 | 语法 | 括号 | 语法 |
 | :--- | :--- | :--- | :--- |
 | $\left(\right)$ | `\left(\right)` | $\left[ \right]$ | `\left[\right]` |
-| $\overbrace{x\_1x\_2\ldots x\_n}^{n}$ | `\overbrace{x_1x_2\ldots x_n}^{n}` | $\underbrace{x\_1x\_2\ldots x\_n}\_{n}$ | `\underbrace{x_1x_2\ldots x_n}_{n}` |
+| $\overbrace{x_1 x_2 \ldots x_n}^{n}$ | `\overbrace{x_1 x_2 \ldots x_n}^{n}` | $\underbrace{x_1 x_2 \ldots x_n}_{n}$ | `\underbrace{x_1 x_2 \ldots x_n}_{n}` |
 
 **注：大尺寸的 `()` 和 `[]` 是可以根据公式的高度自动调节的，例如**
 
