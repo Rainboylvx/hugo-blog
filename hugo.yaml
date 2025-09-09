@@ -3,6 +3,7 @@ languageCode: zh-cn
 title: "Rainboy's Blog"
 enableGitInfo: false
 theme: "hugo-dead-simple"
+uglyURLs: true
 menu:
   main:
     - name: "<u>H</u>ome"
@@ -34,7 +35,6 @@ frontmatter:
   lastmod: # 使用文件的最后修改时间作为 lastmod
     - lastmod
     - :fileModTime
-
 
 markup:
   goldmark:
