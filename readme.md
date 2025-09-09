@@ -47,6 +47,27 @@ hugo
 
 Hugo 会将完整的静态网站文件生成到 `public/` 目录下。你只需将此目录下的所有文件部署到任何静态网站托管服务（如 Netlify, Vercel, GitHub Pages 等）即可。
 
+nignx 配置
+
+因为我使用了 `uglyURLs: true`
+
+我使用的 nginx 配置如下
+
+```conf
+# 规则一：专门处理以 / 结尾的请求 (例如 /path/a/)
+# 这个 location 块的优先级会高于下面的 location /
+location ~ ^(.+)/$ {
+    # $1 变量会捕获到 URI 中除了最后一个斜杠之外的所有内容
+    # 例如，请求 /path/a/，那么 $1 的值就是 /path/a
+    try_files $1.html $uri $uri/ =404;
+}
+
+# 规则二：处理所有其他请求 (例如 /path/a, /style.css 等)
+location / {
+    # 这是标准的鲁棒性配置
+    try_files $uri $uri.html $uri/ $uri/ =404;
+}
+```
 
 ## 使用
 
@@ -56,7 +77,6 @@ Hugo 会将完整的静态网站文件生成到 `public/` 目录下。你只需�
 - 数学公式: katex
 - 使 [赫蹏](https://github.com/sivan/heti)排版样式增强
 - 使用 google font Roboto Mono 英文字体
-
 
 
 ### shortcodes

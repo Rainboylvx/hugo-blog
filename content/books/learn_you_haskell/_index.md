@@ -1,7 +1,7 @@
 ---
 title: learn you haskell for great good
 date: 2025-09-09
-noList: false
+noList: true
 ---
 
 ## 资源
