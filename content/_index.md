@@ -40,6 +40,9 @@ article_categories:
       - name: learn you haskell
         icon: "books/learn_you_haskell/images/cover.jpg"
         link: "books/learn_you_haskell"
+      - name: 线性代数及其应用
+        icon : "books/线性代数及其应用/cover.jpg"
+        link: "books/线性代数及其应用"
 ---
 
 <div class="author-profile">
