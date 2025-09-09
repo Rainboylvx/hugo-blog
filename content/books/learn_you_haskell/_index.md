@@ -28,3 +28,4 @@ ghc -dynamic 1.hs
 ## 目录
 
 - [Introduction](./chapter_1)
+- [Starting Out](./chapter_2)
