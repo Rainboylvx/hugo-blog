@@ -37,6 +37,9 @@ article_categories:
       - name: 群论
         icon: "/logo/Rubik's_cube_v2.svg"
         link: "/group_theory"
+      - name: learn you haskell
+        icon: "books/learn_you_haskell/images/cover.jpg"
+        link: "books/learn_you_haskell"
 ---
 
 <div class="author-profile">
