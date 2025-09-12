@@ -34,15 +34,18 @@ article_categories:
       - name: 算法新解-刘新宇
         icon: "books/算法新解-刘新宇/cover.jpg"
         link: "books/算法新解-刘新宇"
-      - name: 群论
-        icon: "/logo/Rubik's_cube_v2.svg"
-        link: "/group_theory"
+      - name: 近世代数
+        icon: "logo/Rubik's_cube_v2.svg"
+        link: "books/group_theory"
       - name: learn you haskell
         icon: "books/learn_you_haskell/images/cover.jpg"
         link: "books/learn_you_haskell"
       - name: 线性代数及其应用
         icon : "books/线性代数及其应用/cover.jpg"
         link: "books/线性代数及其应用"
+      - name: Lua程序设计（第4版）
+        icon : "books/lua/cover.jpg"
+        link: "books/lua"
 ---
 
 <div class="author-profile">
