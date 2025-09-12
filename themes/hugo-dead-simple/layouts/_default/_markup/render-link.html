@@ -1,2 +1,12 @@
-<a href="{{ .Destination | safeURL }}" {{ with .Title}}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noreferrer nofollow"{{ end }}>{{ .Text | safeHTML }}</a>
-{{- "" -}}
+{{- $url := .Destination -}}
+{{- $isRemote := strings.HasPrefix $url "http" -}}
+{{- if not $isRemote -}}
+  {{- with .Page.GetPage $url -}}
+    {{- $url = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $url | safeURL }}"
+   {{- with .Title }} title="{{ . }}"{{ end -}}
+   {{- if $isRemote }} target="_blank" rel="noopener"{{ end -}}>
+    {{- .Text | safeHTML -}}
+</a>
