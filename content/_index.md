@@ -46,6 +46,9 @@ article_categories:
       - name: Lua程序设计（第4版）
         icon : "books/lua/cover.jpg"
         link: "books/lua"
+      - name: 微积分
+        icon : "books/微积分/cover.png"
+        link: "books/微积分"
 ---
 
 <div class="author-profile">
