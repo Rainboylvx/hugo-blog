@@ -2,7 +2,7 @@ baseURL: "https://hugo-dead-simple.netlify.com/"
 languageCode: zh-cn
 title: "Rainboy's Blog"
 enableGitInfo: false
-theme: "hugo-dead-simple"
+theme: ["hugo-admonitions", "hugo-dead-simple"]
 uglyURLs: true
 menu:
   main:

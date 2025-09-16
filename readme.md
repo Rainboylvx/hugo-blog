@@ -92,3 +92,47 @@ location / {
     Lorem markdownum insigne...
     {{% /details %}}
     ```
+### shortcodes
+
+使用了: https://github.com/KKKZOZ/hugo-admonitions
+
+```
+> [!IDEA] Summary
+> This is a summary using the `IDEA` callout!
+
+> [!TIP] You can choose to only to show the header!
+
+> [!NOTIFY] System notification: Your password will expire in 30 days
+
+> [!SUCCESS] Congratulations! Your code has been successfully deployed to production
+
+> [!WARNING] Warning: This operation will delete all data. 
+
+
+extends
+
+> [!TIP]- Click here to view the tips
+
+> [!TIP]+ Click here to view the tips
+
+nest extends more
+
+> [!QUESTION] Can admonitions be nested?
+> > [!TODO] Yes!, they can.
+> > > [!EXAMPLE]  You can even use multiple layers of nesting.
+
+```
+
+Available Callouts List
+
+| Alerts & Emphasis | Information & Elaboration | Guidance & Interaction |
+|-------------------|---------------------------|------------------------|
+| `[!DANGER]`       | `[!INFO]`                 | `[!TIP]`               |
+| `[!ERROR]`        | `[!NOTE]`                 | `[!TASK]`              |
+| `[!WARNING]`      | `[!ABSTRACT]`             | `[!GOAL]`              |
+| `[!CAUTION]`      | `[!CONCLUSION]`           | `[!IDEA]`              |
+| `[!IMPORTANT]`    | `[!EXAMPLE]`              | `[!QUESTION]`          |
+| `[!SUCCESS]`      | `[!QUOTE]`                | `[!NOTIFY]`            |
+|                   | `[!CODE]`                 |                        |
+|                   | `[!EXPERIMENT]`           |                        |
+|                   | `[!MEMO]`                 |                        |
