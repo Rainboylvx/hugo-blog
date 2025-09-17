@@ -7,6 +7,9 @@ article_categories:
       - name: blog
         icon: "/logo/notepad.svg"
         link: "/blog"
+      - name: math
+        icon: "/math/cover.png"
+        link: "/math"
   - name: 项目学习
     desc: 我学习的项目
     children:

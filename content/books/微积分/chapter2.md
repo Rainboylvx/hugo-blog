@@ -16,9 +16,8 @@ $$
 
 ## 定义
 
-> [!IDEA] 函数极限的定义
+> [!IDEA] 函数极限的定义 $\varepsilon - \delta$ 语言
 > 
-> $\forall \varepsilon >0$,$\exist \delta > 0$
-> $$
-\left| f(x)-b \right| < \varepsilon , x \in (a-\delta,a+\delta)
-> $$
+> $\forall \varepsilon >0$,$\exist \delta > 0,x \in (a-\delta,a+\delta) \Rightarrow  \left| f(x)-b \right| < \varepsilon $
+>
+> $\lim \limits_{x \to a} f(x) = b$
