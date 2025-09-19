@@ -30,7 +30,6 @@ ehthumbs.db
 Thumbs.db
 
 # IDE / Editor specific files
-.vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace

@@ -1,0 +1,8 @@
+{
+    // markdown不显示代码块的问题
+    "[markdown]": {
+        "editor.quickSuggestions": {
+            "other": "on"
+        }
+    },
+}

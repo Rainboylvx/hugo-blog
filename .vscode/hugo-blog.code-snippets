@@ -1,0 +1,197 @@
+{
+	"Hugo Front Matter": {
+		"scope": "markdown",
+		"prefix": "hugo-front",
+		"body": [
+			"---",
+			"title: \"${1:${TM_FILENAME_BASE}}\"",
+			"date: ${2:$CURRENT_YEAR}-${3:$CURRENT_MONTH}-${4:$CURRENT_DATE}T${5:$CURRENT_HOUR}:${6:$CURRENT_MINUTE}:${7:$CURRENT_SECOND}+08:00",
+			"draft: ${8|true,false|}",
+			"tags: [\"$9\"]",
+			"categories: [\"${10}\"]",
+			"---",
+			"",
+			"$11"
+		],
+		"description": "Hugo文章前置元数据 - title默认使用文件名"
+	},
+	"Hugo Include Shortcode": {
+		"scope": "markdown",
+		"prefix": "hugo-include",
+		"body": [
+			"{{\\< include \"${1:src/demo/file.ts}\" \"${2:ts}\" \\>}}"
+		],
+		"description": "Hugo include代码片段shortcode"
+	},
+	"Hugo Details Shortcode": {
+		"scope": "markdown",
+		"prefix": "hugo-details",
+		"body": [
+			"{{% details title=\"${1:Title}\" ${2|open=true,open=false|} %}}",
+			"${3:## Markdown content",
+			"Lorem markdownum insigne...}",
+			"{{% /details %}}"
+		],
+		"description": "Hugo details折叠内容shortcode"
+	},
+	"Hugo Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-admonition",
+		"body": [
+			"> [!${1|IDEA,TIP,WARNING,SUCCESS,ERROR,INFO,QUESTION,TODO,EXAMPLE,DANGER,ABSTRACT,CONCLUSION,NOTE,IMPORTANT,CAUTION,QUOTE,CODE,EXPERIMENT,MEMO,TASK,GOAL,NOTIFY|}] ${2|摘要,重要,注意,警告,提示,想法,问题,示例,错误,成功,信息,抽象,结论,危险,告诫,重要,引用,代码,实验,备忘录,任务,目标,通知|}",
+			"> ${3:内容这里}"
+		],
+		"description": "Hugo Admonition提示框 - 支持所有类型，title提供中文选择"
+	},
+	"Hugo Info Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-info",
+		"body": [
+			"> [!INFO] ${1|信息,重要,注意,提示|}",
+			"> ${2:信息内容 here}"
+		],
+		"description": "Hugo Info提示框 - 常用信息提示"
+	},
+	"Hugo Question Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-question",
+		"body": [
+			"> [!QUESTION] ${1|问题,疑问,疑惑|}",
+			"> ${2:问题内容 here}"
+		],
+		"description": "Hugo Question提示框 - 常用问题提示"
+	},
+	"Hugo Warning Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-warning",
+		"body": [
+			"> [!WARNING] ${1|警告,注意,重要|}",
+			"> ${2:警告内容 here}"
+		],
+		"description": "Hugo Warning提示框 - 常用警告提示"
+	},
+	"Hugo Tip Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-tip",
+		"body": [
+			"> [!TIP] ${1|提示,技巧,建议|}",
+			"> ${2:提示内容 here}"
+		],
+		"description": "Hugo Tip提示框 - 常用提示技巧"
+	},
+	"Hugo Success Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-success",
+		"body": [
+			"> [!SUCCESS] ${1|成功,完成,通过|}",
+			"> ${2:成功内容 here}"
+		],
+		"description": "Hugo Success提示框 - 常用成功提示"
+	},
+	"Hugo Error Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-error",
+		"body": [
+			"> [!ERROR] ${1|错误,失败,问题|}",
+			"> ${2:错误内容 here}"
+		],
+		"description": "Hugo Error提示框 - 常用错误提示"
+	},
+	"Hugo Important Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-important",
+		"body": [
+			"> [!IMPORTANT] ${1|重要,注意,关键|}",
+			"> ${2:重要内容 here}"
+		],
+		"description": "Hugo Important提示框 - 常用重要提示"
+	},
+	"Hugo Admonition with Expand": {
+		"scope": "markdown",
+		"prefix": "hugo-admonition-expand",
+		"body": [
+			"> [!${1|IDEA,TIP,WARNING,SUCCESS,ERROR,INFO,QUESTION,TODO,EXAMPLE,DANGER,ABSTRACT,CONCLUSION,NOTE,IMPORTANT,CAUTION,QUOTE,CODE,EXPERIMENT,MEMO,TASK,GOAL,NOTIFY|}]${2|+,-|} ${3|摘要,重要,注意,警告,提示,想法,问题,示例,错误,成功,信息,抽象,结论,危险,告诫,重要,引用,代码,实验,备忘录,任务,目标,通知|}",
+			"> ${4:点击这里查看内容}"
+		],
+		"description": "Hugo Admonition可展开提示框 - +展开/-折叠，title提供中文选择"
+	},
+	"Hugo Nested Admonition": {
+		"scope": "markdown",
+		"prefix": "hugo-admonition-nested",
+		"body": [
+			"> [!${1|IDEA,TIP,WARNING,SUCCESS,ERROR,INFO,QUESTION,TODO,EXAMPLE|}] ${2:Outer Title}",
+			"> > [!${3|IDEA,TIP,WARNING,SUCCESS,ERROR,INFO,QUESTION,TODO,EXAMPLE|}] ${4:Inner Title}",
+			"> > ${5:Nested content here}",
+			"> ${6:Outer content here}"
+		],
+		"description": "Hugo嵌套Admonition提示框"
+	},
+	"KaTeX Math": {
+		"scope": "markdown",
+		"prefix": "katex",
+		"body": [
+			"${1|$$,$$$$|}${2:math expression}${1|$$,$$$$|}"
+		],
+		"description": "KaTeX数学公式 - 自动选择行内或块级"
+	},
+	"KaTeX Block Math Multi-line": {
+		"scope": "markdown",
+		"prefix": "katex-block-multi",
+		"body": [
+			"$$$$",
+			"${1:multi-line}",
+			"${2:math expression}",
+			"${3:here}",
+			"$$$$"
+		],
+		"description": "KaTeX多行块级数学公式"
+	},
+	"Hugo Code Block": {
+		"scope": "markdown",
+		"prefix": "hugo-code",
+		"body": [
+			"```${1:language}${2|,{linenos=table,hl_lines=[]},|}",
+			"${3:// code here}",
+			"```"
+		],
+		"description": "Hugo代码块 - 可选行号和高亮"
+	},
+	"Hugo Link or Image": {
+		"scope": "markdown",
+		"prefix": "hugo-media",
+		"body": [
+			"${1|![,|[}${2:alt text}](${3:/images/filename.png|https://example.com|})"
+		],
+		"description": "Markdown链接或图片 - 自动选择类型"
+	},
+	"Hugo Table": {
+		"scope": "markdown",
+		"prefix": "hugo-table",
+		"body": [
+			"| ${1:Header 1} | ${2:Header 2} | ${3:Header 3} |",
+			"|${4:-${5:-}|${6:-}${7:-}|${8:-}${9:-}|",
+			"| ${10:Cell 1}  | ${11:Cell 2}  | ${12:Cell 3}  |",
+			"| ${13:Cell 4}  | ${14:Cell 5}  | ${15:Cell 6}  |"
+		],
+		"description": "Markdown表格 - 灵活列数"
+	},
+	"Hugo Commands": {
+		"scope": "markdown",
+		"prefix": "hugo-cmd",
+		"body": [
+			"```bash",
+			"${1|hugo server -D --bind 0.0.0.0,hugo|}",
+			"```"
+		],
+		"description": "Hugo命令 - 服务器或构建"
+	},
+	"Hugo Quick Actions": {
+		"scope": "markdown",
+		"prefix": "hugo-quick",
+		"body": [
+			"${1|include,details,admonition,code,math|}",
+			"${2:content}"
+		],
+		"description": "Hugo快速操作 - 选择常用功能"
+	}
+}
