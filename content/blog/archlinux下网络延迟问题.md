@@ -9,11 +9,11 @@ categories: [""]
 
 
 
-## 起因
+## 1. 起因
 
 最近在使用archlinux,发现网络延迟很高,但是其他设备正常,于是开始排查问题.
 
-## 问题排查
+## 2. 问题排查
 
 直接问AI,AI 告诉我最大的可能是:
 
@@ -37,7 +37,7 @@ sudo iwconfig <your wlan-name> power off
 
 ping值,恢复正常
 
-## 解决方案
+## 3. 解决方案
 
 ```bash
 sudo vim /etc/NetworkManager/conf.d/wifi-powersave.conf
