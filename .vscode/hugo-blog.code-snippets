@@ -5,13 +5,14 @@
 		"body": [
 			"---",
 			"title: \"${1:${TM_FILENAME_BASE}}\"",
-			"date: ${2:$CURRENT_YEAR}-${3:$CURRENT_MONTH}-${4:$CURRENT_DATE}T${5:$CURRENT_HOUR}:${6:$CURRENT_MINUTE}:${7:$CURRENT_SECOND}+08:00",
-			"draft: ${8|true,false|}",
-			"tags: [\"$9\"]",
-			"categories: [\"${10}\"]",
+			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+			"draft: ${2|false,true|}",
+			"toc: true",
+			"tags: [\"$4\"]",
+			"categories: [\"${4}\"]",
 			"---",
 			"",
-			"$11"
+			"$5"
 		],
 		"description": "Hugo文章前置元数据 - title默认使用文件名"
 	},
@@ -19,7 +20,7 @@
 		"scope": "markdown",
 		"prefix": "hugo-include",
 		"body": [
-			"{{\\< include \"${1:src/demo/file.ts}\" \"${2:ts}\" \\>}}"
+			"{{< include \"${1:src/demo/file.ts}\" \"${2:ts}\" >}}"
 		],
 		"description": "Hugo include代码片段shortcode"
 	},
@@ -130,7 +131,7 @@
 		"scope": "markdown",
 		"prefix": "katex",
 		"body": [
-			"${1|$$,$$$$|}${2:math expression}${1|$$,$$$$|}"
+			"${1|$,$$|}${2:math expression}${1|$,$$|}"
 		],
 		"description": "KaTeX数学公式 - 自动选择行内或块级"
 	},
@@ -138,11 +139,11 @@
 		"scope": "markdown",
 		"prefix": "katex-block-multi",
 		"body": [
-			"$$$$",
+			"$$",
 			"${1:multi-line}",
 			"${2:math expression}",
 			"${3:here}",
-			"$$$$"
+			"$$"
 		],
 		"description": "KaTeX多行块级数学公式"
 	},
@@ -174,16 +175,6 @@
 			"| ${13:Cell 4}  | ${14:Cell 5}  | ${15:Cell 6}  |"
 		],
 		"description": "Markdown表格 - 灵活列数"
-	},
-	"Hugo Commands": {
-		"scope": "markdown",
-		"prefix": "hugo-cmd",
-		"body": [
-			"```bash",
-			"${1|hugo server -D --bind 0.0.0.0,hugo|}",
-			"```"
-		],
-		"description": "Hugo命令 - 服务器或构建"
 	},
 	"Hugo Quick Actions": {
 		"scope": "markdown",
