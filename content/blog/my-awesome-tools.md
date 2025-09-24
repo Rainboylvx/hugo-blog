@@ -1,6 +1,6 @@
 ---
 title: "my-awesome-tools"
-date: 2025-09-24 22:33
+date: 2025-09-24
 draft: false
 toc: true
 tags: ["self-record"]
