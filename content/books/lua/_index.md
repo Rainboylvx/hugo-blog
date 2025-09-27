@@ -1,5 +1,5 @@
 ---
-title: 算法新解-刘新宇 读书笔记
+title: lua学习笔记
 date: 2025-09-07
 noList: true
 ---
