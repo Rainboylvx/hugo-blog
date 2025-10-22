@@ -11,7 +11,7 @@ article_categories:
         icon: "/math/cover.png"
         link: "/math"
   - name: 项目学习
-    desc: 我学习的项目
+    desc: 我的项目
     children:
       - name: 前端
         icon: "skill-icons:html"
@@ -25,6 +25,15 @@ article_categories:
       - name: TypeScript
         icon: "logos:typescript-icon"
         link: "/typescript"
+      - name: "Lua编程语言"
+        icon: "/program_language/lua/cover.png"
+        link: "/program_language/lua"
+      - name: "nestjs框架"
+        icon: "/program_language/nestjs/cover.svg"
+        link: "/program_language/nestjs"
+      - name: "Nvim For OI"
+        icon: "devicon:neovim"
+        link: "/nvim-for-oi/"
       - name: "linux网络编程"
         icon: "mdi:ip-network"
         link: "/linux_tcp_program"

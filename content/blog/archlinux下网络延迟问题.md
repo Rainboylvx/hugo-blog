@@ -7,8 +7,6 @@ tags: ["linux","bug fix"]
 categories: [""]
 ---
 
-
-
 ## 1. 起因
 
 最近在使用archlinux,发现网络延迟很高,但是其他设备正常,于是开始排查问题.
@@ -64,3 +62,8 @@ EOF
 ```bash
 sudo systemctl restart NetworkManager
 ```
+
+## 参考
+
+- [NetworkManager Wi-Fi powersaving configuration](https://gist.github.com/jcberthon/ea8cfe278998968ba7c5a95344bc8b55)
+- [Arch Linux Wi-Fi Power Management](https://wiki.archlinux.org/title/Power_management#NetworkManager  )

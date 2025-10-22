@@ -1,10 +1,14 @@
 ---
-title: lua程序设计第四版
+title: lua学习笔记
 date: 2025-09-07
 noList: true
 ---
 
 ![](./cover.jpg)
+
+## 内容
+
+- [lua面向对象](./lua面向对象.md)
 
 
 ## 资源

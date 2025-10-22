@@ -21,3 +21,5 @@ $$
 > $\forall \varepsilon >0$,$\exist \delta > 0,x \in (a-\delta,a+\delta) \Rightarrow  \left| f(x)-b \right| < \varepsilon $
 >
 > $\lim \limits_{x \to a} f(x) = b$
+
+hugo
