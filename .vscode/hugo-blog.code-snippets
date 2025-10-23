@@ -1,4 +1,23 @@
 {
+	"Hugo index file" :{
+		"scope": "markdown",
+		"prefix": "hugo-index",
+		"body": [
+			"---",
+			"title: \"${1:${TM_FILENAME_BASE}}\"",
+			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+			"noList: true",
+			"---",
+			"",
+			"![](./${2:cover.svg})",
+			"",
+			"## 内容",
+			"",
+			"- [${3:视频教程}](${4:https://example.com})",
+			"- [${5:系列文章}](${6:https://example.com})"
+		],
+		"description": "Hugo文章索引文件 - 自动生成标题和内容结构"
+	},
 	"Hugo Front Matter": {
 		"scope": "markdown",
 		"prefix": "hugo-front",
