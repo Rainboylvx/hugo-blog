@@ -1,4 +1,18 @@
-> Lua 中的每个值都可以有一个 元表。 这个 元表 就是一个普通的 Lua 表， 它用于定义原始值在特定操作下的行为
+---
+title: "元表及元方法"
+date: 2025-10-22
+draft: false
+toc: true
+tags: [""]
+categories: [""]
+---
+
+
+## 元表概念
+
+> **Lua 中的每个值都可以有一个元表**。此元表是一个普通的 Lua 表，它定义了原始值在特定事件下的行为。您可以通过设置其元表中的特定字段来更改值的多个行为方面。例如，当非数字值是加法的操作数时，Lua 会在该值的元表的 __add 字段中查找一个函数。如果找到一个，Lua 会调用此函数来执行加法
+
+详细参见 [2.4 – 元表及元方法](https://cloudwu.github.io/lua53doc/manual.html#2.4)
 
 
 举一个例子,类似于 c++的运算符重载,这里我们重载`+`
@@ -13,6 +27,8 @@ smt = {
     end
 }
 
+-- 设定 foo 的元表,
+-- 当你对非数字值做加操作时， Lua 会检查该值的元表中的 "__add" 域下的函数
 setmetatable(foo, smt)
 
 b = foo + 1
@@ -65,7 +81,7 @@ print(foo["abc"])
 
 ## 语法糖
 
-> 这是 Lua 支持的一种语法糖。 像 v:name(args) 这个样子， 被解释成 v.name(v,args)， 这里的 v 只会被求值一次
+> 这是 Lua 支持的一种语法糖。 像 `v:name(args)` 这个样子， 被解释成 `v.name(v,args)`， 这里的 v 只会被求值一次
 
 > 冒号 语法可以用来定义 方法， 就是说，函数可以有一个隐式的形参 self。 因此，如下语句
 
@@ -116,6 +132,7 @@ function fooClass:new(name) {
         -- 添加基础属
         "default_name" = "bar" 
     }
+    -- 当 t['no-key'] 时候 回去找 t_smt 里面的元素
     t_smt["__index"] = t_smt
     setmetatable(t,t_smt)
     return t
@@ -157,3 +174,103 @@ end
 local dog = animal:new("dog")
 dog:printName()
 ```
+
+
+## 一个例子 
+
+```lua
+print("<-- learning class -->")
+local Animal = {}
+Animal.__index = Animal
+
+function Animal.new(name)
+    local self = setmetatable({}, {__index = Animal})
+    self.name = name
+    return self
+end
+
+function Animal:count()
+    print(self.name .. "Animal kingdom is large!")
+end
+
+function Animal:speak()
+    print(self.name .. " says: I'm an animal!")
+end
+
+function Animal:move()
+    print(self.name .. " is moving.")
+end
+
+
+--- use Animal class
+local dog = Animal.new("Dog")
+dog:speak()  -- Output: Dog says: I'm an animal!
+dog:move()   -- Output: Dog is moving.
+
+--- li sh
+
+
+-- class inherit
+local Dog = {}
+Dog.__index = Dog --  为了后面可以继承 Dog
+-- setmetatable(Dog,{__index = Animal}) -- 指向父类
+setmetatable(Dog,{__index = Animal}) -- 指向父类
+
+
+function Dog.new(name)
+    local self = Animal.new(name) -- 调用父类的构造函数
+    setmetatable(self, Dog) -- 设置元表为 Dog
+    -- 可以认为创建了一个 Dog 的实例
+    return self
+end
+
+function Dog:speak()
+    print(self.name .. " says: Woof!")
+end
+
+local myDog = Dog.new("Buddy")
+myDog:speak()  -- Output: Buddy says: Woof!
+myDog:move()   -- Output: Buddy is moving.
+
+myDog.count(myDog) -- Output: Buddy Animal kingdom is large!
+ 
+```
+
+## `__index` 只读取特性
+
+> 答案很简单：`__index` 只会影响“读取”操作，不会影响“写入”（赋值）操作。
+
+```lua
+local obj = {
+    num  = 0;
+}
+
+function obj:add1()
+    self.num = self.num + 1
+end
+
+function obj.new(start)
+    local t = {}
+    setmetatable(t, {__index = obj})
+    -- t.num = start
+    return t;
+end
+
+local o1 = obj.new(10)
+o1:add1()
+print(o1.num)
+
+local o2 = obj.new(100)
+o2:add1()
+print(o2.num)
+```
+
+
+`__index` 只在**读取**（查找）时生效，**写入**（赋值）时无效。
+
+`o1:add1()` 和 `o2:add1()` 都是：
+1.  **读取** `obj.num` (值是 `0`)。
+2.  计算 `0 + 1 = 1`。
+3.  **写入**到**自己**身上 (`o1.num = 1`, `o2.num = 1`)。
+
+`obj.num` 永远是 `0`，`o1` 和 `o2` 互不影响。
