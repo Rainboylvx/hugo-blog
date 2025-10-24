@@ -274,3 +274,44 @@ print(o2.num)
 3.  **写入**到**自己**身上 (`o1.num = 1`, `o2.num = 1`)。
 
 `obj.num` 永远是 `0`，`o1` 和 `o2` 互不影响。
+
+## 改进的面向对象
+
+- 不创建新的表,而是直接使用原表,这样可以节省内存
+- `new`方法也使用冒号语法,这样可以直接调用
+
+来自`lua programming 4th ` 书中方式
+
+```lua
+local Animal = {}
+
+function Animal:new(name)
+    local o = { name = name}
+    self.__index = self
+    setmetatable(o,self)
+    return o
+end
+
+function Animal:speak() 
+    print(self.name .. " is speaking!")
+end
+
+local myPet1 = Animal:new('pet1')
+myPet1:speak()
+
+
+local Dog = {}
+setmetatable(Dog,{__index = Animal})
+
+function Dog:new(name,hair_color)
+    local dog = Animal:new(name)
+    dog.hair_color = hair_color
+    self.__index = self
+    setmetatable(dog,self)
+    return dog
+end
+
+
+local mypet_dog = Dog:new("dogee","black")
+mypet_dog:speak()
+```
