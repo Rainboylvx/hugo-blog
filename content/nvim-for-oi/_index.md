@@ -12,6 +12,11 @@ noList: true
 - [lsp clangd](./lsp-clang.md)
 - [clangd](./clangd.md)
 
+## cheat-sheet
+
+- [vim的跳转](./vim的跳转.md)
+
 ## Snacks 源码解读
 
 - [概述](./snacks源码解读/index.md)
+- [学习路径](./snacks源码解读/学习路径.md)

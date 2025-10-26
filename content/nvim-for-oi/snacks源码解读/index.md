@@ -17,7 +17,7 @@ categories: [""]
 
 ```bash
 # 1. 创建一个用于学习的根目录 (可以放在任何你喜欢的地方)
-configPath="~/.config/snacks-learn"
+configPath="$HOME/.config/snacks-learn"
 mkdir -p $configPath
 
 # 2. 创建 lazy.vim 需要的配置、数据和状态目录
@@ -65,6 +65,10 @@ vim.opt.swapfile = false      -- 关闭交换文件
 vim.opt.backup = false        -- 关闭备份
 vim.opt.writebackup = false
 
+-- 设置 leader 键为空格
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- =============================================================================
 -- 3. lazy.vim 插件管理器 - 引导程序
 -- =============================================================================
@@ -107,40 +111,7 @@ require("lazy").setup({
 
     -- `opts` 表格用于配置 snacks.nvim
     -- 你可以在这里打开/关闭/配置 snacks 的各个模块
-    opts = {
-      -- 模块白名单，只加载你感兴趣的
-      -- 留空 (opts = {}) 来加载所有模块
-      modules = {
-        "cursor",    -- 高亮光标所在行
-        "indent",    -- 缩进线
-        "navic",     -- (需要 nvim-navic 插件)
-        "notify",    -- (需要 nvim-notify 插件)
-        "regex",     -- 正则表达式预览
-        "scrollbar", -- 滚动条
-        "search",    -- 搜索高亮
-      },
-
-      -- ==================
-      -- 模块的具体配置示例
-      -- ==================
-
-      -- 启用滚动条
-      scrollbar = {
-        enabled = true,
-      },
-
-      -- 启用缩进线
-      indent = {
-        enabled = true,
-        -- 你可以尝试 "conveal" 或 "list" 策略
-        -- strategy = "conceal",
-      },
-
-      -- 启用光标行高亮
-      cursor = {
-        enabled = true,
-      },
-    },
+    opts = { },
 
     -- `config` 函数会在插件加载后运行
     -- `snacks.nvim` 会自动调用 `setup(opts)`，所以这里通常是空的
@@ -149,11 +120,9 @@ require("lazy").setup({
       require("snacks").setup(opts)
 
       -- 示例：添加一个键位绑定来切换缩进线
-      vim.keymap.set("n", "<leader>ti", function()
-        local indent = require("snacks.indent")
-        indent.toggle()
-        print("缩进线: " .. (indent.is_enabled() and "ON" or "OFF"))
-      end, { desc = "[T]oggle [I]ndent guides (Snacks)" })
+      vim.keymap.set("n", "<leader>f", function()
+        Snacks.picker.files()
+      end, { desc = "snacks files" })
     end,
   },
 
