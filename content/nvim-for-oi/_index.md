@@ -10,6 +10,7 @@ noList: true
 - [概述](./readme.md)
 - [buffline](./buffline.md)
 - [lsp clangd](./lsp-clang.md)
+- [lua snip](./LuaSnip.md)
 - [clangd](./clangd.md)
 
 ## cheat-sheet
