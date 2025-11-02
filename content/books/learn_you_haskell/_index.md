@@ -25,7 +25,12 @@ ghc -dynamic 1.hs
 
 最简单的方法可以是用 在线haskell: https://play.haskell.org/
 
+## 资源
+
+- [鹏翔万里haskell读书笔记](./鹏翔万里haskell读书笔记.md)
+
 ## 目录
 
 - [Introduction](./chapter_1)
 - [Starting Out](./chapter_2)
+- [types-and-typeclasses](./chapter_2)

@@ -166,6 +166,13 @@ zellij setup --dump-layout default > /tmp/my-quickstart-layout-file.kdl
 默认的float 布局,对我来说，太小了我希望把它改大一点
 
 
+## FAQ
+
+- `zellij delete-session` 删除会话
+- `zellij list-sessions` 列出所有会话
+- `zellij attach <SESSION_NAME>` 恢复会话
+- `zellij -s <SESSION_NAME>` 创建一个新的会话
+
 
 ## 为什么选择 Zellij?
 
@@ -174,10 +181,6 @@ zellij setup --dump-layout default > /tmp/my-quickstart-layout-file.kdl
 - **内置布局**: Zellij 拥有强大的布局系统, 可以保存和加载复杂的窗格布局.
 - **WebAssembly 插件**: 支持使用任何可以编译为 WASM 的语言编写插件, 扩展性强.
 ## 总结
-
-
-
-
 
 
 
