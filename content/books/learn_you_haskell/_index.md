@@ -27,10 +27,22 @@ ghc -dynamic 1.hs
 
 ## 资源
 
+- [macM1配置haskell环境](./macM1配置haskell环境.md)
 - [鹏翔万里haskell读书笔记](./鹏翔万里haskell读书笔记.md)
+- [cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
+- [some codeforces problems that solved by  haskell at Github ](https://github.com/Vicfred/codeforces-haskell)
+- [chattille haskell 学习笔记](https://chattille.github.io/haskell-notes)
 
 ## 目录
 
 - [Introduction](./chapter_1)
 - [Starting Out](./chapter_2)
-- [types-and-typeclasses](./chapter_2)
+- [types-and-typeclasses](./chapter_3)
+- [4. Syntax in Functions](./chapter_4)
+- [Modules](./chapter_7)
+- [Making Our Own types and typeclasses](./chapter_8)
+
+
+## 练习
+
+- https://exercism.org/tracks/haskell/

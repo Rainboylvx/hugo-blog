@@ -1,5 +1,5 @@
 ---
-title: "chapter_3"
+title: "类型与类型类"
 date: 2025-11-02
 draft: false
 toc: true
