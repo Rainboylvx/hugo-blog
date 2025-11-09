@@ -49,3 +49,49 @@ tags: ["self-record"]
 - [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) - 精选的 ChatGPT 提示词集合，帮助用户更好地使用 ChatGPT 和其他大语言模型工具
 - [prompts.chat](https://prompts.chat/) - 提供优质 AI 提示词的网站，包含各种场景下的实用提示词模板
 
+## 8 前端
+
+ - [cytoscape.js](https://js.cytoscape.org/)
+ - [cdnjs](https://cdnjs.com/)
+ - [codepen-topics](https://codepen.io/topics/)
+ - [iconify](https://icon-sets.iconify.design/)
+ - [animate.css](https://animate.style/)
+ - [unocss](https://unocss.dev/)
+ - [tailwindcss](https://tailwindcss.com/) - Rapidly build modern websites without ever leaving your HTML.
+ - [html map generator](https://www.image-map.net/)
+ - [image-map-resizer](https://github.com/davidjbradshaw/image-map-resizer) - 配合html map generator 一起使用,使 HTML 图像映射具有响应性
+ - [Glass Css](https://css.glass/) - Glassmorphism CSS Effect Generator - Glass CSS
+ - [fullPage](https://alvarotrigo.com/fullPage/zh/) - 全屏滚动
+ - [canvas-彩带](https://github.com/catdad/canvas-confetti) - canvas confetti 库
+ - [css-layout](https://phuoc.ng/collection/css-layout/) - css-layout
+ - [swiperjs](https://swiperjs.com/) - 轮播
+ - [css-layout](https://sweet-kk.github.io/css-layout/#/) - 各种页面常见布局+知名网站实例分析+相关阅读推荐
+ - [pure.css](https://pure-css.github.io/) - A set of small, responsive CSS modules that you can use in every web project.
+ - [学习CSS布局](https://zh.learnlayout.com/toc) - 学习CSS布局
+
+## 9 Bootstrap
+
+ - [bootStrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+ - [github-awesome-bootstrap](https://github.com/awesome-bootstrap-org/awesome-bootstrap?tab=readme-ov-file#ui-kits--libraries)
+ - [mdb-ui-kit-git](https://github.com/mdbootstrap/mdb-ui-kit) - MDB is a collection of free Bootstrap templates, themes, design tools & resources.
+ - [mdb-ui-kit](https://mdbootstrap.com/docs/standard/) - MDB is a collection of free Bootstrap templates, themes, design tools & resources.
+ - [codehim-bootstrap-snip](https://www.codehim.com/category/bootstrap/)
+ - [bootsnip](https://bootsnipp.com/)
+
+## 10 GeoGebra
+
+ - [geogebra](https://www.geogebra.org/)
+ - [ggb123](https://www.ggb123.cn/)
+ - [geo嵌入网页](https://www.zywvvd.com/notes/tools/geogebra/geogebra-html-embed/geogebra-html-embed/)
+ - [GeoGebra不一样的制作教程](https://www.bilibili.com/video/av80321187/)
+ - [课中引路网](https://kz16.top/)
+
+## 11 电子书
+
+ - [安妮的档案](https://zh.annas-archive.org/)
+ - [zlibrary wiki](https://en.wikipedia.org/wiki/Z-Library)
+ - [using d3.js](https://using-d3js.com)
+ - [debian live build](https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html)
+ - [libgen](https://www.sssam.com/tool/libgen/)
+
+
