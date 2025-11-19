@@ -11,7 +11,7 @@
         "**/.hg": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        ".vscode":true,
-        ".github":true
+        ".vscode":false,
+        ".github":false
     }
 }
