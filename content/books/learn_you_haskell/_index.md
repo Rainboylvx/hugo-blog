@@ -43,6 +43,10 @@ ghc -dynamic 1.hs
 - [Making Our Own types and typeclasses](./chapter_8)
 
 
+## haskell 在竞赛中的使用
+
+- [haskell io](./hask_io.md)
+
 ## 练习
 
 - https://exercism.org/tracks/haskell/
