@@ -45,6 +45,7 @@ ghc -dynamic 1.hs
 ## 其它
 
 - [accumArray](./others/accumArray.md)
+- [haskell枚举](./others/枚举.md)
 
 ## haskell 在竞赛中的使用
 
