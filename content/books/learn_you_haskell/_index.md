@@ -42,6 +42,9 @@ ghc -dynamic 1.hs
 - [Modules](./chapter_7)
 - [Making Our Own types and typeclasses](./chapter_8)
 
+## 其它
+
+- [accumArray](./others/accumArray.md)
 
 ## haskell 在竞赛中的使用
 
