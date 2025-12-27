@@ -12,6 +12,7 @@ tags: ["self-record"]
  - [dialog](https://linuxcommand.org/lc3_adv_dialog.php) - 用于在 shell 脚本中创建文本用户界面的工具，支持对话框、菜单、进度条等交互元素
  - [gum](https://github.com/charmbracelet/gum)：一个由 Charmbracelet 开发的命令行工具，用于创建漂亮的交互式 Shell 脚本，支持输入、选择、确认等 UI 组件，适合增强终端用户体验。
  - [ sunlei awesome-tools](https://github.com/sunlei/awesome-tools) - 一个收集各种实用工具和资源的精选列表，涵盖开发、设计、效率等多个领域
+ - [ttyd - Share your terminal over the web](https://github.com/tsl0922/ttyd)
 
 ## 2 Windows
 
