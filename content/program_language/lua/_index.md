@@ -17,3 +17,4 @@ noList: true
 - [[2.一些代码]]
 - 在线编辑器 https://wiki.luatos.com/_static/luatos-emulator/lua.html
 - 在线编辑器 https://www.jdoodle.com/execute-lua-online
+- [luatos wiki ](https://wiki-zh.luatos.org/luaGuide/introduction.html)
