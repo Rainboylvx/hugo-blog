@@ -35,12 +35,20 @@ ghc -dynamic 1.hs
 
 ## 目录
 
-- [Introduction](./chapter_1)
-- [Starting Out](./chapter_2)
-- [types-and-typeclasses](./chapter_3)
-- [4. Syntax in Functions](./chapter_4)
-- [Modules](./chapter_7)
-- [Making Our Own types and typeclasses](./chapter_8)
+- [Chapter 1: Introduction](./chapter_1)
+- [Chapter 2: Starting Out](./chapter_2)
+- [Chapter 3: Types and Typeclasses](./chapter_3)
+- [Chapter 4: Syntax in Functions](./chapter_4)
+- [Chapter 5: Recursion](./chapter_5)
+- [Chapter 6: Higher-order Functions](./chapter_6)
+- [Chapter 7: Modules](./chapter_7)
+- [Chapter 8: Making Our Own Types and Typeclasses](./chapter_8)
+- [Chapter 9: Input and Output](./chapter_9)
+- [Chapter 10: Functionally Solving Problems](./chapter_10)
+- [Chapter 11: Functors, Applicative Functors and Monoids](./chapter_11)
+- [Chapter 12: A Fistful of Monads](./chapter_12)
+- [Chapter 13: For a Few Monads More](./chapter_13)
+- [Chapter 14: Zippers](./chapter_14)
 
 ## 其它
 
