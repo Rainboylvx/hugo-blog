@@ -3,7 +3,7 @@ title: "鹏翔万里haskell读书笔记"
 date: 2025-11-02
 draft: false
 toc: true
-tags: [""]
+tags: ["读书笔记"]
 categories: [""]
 source: https://github.com/TonyCrane/note/blob/726089f71103941b9371c997aecba5ea49bcf436/docs/cs/pl/haskell.md
 ---

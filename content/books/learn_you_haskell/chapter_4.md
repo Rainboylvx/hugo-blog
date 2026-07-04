@@ -3,7 +3,7 @@ title: "chapter_4 《Haskell：函数语法》读书笔记核心内容"
 date: 2025-11-02
 draft: false
 toc: true
-tags: [""]
+tags: ["读书笔记"]
 categories: [""]
 ---
 

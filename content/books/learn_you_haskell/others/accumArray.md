@@ -3,7 +3,7 @@ title: "accumArray 学习笔记"
 date: 2025-12-13
 draft: false
 toc: true
-tags: ["haskell"]
+tags: ["haskell", "读书笔记"]
 categories: [""]
 ---
 

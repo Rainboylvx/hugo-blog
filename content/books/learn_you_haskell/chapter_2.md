@@ -2,6 +2,7 @@
 title: chapter 2 Starting Out
 date: 2025-09-09
 toc: true
+tags: ["读书笔记"]
 ---
 ## 这是什么页面？
 

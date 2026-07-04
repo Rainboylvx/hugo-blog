@@ -3,7 +3,7 @@ title: "haskell竞赛io操作"
 date: 2025-12-11
 draft: false
 toc: true
-tags: [""]
+tags: ["读书笔记"]
 categories: [""]
 ---
 

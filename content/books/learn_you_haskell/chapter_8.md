@@ -3,7 +3,7 @@ title: "制造我们自己的类型和类型类"
 date: 2025-11-05
 draft: false
 toc: true
-tags: ["haskell"]
+tags: ["haskell", "读书笔记"]
 categories: [""]
 ---
 
