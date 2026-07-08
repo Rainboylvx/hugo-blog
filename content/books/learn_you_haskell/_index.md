@@ -23,6 +23,8 @@ ghc -dynamic 1.hs
 ./1
 ```
 
+在
+
 最简单的方法可以是用 在线haskell: https://play.haskell.org/
 
 ## 资源

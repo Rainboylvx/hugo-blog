@@ -61,6 +61,12 @@ article_categories:
       - name: 微积分
         icon : "books/微积分/cover.png"
         link: "books/微积分"
+      - name: Rust程序设计（第2版）
+        icon : "books/rust程序设计/images/cover.png"
+        link: "books/rust程序设计"
+      - name: Rust 官方教程
+        icon : "books/rust官方教程/images/cover.svg"
+        link: "books/rust官方教程"
 ---
 
 <div class="author-profile">

@@ -37,5 +37,4 @@ jobs:
               PUBLISH_DIR: ./public
               commit_message: auto deploy
 
-        - name: Update Blog Server via Webhook
-          run: curl -k ${{ secrets.WEBHOOK_URL }}
+
