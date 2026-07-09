@@ -28,7 +28,11 @@ VS Code 搜索安装 **Continue** 插件：
 
 ## 配置 Continue
 
-Continue 的配置文件是 `~/.continue/config.yaml`，内容如下：
+Continue 的配置文件是 `~/.continue/config.yaml`。
+
+### 配置一：完整版（Chat 思考 + Autocomplete 不思考）
+
+Chat 保留思考模式获得更好回答，Autocomplete 关闭思考获得更快补全：
 
 ```yaml
 name: Rust Dev Config
@@ -56,18 +60,53 @@ models:
           type: disabled
 ```
 
+### 配置二：简易版（Chat + Autocomplete 同一模型）
+
+```yaml
+name: Rust Dev Config
+version: 1.0.0
+schema: v1
+models:
+  - name: DeepSeek V4 Flash (Chat)
+    provider: deepseek
+    model: deepseek-v4-flash
+    apiKey: sk-your-api-key-here
+    contextLength: 1048576
+    roles:
+      - chat
+      - autocomplete
+```
+
 几个关键配置说明：
 
 | 字段 | 说明 |
 |------|------|
 | `model: deepseek-v4-flash` | DeepSeek 最新 V4 快模型，性价比最高 |
 | `contextLength: 1048576` | 1M token 上下文，等于 2^20 |
-| `roles: [chat]` | 分配给对话功能 |
-| `roles: [autocomplete]` | 分配给 Tab 补全功能 |
-| `extraBodyProperties.thinking.type: disabled` | **关掉补全的思考模式**，速度更快 |
+| `roles: [chat, autocomplete]` | 同时用于对话和补全 |
 
 > [!TIP] 为什么补全要关掉思考？
 > 思考模式会让模型先「想」一会再输出，对对话质量有帮助，但对代码补全（你敲 `let x =` 它接 `String::new()`）不需要推理。关掉后延迟明显降低。
+
+### 最简配置（仅对话）
+
+如果补全暂时不可用，可以先只用对话功能：
+
+```yaml
+name: Rust Dev Config
+version: 1.0.0
+schema: v1
+models:
+  - name: DeepSeek V4 Flash (Chat)
+    provider: deepseek
+    model: deepseek-v4-flash
+    apiKey: sk-your-api-key-here
+    contextLength: 1048576
+    roles:
+      - chat
+```
+
+这个配置去掉补全部分，只保留对话。适合先用起来，后续再考虑补全。
 
 ## 使用方式
 
