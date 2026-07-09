@@ -6,5 +6,8 @@ toc: true
 tags: ["读书笔记"]
 ---
 
+- [原文（英文）](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [原文（中文）](https://rustwiki.org/zh-CN/book/ch09-00-error-handling.html)
+
 
 

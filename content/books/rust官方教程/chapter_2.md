@@ -6,6 +6,9 @@ toc: true
 tags: ["读书笔记"]
 ---
 
+- [原文（英文）](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)
+- [原文（中文）](https://rustwiki.org/zh-CN/book/ch02-00-guessing-game-tutorial.html)
+
 本章通过一个完整的猜数字游戏项目，一次性介绍 Rust 的核心工作机制：`let`、`match`、`use`、外部 crate、类型转换、循环、错误处理等。不深入原理，重在直觉建立。
 
 最终完整代码：

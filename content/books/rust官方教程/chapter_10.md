@@ -6,5 +6,8 @@ toc: true
 tags: ["读书笔记"]
 ---
 
+- [原文（英文）](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [原文（中文）](https://rustwiki.org/zh-CN/book/ch10-00-generics.html)
+
 
 

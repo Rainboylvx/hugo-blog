@@ -6,6 +6,9 @@ toc: true
 tags: ["读书笔记"]
 ---
 
+- [原文（英文）](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
+- [原文（中文）](https://rustwiki.org/zh-CN/book/ch03-00-common-programming-concepts.html)
+
 本章涵盖 Rust 的基础语法：变量、类型、函数、注释、控制流。这些概念几乎所有语言都有，但 Rust 的实现有独特的规则。
 
 ## 3.1 变量与可变性

@@ -6,6 +6,9 @@ toc: true
 tags: ["读书笔记"]
 ---
 
+- [原文（英文）](https://doc.rust-lang.org/book/ch01-00-getting-started.html)
+- [原文（中文）](https://rustwiki.org/zh-CN/book/ch01-00-getting-started.html)
+
 本章内容：安装 Rust、编写第一个程序、使用 Cargo 管理项目。
 
 ## 1.1 安装
