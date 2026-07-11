@@ -37,6 +37,12 @@ article_categories:
       - name: "linux网络编程"
         icon: "mdi:ip-network"
         link: "/linux_tcp_program"
+      - name: "Haskell 99题"
+        icon: "devicon:haskell"
+        link: "/program_language/haskell-99"
+      - name: "英语学习"
+        icon: "mdi:translate"
+        link: "/english_learning"
   - name: 读书笔记
     desc: 我的读书笔记
     children:
