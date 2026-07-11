@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-为 Haskell 99 题每个 pNN.md 添加上一题/下一题导航链接（纯 Markdown）。
+为 Haskell 99 题每个 pNN.md 在文章开头和末尾添加上一题/下一题导航链接。
 """
 
 import os
+import re
 
 BASE_DIR = "/home/rainboy/mycode/hugo-blog/content/program_language/haskell-99"
 
@@ -110,19 +111,7 @@ TITLES = {
 }
 
 
-def add_navigation(filepath, num):
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # 跳过已有导航的
-    if "←" in content and "→" in content and "p" in content:
-        # 粗略检查：文件尾部有导航链接样式
-        tail = content.strip()[-200:]
-        if "← P" in tail and "→" in tail:
-            print(f"  ⏭️  Skipped p{num:02d}")
-            return
-
-    # 构建导航行
+def make_nav_line(num):
     parts = []
     if num > 1:
         prev_title = TITLES[num - 1]
@@ -132,11 +121,32 @@ def add_navigation(filepath, num):
     if num < 99:
         next_title = TITLES[num + 1]
         parts.append(f"[P{num+1:02d} {next_title} →](./p{num+1:02d})")
+    return " ".join(parts)
 
-    nav_line = " ".join(parts)
-    nav_block = f"\n---\n\n{nav_line}\n"
 
-    content = content.rstrip() + nav_block
+def update_file(filepath, num):
+    with open(filepath, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    nav_line = make_nav_line(num)
+    nav_block = f"---\n\n{nav_line}\n\n---\n"
+
+    # 1. 移除已有的底部导航
+    content = re.sub(r"\n---\n\n" + re.escape(nav_line) + r"\n*$", "", content)
+
+    # 2. 在第一个二级标题（##）之前插入顶部导航
+    # 文件结构：frontmatter → 空行 → # PNN Title → 空行 → blockquote → 空行 → ## ...
+    first_h2 = content.find("\n## ")
+    if first_h2 == -1:
+        print(f"  ❌ p{num:02d}: 找不到 ## 标题")
+        return
+
+    # 在第一个 ## 之前的空行处插入
+    content = content[:first_h2] + "\n" + nav_block + "\n" + content[first_h2:]
+
+    # 3. 在末尾添加底部导航
+    content = content.rstrip() + f"\n\n---\n\n{nav_line}\n"
+
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"  ✅ p{num:02d}")
@@ -145,7 +155,7 @@ def add_navigation(filepath, num):
 def main():
     for num in range(1, 100):
         filepath = f"{BASE_DIR}/p{num:02d}.md"
-        add_navigation(filepath, num)
+        update_file(filepath, num)
     print(f"\n🎉 Done")
 
 
