@@ -64,5 +64,5 @@ ghc -dynamic 1.hs
 ## 练习
 
 - [Ninety-Nine Haskell Problems](https://ninetynine.haskell.chungyc.org/)
-- [Haskell 99 题学习路线](/blog/haskell-99-problems-guide/)
+- [Haskell 99 题学习路线](/program_language/haskell-99/)
 - https://exercism.org/tracks/haskell/
