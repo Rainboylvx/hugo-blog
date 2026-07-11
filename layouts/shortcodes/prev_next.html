@@ -1,0 +1,17 @@
+{{- $prev := .Page.PrevInSection -}}
+{{- $next := .Page.NextInSection -}}
+{{- if or $prev $next -}}
+<hr>
+<nav class="prev-next" style="display: flex; justify-content: space-between; margin: 1.5em 0;">
+  <span>
+    {{- if $prev -}}
+      <a href="{{ $prev.RelPermalink }}">← {{ $prev.Title }}</a>
+    {{- end -}}
+  </span>
+  <span>
+    {{- if $next -}}
+      <a href="{{ $next.RelPermalink }}">{{ $next.Title }} →</a>
+    {{- end -}}
+  </span>
+</nav>
+{{- end -}}
