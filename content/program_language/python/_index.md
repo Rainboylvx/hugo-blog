@@ -21,3 +21,4 @@ noList: true
 12. [C++ 选手转 Python 竞赛的 4 个血泪坑点](./cpp_to_python_pitfalls.md)：浅拷贝灾难、回溯存答案为空、闭包赋值报错与性能陷阱。
 13. [Python 组合数学神器：有放回的组合与隔板法](./combinations_with_replacement.md)：利用 `combinations_with_replacement` 秒杀无限背包暴力与非严格递增序列构造。
 14. [Python 暴力验证：含有重复元素的全排列去重](./unique_permutations.md)：原理解析 `unique_permutations` 及其核心的同级枝剪算法。
+15. [组合去重的核心哲学：有序唯一性](./ordered_uniqueness.md)：从算法“术”到数学“道”，一统组合 DFS 与去重排列的底层思想。
