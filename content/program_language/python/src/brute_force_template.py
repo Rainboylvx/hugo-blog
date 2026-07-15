@@ -96,13 +96,14 @@ def iter_subsets(a):
         yield from combinations(a, size)
 
 
-# Binary state of every position:
-# for state in product([0, 1], repeat=n):
-#     ...
-#
-# k states for every position:
-# for state in product(range(k), repeat=n):
-#     ...
+def iter_binary_states(n):
+    """Yield all binary states of length n as tuples."""
+    yield from product([0, 1], repeat=n)
+
+
+def iter_k_states(k, n):
+    """Yield all k-ary states of length n as tuples."""
+    yield from product(range(k), repeat=n)
 
 
 # ============================================================
@@ -327,12 +328,19 @@ def _self_test():
     assert list(iter_subsets([])) == [()]
     assert list(iter_subsets([1, 2])) == [(), (1,), (2,), (1, 2)]
 
-    assert list(product([0, 1], repeat=2)) == [
+    assert list(iter_binary_states(2)) == [
         (0, 0),
         (0, 1),
         (1, 0),
         (1, 1),
     ]
+    
+    assert list(iter_k_states(3, 2)) == [
+        (0, 0), (0, 1), (0, 2),
+        (1, 0), (1, 1), (1, 2),
+        (2, 0), (2, 1), (2, 2)
+    ]
+
     assert list(permutations([1, 2])) == [(1, 2), (2, 1)]
     assert list(combinations([1, 2, 3], 2)) == [(1, 2), (1, 3), (2, 3)]
     assert list(combinations_with_replacement([1, 2], 2)) == [
