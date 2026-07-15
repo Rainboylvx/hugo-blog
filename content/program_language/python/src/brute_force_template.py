@@ -154,6 +154,9 @@ def unique_permutations(a):
 # 5. DFS / backtracking
 # ============================================================
 
+# Example:
+# >>> dfs_assignments([["a","b"], [1,2]])
+# [('a', 1), ('a', 2), ('b', 1), ('b', 2)]
 def dfs_assignments(options):
     """Return every sequence that chooses one value per position."""
     answer = []
@@ -165,7 +168,8 @@ def dfs_assignments(options):
             return
 
         for choice in options[position]:
-            # Put pruning based on path and choice here.
+            # Manually uncomment the next line when pruning is needed:
+            # if sum(path) + choice > SOME_LIMIT: continue
             path.append(choice)
             dfs(position + 1)
             path.pop()
@@ -178,6 +182,10 @@ def dfs_assignments(options):
 # 6. BFS shortest path in an implicit state graph
 # ============================================================
 
+# Example:
+# >>> def neighbors(x): return [y for y in (x-1, x+1) if 0 <= y <= 4]
+# >>> bfs_shortest(0, lambda x: x == 3, neighbors)
+# 3
 def bfs_shortest(start, is_goal, neighbors):
     """Return the minimum number of edges to a goal, or None."""
     queue = deque([start])
