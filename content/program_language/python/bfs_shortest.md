@@ -10,7 +10,35 @@ tags: ["Python", "BFS", "最短路径", "算法竞赛", "隐式图"]
 
 这种需求极其常见，比如：八数码问题、迷宫寻路、单词接龙、华容道等。
 
-在我们的 [Python 暴力代码大模板](./brute_force_template.md) 中，提供了一个高度泛化的 BFS 函数 `bfs_shortest`，它不需要你提前建好整个图，只需要告诉它三个东西：起点、如何判断终点、如何从当前状态产生下一步。
+## bfs_shortest 完整模板
+
+直接复制这段代码到你的 `solve.py` 开头即可使用：
+
+```python
+from collections import deque
+
+def bfs_shortest(start, is_goal, neighbors):
+    """Return the minimum number of edges to a goal, or None."""
+    queue = deque([start])
+    distance = {start: 0}
+
+    while queue:
+        state = queue.popleft()
+        current_distance = distance[state]
+
+        if is_goal(state):
+            return current_distance
+
+        for next_state in neighbors(state):
+            if next_state in distance:
+                continue
+            distance[next_state] = current_distance + 1
+            queue.append(next_state)
+
+    return None
+```
+
+当然它也是我们 [Python 暴力代码大模板](./brute_force_template.md) 中自带的函数之一。
 
 ## 函数签名与三个参数
 
