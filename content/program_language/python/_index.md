@@ -24,3 +24,5 @@ noList: true
 15. [组合去重的核心哲学：有序唯一性](./ordered_uniqueness.md)：从算法“术”到数学“道”，一统组合 DFS 与去重排列的底层思想。
 16. [Python 隐式图 BFS 最短路径模板](./bfs_shortest.md)：通用 `bfs_shortest` 函数在数轴、网格迷宫、八数码与单词接龙中的用法。
 17. [Python 子集和判定：记忆化 DFS 与 @cache](./subset_sum_exists.md)：暴力指数级搜索加上缓存，和 C++ 全局数组记忆化一一对照。
+18. [Python 竞赛中的字典经典用法](./dict_usage.md)：dict、defaultdict、Counter 三件套覆盖竞赛 30% 的数据结构需求。
+19. [Python 解包操作符 * 和 **：写更少做更多](./unpacking_operator.md)：扩展解包、合并列表、矩阵转置、合并字典。
