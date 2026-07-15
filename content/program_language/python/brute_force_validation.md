@@ -4,6 +4,8 @@ date: 2026-07-15
 draft: true
 toc: true
 tags: ["Python", "Codeforces", "算法竞赛"]
+aliases:
+  - /blog/python_stress_test.html
 ---
 
 在 Codeforces 或其他算法竞赛中，我们经常会得到一个看起来正确的贪心、DP 或数学结论，但暂时无法完全证明它。此时最实用的办法不是继续盯着正解，而是写一个只处理小数据的暴力程序，直接按照题意枚举所有可能，再比较答案。
@@ -208,6 +210,8 @@ assert sum(squares_generator) == 30
 
 列表推导式会立即创建整个列表；生成器只在需要时逐个产生元素。验证程序中，生成器经常直接交给 `sum`、`min`、`max`、`any` 或 `all`，不需要保存所有中间结果。
 
+生成器的惰性求值、一次性消费和短路复杂度，见[Python 生成器表达式](./generator_expression.md)。
+
 ### 3.3 使用 `any` 和 `all` 表达存在与全称
 
 - `any(...)`：只要存在一个元素为真，就返回 `True`。
@@ -401,6 +405,8 @@ assert choices == [
 > [!WARNING] 重复元素与重复排列
 > `permutations([1, 1, 2])` 按位置排列，因此会产生内容相同的元组。小数据下可以写 `set(permutations(a))` 去重，但它仍会枚举全部位置排列，并保存所有不同的结果。更大的状态空间应在搜索过程中跳过重复选择。
 
+相邻元素、前缀聚合和连接迭代器等工具，见[Python itertools 实用组合](./itertools_recipes.md)。
+
 ## 6. 选择依赖当前状态：DFS 与回溯
 
 `product` 适合每个位置的候选集合固定不变。如果下一步能选什么取决于当前状态，就需要 DFS 和回溯。
@@ -516,6 +522,8 @@ distance[(2, 1, 3)] = 1
 assert distance[(2, 1, 3)] == 1
 assert (3, 2, 1) not in distance
 ```
+
+关于 `Counter`、`defaultdict`、`deque`、`dict` 和 `set` 的选择，见[Python 竞赛常用容器](./collections_toolkit.md)。
 
 ## 8. 消除重复搜索：记忆化
 
@@ -750,6 +758,8 @@ for case_id in range(1000):
 
 这里使用独立的 `Random` 对象和固定种子。只要代码不变，每次运行都会生成相同的数据，出现错误时就能稳定复现。
 
+如何生成边界数组、合法区间、树和简单图，见[用 Python 生成可复现的随机测试数据](./random_test_data.md)。
+
 这个例子说明，对拍流程并不是重点。真正需要练习的是前面的 `max_subarray_brute`：能否快速把题目定义写成简单、独立、值得信任的 Python 程序。
 
 ## 12. 如何选择枚举方式
@@ -767,6 +777,17 @@ for case_id in range(1000):
 | 大量重复子问题 | DFS + `cache` | 取决于不同状态数 |
 
 不要死记“Python 能跑到多大的 $n$”。验证程序的总耗时还取决于单个状态的计算量和需要测试多少组数据。更稳妥的做法是从很小的 $n$ 开始，确认能够快速运行后再逐渐增大。
+
+## 相关专题
+
+- [Python 暴力代码大模板](./brute_force_template.md)
+- [Python 竞赛输入输出与字符串处理](./input_output_and_strings.md)
+- [Python 排序与顺序验证](./sorting_and_ordering.md)
+- [Python 竞赛常用容器](./collections_toolkit.md)
+- [Python 生成器表达式](./generator_expression.md)
+- [Python itertools 实用组合](./itertools_recipes.md)
+- [用 Python 生成可复现的随机测试数据](./random_test_data.md)
+- [Python 验证代码中的常用数学工具](./math_tools.md)
 
 ## 总结
 

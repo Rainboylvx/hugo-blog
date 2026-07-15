@@ -25,6 +25,9 @@ article_categories:
       - name: TypeScript
         icon: "logos:typescript-icon"
         link: "/typescript"
+      - name: Python
+        icon: "logos:python"
+        link: "/program_language/python"
       - name: "Lua编程语言"
         icon: "/program_language/lua/cover.png"
         link: "/program_language/lua"
