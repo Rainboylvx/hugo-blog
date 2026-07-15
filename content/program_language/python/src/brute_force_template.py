@@ -73,9 +73,9 @@ def iter_pairs(n):
 
 def iter_intervals(n):
     """Yield all non-empty half-open intervals [left, right)."""
-    for left in range(n):
-        for right in range(left + 1, n + 1):
-            yield left, right
+    # Note: In 0-indexed arrays, generating half-open intervals [left, right)
+    # is mathematically identical to generating pairs (i, j) where i < j <= n.
+    yield from iter_pairs(n + 1)
 
 
 # ============================================================
