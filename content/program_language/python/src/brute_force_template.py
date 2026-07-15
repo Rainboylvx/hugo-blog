@@ -110,6 +110,10 @@ def iter_k_states(k, n):
 # 4. Permutations and combinations
 # ============================================================
 
+def iter_multisets(a, k):
+    """Yield all multisets (combinations with replacement) of size k."""
+    yield from combinations_with_replacement(a, k)
+
 # for order in permutations(a):
 #     ...
 #
@@ -343,7 +347,7 @@ def _self_test():
 
     assert list(permutations([1, 2])) == [(1, 2), (2, 1)]
     assert list(combinations([1, 2, 3], 2)) == [(1, 2), (1, 3), (2, 3)]
-    assert list(combinations_with_replacement([1, 2], 2)) == [
+    assert list(iter_multisets([1, 2], 2)) == [
         (1, 1),
         (1, 2),
         (2, 2),
