@@ -20,3 +20,4 @@ noList: true
 11. [Python 函数式编程三剑客：map、filter 与 reduce](./map_reduce_filter.md)：深入理解高阶函数思想以及在数据聚合与映射中的应用。
 12. [C++ 选手转 Python 竞赛的 4 个血泪坑点](./cpp_to_python_pitfalls.md)：浅拷贝灾难、回溯存答案为空、闭包赋值报错与性能陷阱。
 13. [Python 组合数学神器：有放回的组合与隔板法](./combinations_with_replacement.md)：利用 `combinations_with_replacement` 秒杀无限背包暴力与非严格递增序列构造。
+14. [Python 暴力验证：含有重复元素的全排列去重](./unique_permutations.md)：原理解析 `unique_permutations` 及其核心的同级枝剪算法。
