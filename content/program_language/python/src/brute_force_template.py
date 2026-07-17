@@ -211,6 +211,9 @@ def bfs_shortest(start, is_goal, neighbors):
 # 7. Memoized DFS example
 # ============================================================
 
+# Example:
+# >>> subset_sum_exists([3, 34, 4, 12, 5, 2], 9)
+# True
 def subset_sum_exists(a, target):
     """Return whether a subset of a sums to target."""
     values = tuple(a)
@@ -253,6 +256,9 @@ def is_square(n):
     return root * root == n
 
 
+# Example:
+# >>> first_true([1, 3, 7, 2, 9], lambda x: x > 5)
+# 7
 def first_true(candidates, predicate):
     return next((x for x in candidates if predicate(x)), None)
 
@@ -261,10 +267,16 @@ def first_true(candidates, predicate):
 # 9. Containers and graphs
 # ============================================================
 
+# Example:
+# >>> frequency([1, 1, 2, 3, 2])
+# Counter({1: 2, 2: 2, 3: 1})
 def frequency(a):
     return Counter(a)
 
 
+# Example:
+# >>> group_by([1, 2, 3, 4], lambda x: x % 2)
+# {1: [1, 3], 0: [2, 4]}
 def group_by(items, key):
     groups = defaultdict(list)
     for item in items:
@@ -272,6 +284,9 @@ def group_by(items, key):
     return dict(groups)
 
 
+# Example:
+# >>> build_undirected_graph(3, [(0, 1), (1, 2)])
+# [[1], [0, 2], [1]]
 def build_undirected_graph(n, edges):
     graph = [[] for _ in range(n)]
     for u, v in edges:
