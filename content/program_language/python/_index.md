@@ -20,11 +20,16 @@ noList: true
 11. [Python 验证代码中的常用数学工具](./math_tools.md)：整数平方根、最大公约数、浮点比较和精确分数。
 12. [Python 函数式编程三剑客：map、filter 与 reduce](./map_reduce_filter.md)：深入理解高阶函数思想以及在数据聚合与映射中的应用。
 13. [把 Haskell 的思考方式带到 Python OJ](./haskell_style_thinking_in_python.md)：用 pattern、guard 和 pipe 先分类与串联思路，再落地为适合 Python 提交的实现。
-14. [C++ 选手转 Python 竞赛的 4 个血泪坑点](./cpp_to_python_pitfalls.md)：浅拷贝灾难、回溯存答案为空、闭包赋值报错与性能陷阱。
-15. [Python 组合数学神器：有放回的组合与隔板法](./combinations_with_replacement.md)：利用 `combinations_with_replacement` 秒杀无限背包暴力与非严格递增序列构造。
-16. [Python 暴力验证：含有重复元素的全排列去重](./unique_permutations.md)：原理解析 `unique_permutations` 及其核心的同级枝剪算法。
-17. [组合去重的核心哲学：有序唯一性](./ordered_uniqueness.md)：从算法“术”到数学“道”，一统组合 DFS 与去重排列的底层思想。
-18. [Python 隐式图 BFS 最短路径模板](./bfs_shortest.md)：通用 `bfs_shortest` 函数在数轴、网格迷宫、八数码与单词接龙中的用法。
-19. [Python 子集和判定：记忆化 DFS 与 @cache](./subset_sum_exists.md)：暴力指数级搜索加上缓存，和 C++ 全局数组记忆化一一对照。
-20. [Python 竞赛中的字典经典用法](./dict_usage.md)：dict、defaultdict、Counter 三件套覆盖竞赛 30% 的数据结构需求。
-21. [Python 解包操作符 * 和 **：写更少做更多](./unpacking_operator.md)：扩展解包、合并列表、矩阵转置、合并字典。
+14. [Python flow：快速搭建 OJ 思路原型与随机验证](./flow_oj_prototyping.md)：用轻量数据流组织原型、短路状态、追踪中间值，并通过暴力随机差分寻找反例。
+15. [C++ 选手转 Python 竞赛的 4 个血泪坑点](./cpp_to_python_pitfalls.md)：浅拷贝灾难、回溯存答案为空、闭包赋值报错与性能陷阱。
+16. [Python 组合数学神器：有放回的组合与隔板法](./combinations_with_replacement.md)：利用 `combinations_with_replacement` 秒杀无限背包暴力与非严格递增序列构造。
+17. [Python 暴力验证：含有重复元素的全排列去重](./unique_permutations.md)：原理解析 `unique_permutations` 及其核心的同级枝剪算法。
+18. [组合去重的核心哲学：有序唯一性](./ordered_uniqueness.md)：从算法“术”到数学“道”，一统组合 DFS 与去重排列的底层思想。
+19. [Python 隐式图 BFS 最短路径模板](./bfs_shortest.md)：通用 `bfs_shortest` 函数在数轴、网格迷宫、八数码与单词接龙中的用法。
+20. [Python 子集和判定：记忆化 DFS 与 @cache](./subset_sum_exists.md)：暴力指数级搜索加上缓存，和 C++ 全局数组记忆化一一对照。
+21. [Python 竞赛中的字典经典用法](./dict_usage.md)：dict、defaultdict、Counter 三件套覆盖竞赛 30% 的数据结构需求。
+22. [Python 解包操作符 * 和 **：写更少做更多](./unpacking_operator.md)：扩展解包、合并列表、矩阵转置、合并字典。
+
+## 学习资源
+
+- [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html)：Python 官方文档中的函数式编程指南。
