@@ -8,8 +8,9 @@ noList: true
 
 ![](./cover.png)
 
+- [近世代数的抗遗忘学习心法与物理模型](./learning_methodology.md)
+
 ## 第一章
 
 - [1.1 等价关系与集合的分类](./1等价关系与集合的分类.md)
 - [1.2-群的概念](./1.2-群的概念.md)
-- [近世代数的抗遗忘学习心法与物理模型](./learning_methodology.md)
