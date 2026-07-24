@@ -30,6 +30,10 @@ noList: true
 21. [Python 子集和判定：记忆化 DFS 与 @cache](./subset_sum_exists.md)：暴力指数级搜索加上缓存，和 C++ 全局数组记忆化一一对照。
 22. [Python 竞赛中的字典经典用法](./dict_usage.md)：dict、defaultdict、Counter 三件套覆盖竞赛 30% 的数据结构需求。
 23. [Python 解包操作符 * 和 **：写更少做更多](./unpacking_operator.md)：扩展解包、合并列表、矩阵转置、合并字典。
+24. [Python 函数传参：对象引用绑定与参数排布](./function_arguments.md)：位置/关键字、默认参数陷阱、`*args/**kwargs`、`/` 与 `*`，以及对象引用传递。
+25. [Python set：哈希集合的核心操作与竞赛用法](./set_toolkit.md)：创建盲区、交并差、增删、`frozenset`，以及 $O(1)$ 查找带来的复杂度降维。
+26. [Python 比赛实战：字符串子串匹配（内置方法、正则与手速版 KMP）](./string_matching_kmp.md)：`s.find()`、正则前瞻断言 `(?=...)` 查找所有匹配，以及 15 行极简 KMP 模板。
+27. [Python 算法思路快速验证指南：全武器库与四层验证法](./rapid_prototyping_toolkit.md)：内置语法糖、标准库黑魔法、调试对拍与本地第三方库（SymPy、NetworkX、Z3）。
 
 ## 学习资源
 

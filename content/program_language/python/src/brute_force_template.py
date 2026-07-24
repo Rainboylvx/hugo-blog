@@ -7,6 +7,7 @@ from functools import cache
 from heapq import heapify, heappop, heappush
 from itertools import (
     accumulate,
+    batched,
     combinations,
     combinations_with_replacement,
     pairwise,
@@ -58,6 +59,7 @@ def read_all_ints(read=None):
 # paired = list(zip(a, b))
 # adjacent = list(pairwise(a))
 # adjacent_compatible = list(zip(a, a[1:]))
+# batches = list(batched(a, 3))  # Python 3.12+; the last tuple may be shorter.
 
 
 # ============================================================
@@ -338,6 +340,12 @@ def _self_test():
     source = BytesIO(b"1 2 3\n4 5\n")
     assert read_ints(source.readline) == [1, 2, 3]
     assert read_all_ints(source.read) == [4, 5]
+
+    assert list(batched([1, 2, 3, 4, 5], 3)) == [
+        (1, 2, 3),
+        (4, 5),
+    ]
+    assert list(batched([], 3)) == []
 
     assert list(iter_pairs(0)) == []
     assert list(iter_pairs(1)) == []
