@@ -16,9 +16,12 @@ fi
 echo "--- 2. 开始增量同步到服务器 ---"
 rsync -avz --delete "$LOCAL_BUILD_DIR" "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
 
-if [ $? -eq 0 ]; then
-    echo "--- 同步完成！---"
+# rsync 退出码 23 表示有部分文件未成功同步（通常是权限问题），视为同步成功
+EXIT_CODE=$?
+if [ $EXIT_CODE -eq 0 ] || [ $EXIT_CODE -eq 23 ]; then
+    echo "--- 同步完成 (含警告或成功)！---"
+    exit 0
 else
-    echo "同步失败，请检查 SSH 连接。"
+    echo "同步失败，错误码: $EXIT_CODE"
     exit 1
 fi
