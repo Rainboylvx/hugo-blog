@@ -44,7 +44,7 @@ article_categories:
         icon: "mdi:code-braces"
         link: "/compiler-principles"
       - name: "DeepSeek Harness"
-        icon: "mdi:robot"
+        icon: "/logo/dsh-whale.svg"
         link: "/deepseek-harness"
       - name: "Haskell 99题"
         icon: "devicon:haskell"
