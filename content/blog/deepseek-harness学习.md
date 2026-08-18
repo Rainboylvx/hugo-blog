@@ -8,6 +8,9 @@ tags: ["AI", "工具", "DeepSeek"]
 
 DeepSeek 在 2026 年 8 月开源了自己的 agent harness（智能体框架）——`DeepSeek Harness`（`dsh`）。它和 `deepseek-chat`、DeepSeek API 是两回事：后者是模型，前者是跑智能体的框架，类似于 Claude Code / OpenAI Codex 这类 Agent 运行环境。
 
+> [!TIP] 系列索引
+> 完整的 DeepSeek Harness 学习系列见 [DeepSeek Harness 系列](./../deepseek-harness/)，涵盖入门、插件开发、服务与事件、模型接入、打包发布、运行机制与工程实践。
+
 它的核心设计理念只有一句话：**Everything is a Plugin（一切皆插件）**。整个产品没有一个"特权核心"，包括模型适配器、工具注册表、会话日志、甚至 Agent 主循环本身，全部是插件。这意味着产品里每个部件都可以通过配置替换掉。
 
 ## 快速开始
