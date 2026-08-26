@@ -136,6 +136,8 @@ tags: ["self-record", "资源收集"]
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) — C++ 最佳实践
 - [learncpp.com](https://www.learncpp.com/) — 循序渐进的 C++ 教程
 - [Compiler Explorer (Godbolt)](https://godbolt.org/) — 在线查看编译器生成的汇编代码
+- [Compilers 文档站](https://docs.compilers.cpl.icu/) — 南京大学魏恒峰老师《编译原理》课程配套文档
+- [Compilers 课程 OJ](https://oj.compilers.cpl.icu/) — 南大《编译原理》课程配套 OJ，练习实验题目
 
 ---
 
