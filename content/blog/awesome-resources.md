@@ -229,3 +229,4 @@ tags: ["self-record", "资源收集"]
 - [Compiler Explorer (Godbolt)](https://godbolt.org/) — 在线编译器汇编输出
 - [Etymology of English Words](https://www.etymonline.com/) — 英语词源词典
 - [Stack Overflow Developer Survey](https://survey.stackoverflow.co/) — 开发者年度调查报告
+- [皮蛋熊的blog（蔚然小站）](https://blog.kkk.rs/) — NAS、群晖 vGPU、NVIDIA 逆向折腾笔记
