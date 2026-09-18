@@ -52,6 +52,9 @@ article_categories:
       - name: "英语学习"
         icon: "mdi:translate"
         link: "/english_learning"
+      - name: "大语言模型AI学习"
+        icon: "mdi:brain"
+        link: "/llm-ai-study"
   - name: 读书笔记
     desc: 我的读书笔记
     children:
