@@ -52,7 +52,7 @@ article_categories:
       - name: "英语学习"
         icon: "mdi:translate"
         link: "/english_learning"
-      - name: "大语言模型AI学习"
+      - name: "llm-ai-study"
         icon: "mdi:brain"
         link: "/llm-ai-study"
   - name: 读书笔记

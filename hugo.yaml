@@ -1,5 +1,5 @@
 baseURL: "https://hugo-dead-simple.netlify.com/"
-languageCode: zh-cn
+defaultContentLanguage: "zh-cn"
 title: "Rainboy's Blog"
 enableGitInfo: false
 theme: ["hugo-admonitions", "hugo-dead-simple"]
