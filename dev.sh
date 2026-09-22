@@ -1,2 +1,2 @@
 #!/bin/bash
-hugo server -D --bind 0.0.0.0
+hugo server -F -D --bind 0.0.0.0

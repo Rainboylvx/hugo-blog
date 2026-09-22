@@ -59,6 +59,12 @@ markup:
     lineNos: true
     tabWidth: 4
 
+# 学习笔记的示例代码只用于 {{< include >}} 读取（readFile 绕过页面管线），
+# 不需要也不应该发布到 public/。
+ignoreFiles:
+  - "content/typescript/src/.*"
+  - "content/typescript/_archive/src/.*"
+
 outputs:
   home:
     - html

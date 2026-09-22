@@ -1,0 +1,24 @@
+{{/*
+  覆盖主题的 search-index.html：归档内容不应出现在站内搜索里。
+  与 themes/hugo-dead-simple/layouts/partials/search-index.html 的唯一区别是
+  加了一层 /_archive/ 过滤，其余保持一致。
+*/}}
+<script>
+window.store = {
+    {{ range .Site.Pages }}
+    {{ if not (strings.Contains .RelPermalink "/_archive/") }}
+    "{{ .Permalink }}": {
+        "title": "{{ .Title  }}",
+        "tags": [{{ range .Params.Tags }}"{{ . }}",{{ end }}],
+        "content": {{ .Content | plainify }}, // Strip out HTML tags
+        "url": "{{ .Permalink }}"
+    },
+    {{ end }}
+    {{ end }}
+}
+</script>
+
+{{ if not .Site.Params.noSearch }}
+    <script defer src="{{ relURL "/js/lunr.js" }}"></script>
+    <script defer src="{{ relURL "/js/search.js" }}"></script>
+{{ end }}

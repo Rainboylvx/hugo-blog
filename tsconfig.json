@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["esnext"],
+    "strict": true,
+    "types": ["node"],
+    "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["content/typescript/src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "content/typescript/_archive/src",
+    "content/typescript/src/decorators-legacy",
+    "content/typescript/src/decorators-standard"
+  ]
+}

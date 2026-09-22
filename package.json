@@ -1,0 +1,15 @@
+{
+  "name": "hugo-blog-typescript-notes",
+  "version": "0.0.0",
+  "private": true,
+  "description": "content/typescript/ 学习笔记的示例代码工具链（仅用于本地验证）",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "reflect-metadata": "^0.2.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
