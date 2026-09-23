@@ -12,10 +12,10 @@ tags: ["ESP32-S3", "ESP-IDF", "GPIO", "LED", "BSP", "Ubuntu"]
 - **2.1 单文件点灯**：除 ESP-IDF 必需的构建文件外，应用逻辑全写在 `main/main.c`，先弄明白 GPIO 怎样让灯亮灭。
 - **2.2 BSP 分层点灯**：保持引脚、时序和实验现象不变，把板级细节从 `main.c` 移到 `components/BSP/LED/`，再比较这样做的收益与成本。
 
-两节各有一个[可独立构建的示例工程](https://github.com/Rainboylvx/esp32-blog/tree/main/examples)；建议先完成 2.1，再读 2.2。
+两节各有一个[可独立构建的示例工程](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples)；建议先完成 2.1，再读 2.2。
 
 > [!INFO] 验证范围
-> [2.1 单文件工程](https://github.com/Rainboylvx/esp32-blog/tree/main/examples/02-01-main-led/)和[2.2 BSP 工程](https://github.com/Rainboylvx/esp32-blog/tree/main/examples/02-02-bsp-led/)都已在 macOS 的 ESP-IDF v5.5.5 下执行 `idf.py set-target esp32s3`、`idf.py build`，编译成功。Ubuntu 26.04 实机及开发板当前未接入；串口号、烧录和实际闪灯仍须在目标机器上验证。
+> [2.1 单文件工程](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/02-01-main-led/)和[2.2 BSP 工程](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/02-02-bsp-led/)都已在 macOS 的 ESP-IDF v5.5.5 下执行 `idf.py set-target esp32s3`、`idf.py build`，编译成功。Ubuntu 26.04 实机及开发板当前未接入；串口号、烧录和实际闪灯仍须在目标机器上验证。
 
 ## 先读原理图：GPIO1 控制哪盏灯
 
@@ -153,7 +153,7 @@ idf.py -p <实际串口> flash monitor
 
 **BSP（Board Support Package，板级支持包）**是把“这块板子怎么接线、怎么初始化和控制外设”的代码集中起来的一种组织方式。这里 `components/BSP` 是我们给 ESP-IDF **组件**取的名字；ESP-IDF 负责按组件的 CMake 声明编译和链接，`BSP` 这个目录名并不会自动赋予特殊功能。
 
-在 2.1，`main.c` 同时知道“每 500 毫秒亮灭一次”和“LED 接 GPIO1、低电平亮”。现在保留前者，把后者移到 BSP。为便于重做和对照，[2.2 工程](https://github.com/Rainboylvx/esp32-blog/tree/main/examples/02-02-bsp-led/)是独立快照；两个工程运行后的灯和日志应该完全一样。
+在 2.1，`main.c` 同时知道“每 500 毫秒亮灭一次”和“LED 接 GPIO1、低电平亮”。现在保留前者，把后者移到 BSP。为便于重做和对照，[2.2 工程](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/02-02-bsp-led/)是独立快照；两个工程运行后的灯和日志应该完全一样。
 
 ### 从 2.1 工程开始重构
 
