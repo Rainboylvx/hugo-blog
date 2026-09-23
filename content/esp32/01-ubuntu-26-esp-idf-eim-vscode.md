@@ -3,6 +3,7 @@ title: "在 Ubuntu 26.04 安装 ESP-IDF、EIM 和 VS Code"
 date: 2026-09-23
 draft: true
 toc: true
+weight: 1
 tags: ["ESP32", "ESP-IDF", "Ubuntu", "VS Code"]
 ---
 
