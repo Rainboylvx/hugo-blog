@@ -13,6 +13,9 @@ article_categories:
   - name: 项目学习
     desc: 我的项目
     children:
+      - name: ESP32 项目学习
+        icon: "mdi:chip"
+        link: "/esp32"
       - name: 前端
         icon: "skill-icons:html"
         link: "/frontend"
