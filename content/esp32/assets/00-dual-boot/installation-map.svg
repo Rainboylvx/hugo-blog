@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 360" role="img" aria-labelledby="title desc">
+  <title id="title">Ventoy U 盘与双系统内置盘的分工</title>
+  <desc id="desc">Ventoy 和 Ubuntu ISO 位于可拔出的 U 盘；内置盘保留 Windows、EFI 和恢复分区，只把预留的未分配空间用于 Ubuntu。</desc>
+  <rect width="1100" height="360" rx="20" fill="#f6f8fb"/>
+  <text x="44" y="49" fill="#19324d" font-size="25" font-weight="700" font-family="sans-serif">先认清两块设备</text>
+  <text x="44" y="77" fill="#52657a" font-size="15" font-family="sans-serif">示意图不表示实际分区顺序；操作前以容量和型号核对目标磁盘</text>
+
+  <rect x="42" y="105" width="428" height="211" rx="16" fill="#ffffff" stroke="#b7c9d8" stroke-width="2"/>
+  <rect x="60" y="125" width="392" height="52" rx="9" fill="#dceafa"/>
+  <text x="79" y="159" fill="#123a66" font-size="22" font-weight="700" font-family="sans-serif">Ventoy U 盘 · 安装介质</text>
+  <text x="80" y="213" fill="#263d55" font-size="19" font-family="sans-serif">Ventoy + Ubuntu 26.04 ISO</text>
+  <text x="80" y="245" fill="#52657a" font-size="16" font-family="sans-serif">制作 Ventoy 时，这只 U 盘会被清空</text>
+  <text x="80" y="278" fill="#52657a" font-size="16" font-family="sans-serif">装完系统按提示拔出</text>
+
+  <path d="M485 206 H600" stroke="#277e9a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M601 206 l-14 -9 v18 z" fill="#277e9a"/>
+  <text x="493" y="190" fill="#277e9a" font-size="15" font-family="sans-serif">启动安装器</text>
+
+  <rect x="614" y="105" width="444" height="211" rx="16" fill="#ffffff" stroke="#b7c9d8" stroke-width="2"/>
+  <rect x="632" y="125" width="408" height="52" rx="9" fill="#e6f3ea"/>
+  <text x="650" y="159" fill="#1d5b38" font-size="22" font-weight="700" font-family="sans-serif">内置 SSD · 双系统位置</text>
+  <rect x="632" y="192" width="408" height="44" rx="7" fill="#f0f3f6"/>
+  <text x="648" y="220" fill="#263d55" font-size="17" font-family="sans-serif">保留：Windows、EFI、恢复分区</text>
+  <rect x="632" y="247" width="408" height="47" rx="7" fill="#d9f0e1"/>
+  <text x="648" y="277" fill="#1d5b38" font-size="17" font-weight="700" font-family="sans-serif">使用：预留的未分配空间 → Ubuntu</text>
+</svg>
