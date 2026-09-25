@@ -1,4 +1,34 @@
 /* POST META */
+.breadcrumbs {
+  margin: 1rem 0 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.9em;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  padding: 0 0.5em;
+  color: var(--text-dim);
+}
+
+.breadcrumbs a {
+  color: var(--link);
+}
+
 #single-header {
   /* border-bottom: 2px solid var(--complimentary); */
   padding: 0px 8px 4px 0;
