@@ -148,6 +148,56 @@ API 只把请求交给服务，再把可预期的失败映射到 `404` 或 `409`
 
 如果以后换成 PostgreSQL，主要工作是实现同一组存储操作，并在装配点把新实例传给 `EnrollmentService`。数据库迁移、事务语义和并发控制仍要认真处理；依赖注入只减少上层代码对某一种存储技术的绑定。
 
+## 两个容易写错的细节
+
+### 细节一：接口必须由「调用方」定义
+
+回看代码：`EnrollmentStore` 这个接口，定义在 `service.py` 里，而不是 `db.py` 里。
+
+```python
+# service.py：谁需要，谁定义
+class EnrollmentStore(Protocol):
+    def get_student(self, student_id: int) -> Student | None: ...
+    def get_course(self, course_id: int) -> Course | None: ...
+    def has_enrollment(self, student_id: int, course_id: int) -> bool: ...
+    def count_enrollments(self, course_id: int) -> int: ...
+    def add_enrollment(self, student_id: int, course_id: int) -> None: ...
+```
+
+这一点是依赖倒置的核心，也最容易写错。假设反过来——接口定义在 `db.py`，`service` 去 `from .db import EnrollmentStore`——那么 `service` 依然依赖着 `db` 这个模块，只是从“依赖具体类”换成了“依赖某个模块里的接口”而已。外层依旧牵着内层走，改动 `db` 仍会波及 `service`。
+
+所以有一条判据：**谁来定义接口，谁就掌握主动权。接口应该由需要它的内层（调用方）定义，由外层（实现方）去满足。**
+
+用餐厅类比：是“大堂经理”写下岗位说明书——我需要一个能查数据、能写数据的仓管员——然后“仓库管理员”照着这份说明书来应聘。而不是仓管员自己写一份说明书塞给经理。
+
+### 细节二：抽象在 Python 里有三种写法
+
+“依赖抽象”要真正落地，Python 给了三档选择：
+
+| 方式 | 写法 | 是否需要继承 | 运行时检查 |
+| --- | --- | --- | --- |
+| 鸭子类型 | 什么都不写，直接传对象 | 不需要 | 无（调用到时才报错） |
+| `Protocol` | `class X(Protocol)` | 不需要，方法签名匹配即可 | 加 `@runtime_checkable` 才有 |
+| `ABC` + `@abstractmethod` | `class X(ABC)` | 必须显式继承 | 有（抽象类不能实例化） |
+
+三档都能切断对具体实现的依赖，区别只在“约束有多强”。
+
+`ABC`（Abstract Base Class，抽象基类）是最传统的方式，用 `@abstractmethod` 声明子类必须实现的方法。它属于**名义类型**（nominal typing）：子类必须显式写 `class SQLiteEnrollmentStore(EnrollmentStore)`，否则不算数。
+
+`Protocol` 是 Python 3.8+ 引入的**结构化类型**（structural typing）。注意看 `db.py`，它根本没有继承 `EnrollmentStore`：
+
+```python
+# db.py：一个有五个方法的普通类，不需要继承任何接口
+class SQLiteEnrollmentStore:
+    def get_student(self, student_id: int) -> Student | None: ...
+    # ...另外四个方法
+```
+
+它靠“长得像不像”来判断，而不是“是不是亲生的”。本文选 `Protocol` 正是因为这一点：`db` 完全不需要知道 `service` 定义过这样一个接口，只要五个方法齐备，它就是 `EnrollmentStore`。
+
+> [!TIP] 从 C++ / Java 过来的人常问：是用虚函数吗？
+> “虚函数（virtual function）”是 C++ 里实现运行时多态的机制（虚函数表）；Python 没有 `virtual` 关键字，所有方法天然就是虚函数。所以“用虚函数解决依赖”并不准确——虚函数是底层语言机制，依赖倒置是架构原则，两者不在一个层次。换到 Java 叫 `interface`，换到 Go 也叫 `interface`，但“接口归调用方所有”这条规则，在哪门语言里都一样。
+
 ## 本地运行与验证
 
 在 `registration_demo` 目录执行：
