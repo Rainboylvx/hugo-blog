@@ -34,6 +34,7 @@ noList: true
 25. [Python set：哈希集合的核心操作与竞赛用法](./set_toolkit.md)：创建盲区、交并差、增删、`frozenset`，以及 $O(1)$ 查找带来的复杂度降维。
 26. [Python 比赛实战：字符串子串匹配（内置方法、正则与手速版 KMP）](./string_matching_kmp.md)：`s.find()`、正则前瞻断言 `(?=...)` 查找所有匹配，以及 15 行极简 KMP 模板。
 27. [Python 算法思路快速验证指南：全武器库与四层验证法](./rapid_prototyping_toolkit.md)：内置语法糖、标准库黑魔法、调试对拍与本地第三方库（SymPy、NetworkX、Z3）。
+28. [从课程报名例子理解 Python 四层架构](./registration-layered-architecture.md)：从报名规则出发，拆分 domain、service、db、api，并运行 SQLite 与 FastAPI 示例。
 
 ## 学习资源
 
