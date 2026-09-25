@@ -42,7 +42,7 @@ tags: ["ESP32-S3", "ESP-IDF", "GPIO", "LED", "BSP", "Ubuntu"]
 
 ### 用 `idf.py` 创建空工程
 
-按[上一篇](./01-ubuntu-26-esp-idf-eim-vscode.md)激活 ESP-IDF。下方脚本名是本机示例；在 Ubuntu 上先运行 `find "$HOME/.espressif/tools" -maxdepth 1 -name 'activate_idf_*.sh' -print`，换成实际安装版本。项目路径不要包含空格。
+先激活 ESP-IDF；**每开一个新终端都要重新激活**。下方的 v5.5.5 是本机 macOS 上已验证的 EIM 安装版本。Ubuntu 用户先按[上一篇的激活步骤](./01-ubuntu-26-esp-idf-eim-vscode.md)找到本机脚本，替换这一行的版本号。项目路径不要包含空格。
 
 ```bash
 source "$HOME/.espressif/tools/activate_idf_v5.5.5.sh"
@@ -129,7 +129,7 @@ void app_main(void)
 
 ### 编译与实板验收
 
-在 `02-01-main-led` 根目录运行：
+在 `02-01-main-led` 根目录运行。`set-target` 只需在新工程首次选择芯片时执行：
 
 ```bash
 idf.py set-target esp32s3
@@ -137,13 +137,25 @@ idf.py build
 grep -E 'CONFIG_IDF_TARGET=|CONFIG_ESPTOOLPY_FLASHSIZE=' sdkconfig
 ```
 
-后两项配置应显示 `esp32s3`、`16MB`。`Project build complete` 且命令以 0 退出，表示固件编译成功；它还不能证明 LED 闪烁。以后只改普通 C 代码，直接重新 `idf.py build` 即可，不必每次 `set-target`。
+配置应显示 `esp32s3`、`16MB`。`Project build complete` 且命令以 0 退出，表示固件编译成功；它还不能证明 LED 闪烁。以后只改普通 C 代码，直接重新 `idf.py build` 即可。
 
-用支持数据传输的 USB 线连接开发板，插拔一次并比较设备列表，找出**新出现的串口**。Ubuntu 常见 `/dev/ttyUSB*` 或 `/dev/ttyACM*`，macOS 常见 `/dev/cu.*`。把下方占位符换成实际端口：
+用支持数据传输的 USB 线连接开发板，插拔前后分别列出设备，找出**新出现的串口**。Ubuntu 常见 `/dev/ttyUSB*` 或 `/dev/ttyACM*`；macOS 用 `/dev/cu.*`。以下两条按操作系统选一条运行：
 
 ```bash
-idf.py -p <实际串口> flash monitor
+# Ubuntu
+find /dev -maxdepth 1 \( -name 'ttyUSB*' -o -name 'ttyACM*' \) -print | sort
+
+# macOS
+find /dev -maxdepth 1 -name 'cu.*' -print | sort
 ```
+
+确认端口属于开发板后，将下面**引号内的示例路径**换成刚找到的实际路径：
+
+```bash
+idf.py -p '/dev/cu.替换为开发板端口' flash monitor
+```
+
+Ubuntu 用户把整段路径换成自己的 `/dev/ttyUSB*` 或 `/dev/ttyACM*` 端口。`flash monitor` 会先编译，再烧录并打开串口监视器，无需先单独运行 `build`。本机目前看到的 `/dev/cu.usbmodem301NTBKCY8612` 是 Steam 控制器，**不是**这块开发板的端口。
 
 验收要同时满足两项：Monitor 交替打印 `LED on`、`LED off`；板上的**红色用户 LED**亮约 0.5 秒、灭约 0.5 秒并循环。蓝色 `PWR` 灯持续亮属于正常供电现象。Monitor 用 `Ctrl+]` 退出；若 Linux 报串口权限不足，按[上一篇的串口权限步骤]({{< relref "01-ubuntu-26-esp-idf-eim-vscode.md#串口-permission-denied" >}})处理。
 
@@ -279,7 +291,7 @@ idf.py set-target esp32s3
 idf.py build
 ```
 
-接板后用同一个实际串口执行 `idf.py -p <实际串口> flash monitor`，验收标准与 2.1 完全相同。还可以在两个工程里分别搜索 `GPIO_NUM_1`：2.1 只应在 `main/main.c` 找到，2.2 只应在 `components/BSP/LED/led.c` 找到。这是板级细节从应用层移出的直接证据。
+接板后按 2.1 的方法确认串口，再运行 `idf.py -p '实际串口路径' flash monitor`。验收标准与 2.1 完全相同。还可以在两个工程里分别搜索 `GPIO_NUM_1`：2.1 只应在 `main/main.c` 找到，2.2 只应在 `components/BSP/LED/led.c` 找到。这是板级细节从应用层移出的直接证据。
 
 ### 这次分层到底得到了什么
 
