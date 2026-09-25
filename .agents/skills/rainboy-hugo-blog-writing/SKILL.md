@@ -135,6 +135,26 @@ vim.lsp.start({
 
 项目高亮配置开启了行号和 `gruvbox` 风格。代码示例应可复制，路径、命令和依赖要写清楚。
 
+### Mermaid 图
+
+项目已启用 Mermaid 渲染（`layouts/_default/_markup/render-codeblock-mermaid.html` + `layouts/partials/footer.html` 加载 cdnjs mermaid 11.15.0）。在正文里直接用 ` ```mermaid ` fenced code block 写即可，构建后会自动渲染成 SVG 图。
+
+```markdown
+```mermaid
+flowchart TD
+    A[开始] --> B{判断}
+    B -- 是 --> C[执行]
+    B -- 否 --> D[结束]
+```
+```
+
+注意：
+
+- `render-codeblock-mermaid.html` 会把代码块内容包进 `<pre class="mermaid">`，Mermaid 的 `startOnLoad` 会自动渲染。不要把 Mermaid 代码块同时标成其他语言（如 ` ```go `）。
+- 适合画流程图、时序图、状态图、类图等；用来展示模块/分层之间的依赖关系比 ASCII 图更清晰、可交互。
+- 自动适配暗色模式（初始化时读页面的 `data-theme`，深色时用 `dark` 主题）。
+- 需要复杂的 HTML/CSS 交互时，用 `<div class="mermaid">` 包裹更灵活，但一般情况下 fenced code block 已足够。
+
 ### Admonition / Callout
 
 项目使用 `hugo-admonitions`，可写 Obsidian 风格 callout：
