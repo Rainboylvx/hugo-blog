@@ -15,24 +15,24 @@ noList: true
 
 状态说明：
 
-- `[x]`：文章、示例工程、编译、烧录和实际现象均已验收。
-- `[ ]`：正在编写或计划中的课程；已有文章会保留链接，并注明尚未完成的验收项。
+- [x] 文章、示例工程、编译、烧录和实际现象均已验收。
+- [ ] 正在编写或计划中的课程；已有文章会保留链接，并注明尚未完成的验收项。
 - 没有链接的标题只是课程占位，不会指向尚未创建的页面。
 
 每一课都按照“读教材 → 核对原理图和引脚 → 编写 BSP 与应用 → 编译、烧录、实板验收 → 对照官方实现”的顺序完成。阶段末尾安排一个综合项目，把前面学到的模块真正组合起来。
 
 ### 阶段 0：准备可用的开发环境
 
-- [ ] **00 · [用 Ventoy 安装 Windows 11 + Ubuntu 26.04 双系统](./00-win11-ubuntu-26-ventoy-dual-boot.md)**（进行中）
+- [x] **00 · [用 Ventoy 安装 Windows 11 + Ubuntu 26.04 双系统](./00-win11-ubuntu-26-ventoy-dual-boot.md)**
   - 完成标准：Windows 11 与 Ubuntu 26.04 均可独立启动，磁盘分区、网络和系统更新正常。
-- [ ] **01 · [在 Ubuntu 26.04 安装 ESP-IDF、EIM 和 VS Code](./01-ubuntu-26-esp-idf-eim-vscode.md)**（进行中）
+- [x] **01 · [在 Ubuntu 26.04 安装 ESP-IDF、EIM 和 VS Code](./01-ubuntu-26-esp-idf-eim-vscode.md)**
   - 完成标准：在 Ubuntu 26.04 激活 ESP-IDF v5.5.5，完成一次真实的编译、烧录和串口监视。
 
 ### 阶段 1：GPIO、轮询与中断
 
-- [ ] **02 · [从单文件点灯到 BSP：用 idf.py 创建 DNESP32S3 工程](./02-dnesp32s3-idf-create-project-led.md)**（教材第 6、9、10 章，进行中）
+- [x] **02 · [从单文件点灯到 BSP：用 idf.py 创建 DNESP32S3 工程](./02-dnesp32s3-idf-create-project-led.md)**（教材第 6、9、10 章）
   - 完成标准：理解最小工程和 BSP 分层，实板上的 GPIO1 红色 LED 每 500 ms 翻转一次。
-- [ ] **03 · [从电平到事件：用 BOOT 按键控制 DNESP32S3 LED](./03-dnesp32s3-boot-key-control-led.md)**（教材第 11 章，进行中）
+- [x] **03 · [从电平到事件：用 BOOT 按键控制 DNESP32S3 LED](./03-dnesp32s3-boot-key-control-led.md)**（教材第 11 章）
   - 完成标准：短按或长按 BOOT 都只产生一次事件，并使红色 LED 翻转一次。
 - [ ] **04 · GPIO 外部中断：让 BOOT 按键通过 ISR 控制 LED**（教材第 12 章）
   - 完成标准：GPIO0 的下降沿触发中断，ISR 只发送事件，消抖和 LED 控制在普通任务中完成。
