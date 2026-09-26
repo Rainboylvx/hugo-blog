@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">BOOT 按键抖动与软件消抖时序</title>
+  <desc id="desc">按键按下和松开时电平会短暂抖动。程序第一次检测到低电平后等待十毫秒，再次检测仍为低电平时只产生一个按下事件。</desc>
+  <rect width="1200" height="520" rx="24" fill="#f8fafc"/>
+  <text x="60" y="58" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="30" font-weight="700" fill="#0f172a">BOOT 按键抖动与软件消抖</text>
+  <text x="60" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" fill="#475569">松开为高电平，按下为低电平；机械触点不会瞬间稳定。</text>
+
+  <rect x="205" y="112" width="155" height="260" rx="12" fill="#fee2e2" opacity="0.7"/>
+  <rect x="825" y="112" width="155" height="260" rx="12" fill="#fef3c7" opacity="0.8"/>
+  <text x="282" y="138" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="600" fill="#991b1b">按下抖动</text>
+  <text x="902" y="138" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="600" fill="#92400e">松开抖动</text>
+
+  <text x="60" y="182" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="18" font-weight="600" fill="#334155">GPIO0</text>
+  <text x="108" y="163" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="14" fill="#64748b">高 1</text>
+  <text x="108" y="277" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="14" fill="#64748b">低 0</text>
+  <line x1="150" y1="160" x2="1135" y2="160" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="6 7"/>
+  <line x1="150" y1="275" x2="1135" y2="275" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="6 7"/>
+  <path d="M150 160 H215 V275 H232 V160 H250 V275 H270 V160 H288 V275 H306 V160 H325 V275 H840 V160 H858 V275 H878 V160 H898 V275 H918 V160 H1135"
+        fill="none" stroke="#2563eb" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <line x1="215" y1="118" x2="215" y2="420" stroke="#ef4444" stroke-width="2" stroke-dasharray="7 6"/>
+  <line x1="365" y1="118" x2="365" y2="420" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 6"/>
+  <path d="M226 330 H354" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="290" y="321" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="600" fill="#334155">等待 10 ms</text>
+  <text x="215" y="447" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="15" fill="#991b1b">第一次读到低电平</text>
+  <text x="365" y="447" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="15" fill="#166534">再次确认仍为低电平</text>
+
+  <text x="60" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="18" font-weight="600" fill="#334155">按下事件</text>
+  <line x1="150" y1="380" x2="1135" y2="380" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M350 380 V342 H380 V380" fill="none" stroke="#16a34a" stroke-width="6" stroke-linejoin="round"/>
+  <text x="395" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="700" fill="#166534">只产生一次 KEY_EVENT_BOOT_PRESS</text>
+  <text x="615" y="254" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" fill="#1e40af">稳定按住：门闩锁定，不重复触发</text>
+  <text x="1045" y="254" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" fill="#475569">稳定松开后，允许下一次按下</text>
+
+  <line x1="150" y1="482" x2="1135" y2="482" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1140" y="488" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="15" fill="#475569">时间</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>
