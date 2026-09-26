@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="660" viewBox="0 0 1440 660" role="img" aria-labelledby="title desc">
+  <title id="title">FreeRTOS 三个任务通过队列和任务通知通信</title>
+  <desc id="desc">按键任务把带数据的事件写入队列，LED 任务接收后控制 LED，再用轻量任务通知唤醒状态任务。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#2563eb"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="660" rx="28" fill="#f8fafc"/>
+  <text x="720" y="62" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="#0f172a">一次按键如何经过三个 FreeRTOS 任务</text>
+  <text x="720" y="100" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">队列负责传数据，任务通知负责发轻量信号</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="180" width="300" height="260" rx="22" fill="#ffffff" stroke="#0ea5e9" stroke-width="3"/>
+    <rect x="570" y="180" width="300" height="260" rx="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+    <rect x="1060" y="180" width="300" height="260" rx="22" fill="#ffffff" stroke="#f59e0b" stroke-width="3"/>
+  </g>
+
+  <circle cx="230" cy="245" r="42" fill="#e0f2fe"/>
+  <text x="230" y="253" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#0369a1">KEY</text>
+  <text x="230" y="325" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#0f172a">key_task</text>
+  <text x="230" y="365" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">轮询 GPIO0 并消抖</text>
+  <text x="230" y="399" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">产生按键事件</text>
+
+  <circle cx="720" cy="245" r="42" fill="#ede9fe"/>
+  <text x="720" y="254" text-anchor="middle" font-family="sans-serif" font-size="31" font-weight="700" fill="#6d28d9">LED</text>
+  <text x="720" y="325" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#0f172a">led_task</text>
+  <text x="720" y="365" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">阻塞等待队列</text>
+  <text x="720" y="399" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">独占 LED 逻辑状态</text>
+
+  <circle cx="1210" cy="245" r="42" fill="#fef3c7"/>
+  <text x="1210" y="254" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700" fill="#b45309">LOG</text>
+  <text x="1210" y="325" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#0f172a">status_task</text>
+  <text x="1210" y="365" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">阻塞等待通知</text>
+  <text x="1210" y="399" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">累计已处理事件数</text>
+
+  <line x1="380" y1="280" x2="570" y2="280" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/>
+  <rect x="407" y="202" width="138" height="52" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="476" y="235" text-anchor="middle" font-family="sans-serif" font-size="23" font-weight="700" fill="#1d4ed8">队列</text>
+  <text x="476" y="326" text-anchor="middle" font-family="monospace" font-size="19" fill="#334155">app_event_t</text>
+  <text x="476" y="357" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#64748b">类型 + tick</text>
+
+  <line x1="870" y1="280" x2="1060" y2="280" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/>
+  <rect x="884" y="202" width="162" height="52" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="965" y="235" text-anchor="middle" font-family="sans-serif" font-size="23" font-weight="700" fill="#1d4ed8">任务通知</text>
+  <text x="965" y="326" text-anchor="middle" font-family="monospace" font-size="19" fill="#334155">notify +1</text>
+  <text x="965" y="357" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#64748b">无需单独对象</text>
+
+  <rect x="175" y="515" width="1090" height="82" rx="18" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+  <text x="720" y="550" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" fill="#155e75">共享状态越少，线程安全越容易</text>
+  <text x="720" y="580" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#334155">LED 的亮灭只由 led_task 修改；其他任务通过消息表达意图，不直接改同一个变量。</text>
+</svg>

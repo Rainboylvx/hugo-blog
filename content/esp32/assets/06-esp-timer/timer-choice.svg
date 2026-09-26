@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="560" viewBox="0 0 1440 560" role="img" aria-labelledby="title desc">
+  <title id="title">延时和定时方案选择</title>
+  <desc id="desc">比较 FreeRTOS 任务延时、ESP Timer 和 GPTimer 的时间单位、适用任务与限制。</desc>
+  <rect width="1440" height="560" rx="28" fill="#f8fafc"/>
+  <text x="720" y="62" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="#0f172a">按需求选择时间工具</text>
+  <text x="720" y="101" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#475569">分辨率高不等于回调一定在那个微秒立即执行</text>
+
+  <rect x="70" y="160" width="400" height="300" rx="22" fill="#ffffff" stroke="#0ea5e9" stroke-width="3"/>
+  <rect x="520" y="160" width="400" height="300" rx="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  <rect x="970" y="160" width="400" height="300" rx="22" fill="#ffffff" stroke="#f59e0b" stroke-width="3"/>
+
+  <text x="270" y="218" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#0369a1">vTaskDelay</text>
+  <text x="270" y="270" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">单位：FreeRTOS tick</text>
+  <text x="270" y="310" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">让当前任务睡一段时间</text>
+  <text x="270" y="350" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">适合普通任务节拍和退让 CPU</text>
+  <text x="270" y="408" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#64748b">简单，但受到 tick 粒度和任务执行时间影响</text>
+
+  <text x="720" y="218" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#6d28d9">esp_timer</text>
+  <text x="720" y="270" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">单位：微秒，分辨率 1 μs</text>
+  <text x="720" y="310" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">单次或周期软件定时</text>
+  <text x="720" y="350" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">适合采样调度、延时动作和超时</text>
+  <text x="720" y="408" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#64748b">本课重点：短回调把工作交给任务</text>
+
+  <text x="1170" y="218" text-anchor="middle" font-family="monospace" font-size="27" font-weight="700" fill="#b45309">GPTimer / RMT</text>
+  <text x="1170" y="270" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">专用硬件外设</text>
+  <text x="1170" y="310" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">更低延迟、波形或事件捕获</text>
+  <text x="1170" y="350" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#334155">适合严格时序和硬件信号</text>
+  <text x="1170" y="408" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#64748b">后续 GPTimer、PWM 和红外课程继续学习</text>
+
+  <rect x="553" y="476" width="334" height="48" rx="14" fill="#ede9fe"/>
+  <text x="720" y="507" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="700" fill="#5b21b6">当前课程选择</text>
+</svg>
