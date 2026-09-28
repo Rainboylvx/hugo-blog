@@ -69,8 +69,8 @@ ESP-IDF: Select Current ESP-IDF Version
 
 ```text
 Version: v5.5.5
-IDF_PATH: /Users/rainboymac/.espressif/v5.5.5/esp-idf
-IDF_TOOLS_PATH: /Users/rainboymac/.espressif/tools
+IDF_PATH: /Users/<你的用户名>/.espressif/v5.5.5/esp-idf
+IDF_TOOLS_PATH: /Users/<你的用户名>/.espressif/tools
 ```
 
 选择成功后，状态栏不再显示 `ESP-IDF InvalidSetup`，而应显示 `ESP-IDF v5.5.5`。接着运行：
@@ -82,9 +82,9 @@ ESP-IDF: Doctor Command
 重点核对报告中的三项是否属于**同一个版本**：
 
 ```text
-IDF_PATH=/Users/rainboymac/.espressif/v5.5.5/esp-idf
-IDF_TOOLS_PATH=/Users/rainboymac/.espressif/tools
-Python=/Users/rainboymac/.espressif/tools/python/v5.5.5/venv/bin/python
+IDF_PATH=/Users/<你的用户名>/.espressif/v5.5.5/esp-idf
+IDF_TOOLS_PATH=/Users/<你的用户名>/.espressif/tools
+Python=/Users/<你的用户名>/.espressif/tools/python/v5.5.5/venv/bin/python
 ```
 
 路径会随系统和安装位置变化，不能把上面的用户名原样复制到另一台电脑。若 EIM 安装在自定义位置，可在 VS Code 设置中让 `idf.eimIdfJsonPath` 指向真实的 `eim_idf.json`。
@@ -276,7 +276,7 @@ ESP-IDF: Build, Flash and Start a Monitor on Your Device
 
 ```json
 {
-  "idf.currentSetup": "/Users/rainboymac/.espressif/v5.5.5/esp-idf",
+  "idf.currentSetup": "/Users/<你的用户名>/.espressif/v5.5.5/esp-idf",
   "idf.port": "/dev/tty.usbmodem31101",
   "idf.flashType": "UART"
 }

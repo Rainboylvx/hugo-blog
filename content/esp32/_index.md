@@ -29,6 +29,8 @@ noList: true
   - 完成标准：在 Ubuntu 26.04 激活 ESP-IDF v5.5.5，完成一次真实的编译、烧录和串口监视。
 - [ ] **工具指南 · [VS Code ESP-IDF 插件：安装、配置、UART 烧录与监视](./90-vscode-esp-idf-extension-install-usage.md)**
   - 完成标准：插件选中 EIM 的 ESP-IDF v5.5.5，并正确设置 `esp32s3`、实际串口和 UART；Build、Flash、Monitor 三层分别验收。
+- [x] **故障排查 · [VS Code 打开 ESP-IDF 工程后 CMake 配置失败、头文件全红](./91-vscode-cmake-tools-intellisense-conflict.md)**
+  - 完成标准：区分 CMake Tools、语言服务与 ESP-IDF 构建；禁用普通 CMake 自动配置，让 IntelliSense 读取 `compile_commands.json`，并用 `idf.py build` 验证工程。
 
 ### 阶段 1：GPIO、轮询与中断
 
