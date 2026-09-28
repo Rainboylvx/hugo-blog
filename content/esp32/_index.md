@@ -27,6 +27,8 @@ noList: true
   - 完成标准：Windows 11 与 Ubuntu 26.04 均可独立启动，磁盘分区、网络和系统更新正常。
 - [x] **01 · [在 Ubuntu 26.04 安装 ESP-IDF、EIM 和 VS Code](./01-ubuntu-26-esp-idf-eim-vscode.md)**
   - 完成标准：在 Ubuntu 26.04 激活 ESP-IDF v5.5.5，完成一次真实的编译、烧录和串口监视。
+- [ ] **工具指南 · [VS Code ESP-IDF 插件：安装、配置、UART 烧录与监视](./90-vscode-esp-idf-extension-install-usage.md)**
+  - 完成标准：插件选中 EIM 的 ESP-IDF v5.5.5，并正确设置 `esp32s3`、实际串口和 UART；Build、Flash、Monitor 三层分别验收。
 
 ### 阶段 1：GPIO、轮询与中断
 
