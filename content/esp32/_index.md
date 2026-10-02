@@ -38,7 +38,7 @@ noList: true
   - 完成标准：理解最小工程和 BSP 分层，实板上的 GPIO1 红色 LED 每 500 ms 翻转一次。
 - [x] **03 · [从电平到事件：用 BOOT 按键控制 DNESP32S3 LED](./03-dnesp32s3-boot-key-control-led.md)**（教材第 11 章）
   - 完成标准：短按或长按 BOOT 都只产生一次事件，并使红色 LED 翻转一次。
-- [ ] **04 · GPIO 外部中断：让 BOOT 按键通过 ISR 控制 LED**（教材第 12 章）
+- [x] **04 · [从轮询到中断：用 GPIO0 外部中断控制 DNESP32S3 LED](./04-gpio-interrupt-led.md)**（教材第 12 章）
   - 完成标准：GPIO0 的下降沿触发中断，ISR 只发送事件，消抖和 LED 控制在普通任务中完成。
 
 ### 阶段 2：FreeRTOS、定时器与 PWM
