@@ -39,6 +39,10 @@ noList: true
 30. [Python 竞赛常用容器](./collections_toolkit.md)：`Counter`、`defaultdict`、`deque`、`dict` 和 `set`。
 31. [Python 生成器表达式](./generator_expression.md)：惰性计算、一次性消费以及 `any`、`all`、`next` 的短路。
 
+32. [Python functools 竞赛核心速览](./functools_competition.md)：记忆化缓存、多组数据隔离、拼接排序、折叠与参数绑定，附数字三角形完整例题。
+
+33. [Python 竞赛实用技巧速查](./competition_cheatsheet.md)：输入输出、堆、二分与离散化、位运算、递归和标准库版本避坑。
+
 ## 学习资源
 
 - [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html)：Python 官方文档中的函数式编程指南。
