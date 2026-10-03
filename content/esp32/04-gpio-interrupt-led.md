@@ -111,6 +111,37 @@ static void IRAM_ATTR boot_gpio_isr(void *arg)
 
 ISR 没有 `ESP_LOGI()`、`vTaskDelay()`、`gpio_set_level()` 或消抖循环。这些操作要么可能阻塞，要么工作量不可控，都不适合放在中断上下文。
 
+### 队列保存的是数值副本，不是指针
+
+本工程创建队列时写的是：
+
+```c
+QueueHandle_t event_queue = xQueueCreate(8, sizeof(uint32_t));
+```
+
+第二个参数规定了**每个队列元素有多大**。因此，这个队列的每个槽位能保存一个 `uint32_t` 的值。发送和接收时的 `&gpio_num` 只是告诉 FreeRTOS“从哪里读”或“往哪里写”：
+
+```text
+ISR 中的 gpio_num       --发送-->  队列内部的 4 字节副本
+任务中的 gpio_num       <--接收--  队列内部的 4 字节副本
+```
+
+- `xQueueSendFromISR(..., &gpio_num, ...)`：从 ISR 局部变量的地址读取 4 字节，复制到队列；
+- `xQueueReceive(..., &gpio_num, ...)`：把队列中的 4 字节复制到任务自己的局部变量；
+- 两处的 `gpio_num` 是两个不同的变量，名字相同不代表它们共享地址。
+
+所以，`&gpio_num` 的确是一个地址，但**队列里保存的是地址指向的数值副本，不是这个地址本身**。ISR 返回后，ISR 中的局部变量就不再有效；正因为队列已经完成值拷贝，任务仍然可以安全读取自己的副本。
+
+只有在队列元素大小明确写成指针时，队列才会保存指针值。例如大结构体不适合频繁整体复制时，可以这样设计：
+
+```c
+QueueHandle_t queue = xQueueCreate(8, sizeof(MyStruct *));
+MyStruct *p = malloc(sizeof(*p));
+xQueueSend(queue, &p, portMAX_DELAY);  // 拷贝的是地址值
+```
+
+这里的 `&p` 仍然只是发送参数的来源地址；队列复制进去的是 `p` 这个指针的值。接收端取出指针后负责使用并 `free()`，还要约定清楚所有权，避免内存泄漏或重复释放。本课的数据只有一个 GPIO 编号，直接按值拷贝更简单，也不需要动态内存。
+
 ## 5. 配置下降沿和注册服务
 
 `exit_init()` 先配置 GPIO0，再安装共享 ISR 服务和本引脚的处理函数：
