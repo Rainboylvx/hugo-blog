@@ -42,6 +42,7 @@ noList: true
 32. [Python functools 竞赛核心速览](./functools_competition.md)：记忆化缓存、多组数据隔离、拼接排序、折叠与参数绑定，附数字三角形完整例题。
 
 33. [Python 竞赛实用技巧速查](./competition_cheatsheet.md)：输入输出、堆、二分与离散化、位运算、递归和标准库版本避坑。
+34. [Python heapq 进阶：合并操作、固定规模堆与大根堆](./heapq_advanced.md)：`heapreplace` 与 `heappushpop` 的求值时机、top-k 固定规模堆、大根堆三种方案（负数、包装类、3.14 `*_max`）、元组比较的坑和 C++ `priority_queue` 对照。
 
 ## 学习资源
 
