@@ -37,3 +37,6 @@ Thumbs.db
 # c++ compiler out
 *.out
 content/typescript/src/**/.emit/
+
+# pi subagent run logs
+.pi-subagents/
