@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 270" role="img" aria-labelledby="title desc">
+<title id="title">任务看门狗：谁没按时报告进度？</title><desc id="desc">故障：CPU0 忙循环 → worker 不喂狗、IDLE0 饥饿 → 3 秒超时。</desc>
+<rect width="960" height="270" rx="20" fill="#f1f5f9"/>
+<g font-family="sans-serif" fill="#0f172a">
+<text x="36" y="48" font-size="25" font-weight="bold">任务看门狗：谁没按时报告进度？</text>
+<rect x="30" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="132" y="136" text-anchor="middle" font-size="18">工作任务完成批次</text>
+<text x="244" y="136" font-size="24">→</text>
+<rect x="265" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="367" y="136" text-anchor="middle" font-size="18">任务自己喂狗</text>
+<text x="479" y="136" font-size="24">→</text>
+<rect x="500" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="602" y="136" text-anchor="middle" font-size="18">阻塞让出 CPU</text>
+<text x="714" y="136" font-size="24">→</text>
+<rect x="735" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="837" y="136" text-anchor="middle" font-size="18">IDLE0 得到运行</text>
+<text x="36" y="222" font-size="19">故障：CPU0 忙循环 → worker 不喂狗、IDLE0 饥饿 → 3 秒超时。</text></g></svg>

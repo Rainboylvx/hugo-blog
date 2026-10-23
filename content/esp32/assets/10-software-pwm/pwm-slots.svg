@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 270" role="img" aria-labelledby="title desc">
+<title id="title">GPIO 软件 PWM：每个周期划分 20 个时间槽</title><desc id="desc">逻辑亮度 25%：前 5 槽输出低电平，后 15 槽输出高电平。</desc>
+<rect width="960" height="270" rx="20" fill="#f1f5f9"/>
+<g font-family="sans-serif" fill="#0f172a">
+<text x="36" y="48" font-size="25" font-weight="bold">GPIO 软件 PWM：每个周期划分 20 个时间槽</text>
+<rect x="30" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="132" y="136" text-anchor="middle" font-size="18">每槽 500 μs</text>
+<text x="244" y="136" font-size="24">→</text>
+<rect x="265" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="367" y="136" text-anchor="middle" font-size="18">20 槽 = 10 ms</text>
+<text x="479" y="136" font-size="24">→</text>
+<rect x="500" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="602" y="136" text-anchor="middle" font-size="18">每秒 100 个周期</text>
+<text x="714" y="136" font-size="24">→</text>
+<rect x="735" y="88" width="205" height="82" rx="12" fill="#dbeafe" stroke="#2563eb"/><text x="837" y="136" text-anchor="middle" font-size="18">每秒 2000 次中断</text>
+<text x="36" y="222" font-size="19">逻辑亮度 25%：前 5 槽输出低电平，后 15 槽输出高电平。</text></g></svg>
