@@ -223,6 +223,75 @@ ESP_ERROR_CHECK(xTaskCreate(exit_task,
 
 先创建队列，再把队列交给 `exit_init()`，最后创建等待队列的任务。GPIO 中断在初始化后就可能发生，所以队列句柄必须在安装 ISR 之前有效。开发板启动时若 BOOT 仍被按住，初始化完成后可能立即产生一个下降沿；实验时应在复位完成前松开按键。
 
+## 用到的 FreeRTOS 函数查询表
+
+本课用到的接口集中列在下面。名称链接到 ESP-IDF v5.5.5 的官方文档；宏的定义链接到该版本的官方源码。
+
+| 函数或宏 | 本课用途 | 调用环境 |
+| --- | --- | --- |
+| [`xTaskCreate()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#xTaskCreate__TaskFunction_t.cCPC.configSTACK_DEPTH_TYPEC.voidPC.UBaseType_t.TaskHandle_tPC) | 创建处理按键事件的任务 | 任务中，不能在 ISR 中调用 |
+| [`xQueueCreate()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#c.xQueueCreate) | 创建保存 GPIO 编号的队列 | 任务中，不能在 ISR 中调用 |
+| [`xQueueSendFromISR()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#c.xQueueSendFromISR) | 从 GPIO 中断向队列发送事件 | ISR 中，不等待空位 |
+| [`xQueueReceive()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#xQueueReceive__QueueHandle_t.voidPC.TickType_t) | 从队列取出 GPIO 编号 | 任务中，不能在 ISR 中调用 |
+| [`vTaskDelay()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#vTaskDelay__TickType_tC) | 消抖、等待按键松开时暂停当前任务 | 任务中，不能在 ISR 中调用 |
+| [`pdMS_TO_TICKS()`](https://github.com/espressif/esp-idf/blob/v5.5.5/components/freertos/FreeRTOS-Kernel/include/freertos/projdefs.h) | 将毫秒换算为 tick 数 | 计算宏，任务和 ISR 中均可使用 |
+| [`portYIELD_FROM_ISR()`](https://github.com/espressif/esp-idf/blob/v5.5.5/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h) | 唤醒更高优先级任务后请求切换 | ISR 中 |
+
+### 创建任务：`xTaskCreate()`
+
+对照第 7 节的调用，六个参数依次是：
+
+| 本文传入的值 | 含义 |
+| --- | --- |
+| `exit_task` | 任务入口函数，创建后由调度器安排运行 |
+| `"exit_task"` | 任务名称，便于调试时辨认 |
+| `3072` | 任务栈大小；**ESP-IDF 中的单位是字节**，这里是 3072 字节 |
+| 第一个 `NULL` | 不向任务入口传递参数 |
+| `5` | 任务优先级，数值越大，优先级越高 |
+| 最后一个 `NULL` | 不接收新任务的句柄；若需要保存句柄，可传入句柄变量的地址 |
+
+创建成功返回 `pdPASS`；内存不足时返回 `errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY`。本文用 `== pdPASS` 检查是否成功。
+
+### 创建队列：`xQueueCreate()`
+
+`xQueueCreate(8, sizeof(uint32_t))` 的第一个参数是队列容量，即最多暂存 8 个元素；第二个参数是每个元素的字节数，即每次复制一个 GPIO 编号。
+
+成功时返回 `QueueHandle_t` 类型的队列句柄，失败时返回 `NULL`。句柄用于后续发送和接收，不是队列中的某个元素。
+
+### 中断发送：`xQueueSendFromISR()`
+
+`xQueueSendFromISR(s_event_queue, &gpio_num, &higher_priority_task_woken)` 的三个参数依次是：
+
+- `s_event_queue`：要写入的队列句柄。
+- `&gpio_num`：待复制数据的来源地址，复制大小由创建队列时的元素大小决定。
+- `&higher_priority_task_woken`：输出标志的地址。如果这次发送唤醒了更高优先级的任务，标志会被置为 `pdTRUE`。
+
+发送成功返回 `pdTRUE`，队列已满则返回 `errQUEUE_FULL`。它没有等待时间参数，不能留在 ISR 中等队列腾出空位。本课 ISR 没有检查这个返回值，因此队列满时，该次事件不会入队。
+
+`higher_priority_task_woken` 在调用前初始化为 `pdFALSE`，调用后若为 `pdTRUE`，再执行 `portYIELD_FROM_ISR()` 请求任务切换。这个标志表示是否需要切换任务，**不表示发送是否成功**；发送结果应看函数返回值。
+
+### 任务接收：`xQueueReceive()`
+
+`xQueueReceive(exit_event_queue(), &gpio_num, portMAX_DELAY)` 的三个参数依次是：
+
+- `exit_event_queue()`：本工程 BSP 提供的函数，返回前面创建的队列句柄；它不是 FreeRTOS API。
+- `&gpio_num`：接收缓冲区地址，队列中的数值会复制到这个变量中。
+- `portMAX_DELAY`：等待时间参数。本课用它等待事件，队列为空时任务阻塞，不会反复读取 GPIO。
+
+接收成功返回 `pdTRUE`，并从队列移除该元素；在等待期限内未收到元素则返回 `pdFALSE`。等待参数的单位是 tick，传 `0` 表示不等待、立即返回。`portMAX_DELAY` 在 `INCLUDE_vTaskSuspend` 为 `1` 时表示无限期等待。
+
+### 延时与时间换算：`vTaskDelay()`、`pdMS_TO_TICKS()`
+
+`vTaskDelay(pdMS_TO_TICKS(20))` 分两步理解：`pdMS_TO_TICKS(20)` 按 tick 频率把 20 ms 换算成 tick 数，`vTaskDelay()` 再让当前任务阻塞相应的 tick 数，期间其他就绪任务可以运行。`vTaskDelay()` 没有返回值。
+
+不要直接写 `vTaskDelay(20)` 来表示 20 ms：这里的 `20` 是 tick 数。换算结果受 tick 频率和整数取整影响，任务何时继续运行还取决于调度，因此它不保证精确延时 20 ms。
+
+### 常量和扩展示例中的接口
+
+- `pdTRUE`、`pdFALSE`：分别表示真、假；本文用于判断收发结果和是否需要任务切换。
+- `pdPASS`：成功状态，本文用于检查任务创建结果。它们的定义可查阅官方源码 [`projdefs.h`](https://github.com/espressif/esp-idf/blob/v5.5.5/components/freertos/FreeRTOS-Kernel/include/freertos/projdefs.h)。
+- [`xQueueSend()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#c.xQueueSend)：只出现在第 4 节传递结构体指针的扩展示例中，配套工程没有调用。三个参数分别是队列句柄、数据来源地址和最长等待 tick 数；成功返回 `pdPASS`，队列满且等待后仍无法发送时返回 `errQUEUE_FULL`。它用于任务上下文，不能替换 ISR 中的 `xQueueSendFromISR()`。
+
 ## 8. 编译、烧录与验收
 
 在工程根目录执行：
