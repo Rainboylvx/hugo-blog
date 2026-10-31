@@ -7,12 +7,12 @@ weight: 4
 tags: ["ESP32-S3", "ESP-IDF", "GPIO", "外部中断", "FreeRTOS", "BSP", "LED"]
 ---
 
-[第 03 课](./03-dnesp32s3-boot-key-control-led.md)每 10 ms 轮询一次 BOOT 按键。这种写法容易理解，但任务即使按键一年不按，也会一直醒来读取 GPIO。本课跟学《DNESP32S3 使用指南（IDF 版）》第 12 章，改用 **GPIO 外部中断**：GPIO0 出现下降沿时由 ISR 产生事件，普通 FreeRTOS 任务再完成消抖和 LED 控制。
+[第 03 课](./03-dnesp32s3-boot-key-control-led.md)每 10 ms 轮询一次 BOOT 按键。这种写法容易理解，但即使一直不按键，任务也会定时醒来读取 GPIO。本课跟学《DNESP32S3 使用指南（IDF 版）》第 12 章，改用 **GPIO 外部中断**：GPIO0 出现下降沿时，ISR 投递事件，再由普通 FreeRTOS 任务消抖并控制 LED。
 
-配套工程位于 [`examples/04-gpio-interrupt-led/`](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/04-gpio-interrupt-led/)。工程沿用前几课的 GPIO1 红色 LED 和 GPIO0 BOOT 按键，但把中断与业务处理分成两层。
+配套工程位于 [`examples/04-gpio-interrupt-led/`](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/04-gpio-interrupt-led/)。工程沿用前几课的 GPIO1 红色 LED 和 GPIO0 BOOT 按键，将中断响应与按键处理分开。
 
 > [!INFO] 验证范围
-> 工程已按 ESP-IDF v5.5.5 的 API 编写，包含 `idf.py set-target esp32s3`、构建和烧录所需文件。本文先以源码和构建验收为准；GPIO 按键的消抖效果仍需要在接上目标开发板后人工连续短按、长按验证。
+> 工程已按 ESP-IDF v5.5.5 的 API 编写，包含 `idf.py set-target esp32s3`、构建和烧录所需文件。本文的验收范围限于源码和构建；按键消抖效果仍需接上目标开发板，通过连续短按、长按人工验证。
 
 ## 1. 先核对两个引脚
 
@@ -23,9 +23,9 @@ tags: ["ESP32-S3", "ESP-IDF", "GPIO", "外部中断", "FreeRTOS", "BSP", "LED"]
 | 红色用户 LED | GPIO1 | 低电平点亮 | 观察中断事件是否被接受 |
 | BOOT 按键 | GPIO0 | 按下接地，低电平 | 下降沿触发 GPIO 中断 |
 
-GPIO0 还是 ESP32-S3 的启动配置脚。开发板复位或上电时一直按住 BOOT，芯片可能进入下载模式；运行程序时先松开按键，再进行实验。
+GPIO0 还是 ESP32-S3 的启动配置脚。开发板复位或上电时一直按住 BOOT，芯片可能进入下载模式。实验时先松开按键，让程序正常启动。
 
-GPIO1 的 LED 电路仍然是 `3.3 V → 限流电阻 → LED → GPIO1`，所以应用层的 `led_set(true)` 最终写入低电平。LED 的极性不应从“亮或灭的现象”猜，而应以板卡原理图和 BSP 中的转换为准。
+GPIO1 的 LED 电路仍然是 `3.3 V → 限流电阻 → LED → GPIO1`，所以应用层的 `led_set(true)` 最终写入低电平。判断 LED 极性时，要核对板卡原理图和 BSP 中的电平转换，不能只凭亮灭现象猜测。
 
 ## 2. 轮询和中断的职责差异
 
@@ -47,7 +47,7 @@ GPIO0 下降沿
     -> 翻转 GPIO1 LED，等待按键松开
 ```
 
-中断并不自动解决机械抖动。一次真实按下可能产生多个快速边沿，因此 ISR 只负责低成本地记录事件，不能直接把每一个边沿都当作一次业务按键。
+中断并不能自动消除机械抖动。按下一次按键，可能在短时间内产生多个边沿，因此 ISR 只负责快速记录事件，不能把每个边沿都当作一次有效按下。
 
 ## 3. 工程结构
 
@@ -69,7 +69,7 @@ GPIO0 下降沿
             └── exit.h
 ```
 
-`EXIT` 是教材对外部中断驱动的命名。这里的 BSP 接口不暴露 GPIO 中断服务的内部细节，只把事件队列作为初始化参数传入。
+`EXIT` 是教材对外部中断驱动的命名。应用通过初始化参数把事件队列传给 BSP，不需要了解 GPIO 中断服务的内部细节。
 
 `main` 与 BSP 的依赖在 `main/CMakeLists.txt` 中声明：
 
@@ -102,7 +102,7 @@ static void IRAM_ATTR boot_gpio_isr(void *arg)
 }
 ```
 
-这里有四个需要同时满足的约束：
+这段 ISR 需要同时满足四个约束：
 
 1. ISR 带有 `IRAM_ATTR`，并通过 `ESP_INTR_FLAG_IRAM` 安装 GPIO ISR 服务；
 2. 使用 `xQueueSendFromISR()`，不能在中断上下文调用普通的 `xQueueSend()`；
@@ -119,7 +119,7 @@ ISR 没有 `ESP_LOGI()`、`vTaskDelay()`、`gpio_set_level()` 或消抖循环。
 QueueHandle_t event_queue = xQueueCreate(8, sizeof(uint32_t));
 ```
 
-第二个参数规定了**每个队列元素有多大**。因此，这个队列的每个槽位能保存一个 `uint32_t` 的值。发送和接收时的 `&gpio_num` 只是告诉 FreeRTOS“从哪里读”或“往哪里写”：
+第二个参数规定了**每个队列元素的大小**，这里每个槽位保存一个 `uint32_t` 的值。发送和接收时，`&gpio_num` 告诉 FreeRTOS 从哪里读取数据，或把数据写到哪里：
 
 ```text
 ISR 中的 gpio_num       --发送-->  队列内部的 4 字节副本
@@ -130,9 +130,9 @@ ISR 中的 gpio_num       --发送-->  队列内部的 4 字节副本
 - `xQueueReceive(..., &gpio_num, ...)`：把队列中的 4 字节复制到任务自己的局部变量；
 - 两处的 `gpio_num` 是两个不同的变量，名字相同不代表它们共享地址。
 
-所以，`&gpio_num` 的确是一个地址，但**队列里保存的是地址指向的数值副本，不是这个地址本身**。ISR 返回后，ISR 中的局部变量就不再有效；正因为队列已经完成值拷贝，任务仍然可以安全读取自己的副本。
+`&gpio_num` 是地址，**队列保存的是它指向的数值副本，不是地址本身**。ISR 返回后，其中的局部变量就不再有效，但数值已经复制到队列中，任务仍然可以安全读取自己的副本。
 
-只有在队列元素大小明确写成指针时，队列才会保存指针值。例如大结构体不适合频繁整体复制时，可以这样设计：
+要让队列保存指针值，需要把元素大小设为指针的大小。例如，大结构体不适合频繁整体复制时，可以这样设计：
 
 ```c
 QueueHandle_t queue = xQueueCreate(8, sizeof(MyStruct *));
@@ -140,7 +140,7 @@ MyStruct *p = malloc(sizeof(*p));
 xQueueSend(queue, &p, portMAX_DELAY);  // 拷贝的是地址值
 ```
 
-这里的 `&p` 仍然只是发送参数的来源地址；队列复制进去的是 `p` 这个指针的值。接收端取出指针后负责使用并 `free()`，还要约定清楚所有权，避免内存泄漏或重复释放。本课的数据只有一个 GPIO 编号，直接按值拷贝更简单，也不需要动态内存。
+这里的 `&p` 仍然是数据的来源地址，队列复制的是指针 `p` 的值。这种设计需要约定清楚内存所有权：接收端取出指针后负责使用并 `free()`，避免内存泄漏或重复释放。本课只传递一个 GPIO 编号，直接按值拷贝更简单，也不需要动态内存。
 
 ## 5. 配置下降沿和注册服务
 
@@ -163,13 +163,13 @@ ESP_ERROR_CHECK(gpio_isr_handler_add(BOOT_INT_GPIO_PIN,
 ESP_ERROR_CHECK(gpio_intr_enable(BOOT_INT_GPIO_PIN));
 ```
 
-BOOT 松开时内部上拉把 GPIO0 保持为高电平，按下时接地形成高到低的变化，所以使用 `GPIO_INTR_NEGEDGE` 表示下降沿。
+BOOT 松开时，内部上拉使 GPIO0 保持高电平；按下时，GPIO0 接地，电平由高变低，因此配置为下降沿触发，即 `GPIO_INTR_NEGEDGE`。
 
-`gpio_install_isr_service()` 负责安装一个共享的 GPIO 中断服务；`gpio_isr_handler_add()` 再把 GPIO0 映射到自己的回调。只在同一个应用里安装一次服务，不能每次按键时重复安装。
+`gpio_install_isr_service()` 安装共享的 GPIO 中断服务，`gpio_isr_handler_add()` 为 GPIO0 注册回调函数。同一个应用只安装一次服务，不要在每次按键时重复安装。
 
 ## 6. 普通任务完成消抖和业务处理
 
-任务从队列收到事件后，先延时 20 ms，再读取 GPIO0 确认按键仍然为低：
+任务从队列收到事件后，先延时 20 ms，再读取 GPIO0，确认按键仍处于低电平：
 
 ```c
 if (xQueueReceive(exit_event_queue(), &gpio_num, portMAX_DELAY) != pdTRUE) {
@@ -196,13 +196,13 @@ while (gpio_get_level(BOOT_INT_GPIO_PIN) == 0) {
 vTaskDelay(pdMS_TO_TICKS(20));
 ```
 
-这一步使“一直按住 BOOT”只对应一次翻转。等待松开期间如果按键触点抖动再次产生下降沿，事件最多暂存在队列中；松开后的 20 ms 稳定期会把已经失效的边沿过滤掉。
+这样，一直按住 BOOT 也只会翻转一次 LED。等待松开期间，如果触点抖动再次产生下降沿，事件最多暂存在队列中；松开后的 20 ms 稳定期会把已经失效的边沿过滤掉。
 
-这是一种适合入门实验的消抖策略，不是所有产品都应照搬。高频按键、旋转编码器或需要记录每个边沿的场景，应使用专门的状态机、硬件滤波或定时采样方案，并为队列溢出制定明确策略。
+这种消抖方式适合入门实验。用于产品时还需考虑具体场景：高频按键、旋转编码器或需要记录每个边沿的场景，应使用专门的状态机、硬件滤波或定时采样方案，并明确队列溢出时如何处理。
 
 ## 7. 按依赖顺序启动
 
-`app_main()` 的顺序是“先准备消费者，再打开事件源”：
+`app_main()` 按 LED 初始化、创建队列、中断初始化、创建任务的顺序启动：
 
 ```c
 ESP_ERROR_CHECK(led_init());
@@ -257,7 +257,7 @@ Ready: press BOOT to toggle LED
 
 ## 9. 与官方 `03_exit` 对答案
 
-教材配套的 `03_exit` 工程同样使用 GPIO0 下降沿、内部上拉、`gpio_install_isr_service()` 和 `gpio_isr_handler_add()`。本工程保留这些硬件和 API 关系，但有一处刻意的架构差异：
+教材配套的 `03_exit` 工程同样使用 GPIO0 下降沿、内部上拉、`gpio_install_isr_service()` 和 `gpio_isr_handler_add()`。本工程沿用这些引脚配置和 API，将按键处理移到任务中，具体差异如下：
 
 | 位置 | 官方示例 | 本工程 |
 | --- | --- | --- |
@@ -267,7 +267,7 @@ Ready: press BOOT to toggle LED
 | 错误处理 | 驱动函数多为 `void` | 初始化返回 `esp_err_t`，应用用 `ESP_ERROR_CHECK()` |
 | 组件组织 | 官方 BSP 宏和课程注释 | `LED`、`EXIT` 分目录，应用只组合接口 |
 
-官方实现适合展示“GPIO 中断回调会被调用”。把事件送到任务则更容易扩展：后续可以把同一个队列交给按键、串口或传感器事件消费者，也能在任务中加入日志、消抖和状态机，而不用让 ISR 变复杂。
+官方实现演示了如何通过 GPIO 中断回调翻转 LED。本工程把事件送到任务，方便后续扩展：同一个队列可以交给处理按键、串口或传感器事件的任务，也可以在任务中加入日志、消抖和状态机，保持 ISR 简短。
 
 ## 10. 小结
 
@@ -275,7 +275,7 @@ Ready: press BOOT to toggle LED
 - ISR 只做固定、快速、可在 IRAM 中执行的队列投递。
 - FreeRTOS 任务负责 20 ms 消抖、确认按下、等待松开和 LED 控制。
 - `gpio_install_isr_service()`、`gpio_isr_handler_add()` 和 `gpio_intr_enable()` 是注册 GPIO 中断的三个关键步骤。
-- 中断能避免无意义的轮询，但不能替代消抖；硬件事件和应用事件仍要分层处理。
+- 中断能避免反复轮询，但不能替代消抖；GPIO 边沿和有效按下仍需分开处理。
 
 下一步可以把本课的事件队列与[第 05 课的任务、队列和任务通知](./05-freertos-task-queue-notify.md)结合，比较“GPIO ISR → 队列 → LED 任务”和“任务通知”的适用边界。
 
