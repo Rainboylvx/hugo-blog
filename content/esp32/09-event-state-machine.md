@@ -84,17 +84,52 @@ if (key_poll(now)) {
 bool key_poll(int64_t now_us);
 ```
 
-它保存原始电平、已经确认的稳定电平，以及原始电平最近变化的时间：
+它保存原始电平、已经确认的稳定电平，以及原始电平最近变化的时间。完整函数如下，代码按“六步”直线阅读：
 
 ```c
-if (raw != s_raw) {
-    s_raw = raw;
-    s_changed_at = now_us; // 每次抖动都会重新开始计时。
+bool key_poll(int64_t now_us)
+{
+    int raw = gpio_get_level(BOOT_KEY_GPIO);
+
+    /* 第 1 步：电平刚变化，重新开始 20 ms 计时。 */
+    if (raw != s_raw) {
+        s_raw = raw;
+        s_changed_at = now_us;
+    }
+
+    /* 第 2 步：这个电平还没稳定满 20 ms，本轮不产生事件。 */
+    if (now_us - s_changed_at < DEBOUNCE_US) return false;
+
+    /* 第 3 步：读到稳定的高电平，说明键已松开，重新允许下一次按下。 */
+    if (s_raw == 1) s_press_allowed = true;
+
+    /* 第 4 步：稳定值和上次确认的一样，没有新事件。 */
+    if (s_raw == s_stable) return false;
+
+    /* 第 5 步：稳定值变了，记录新状态。 */
+    s_stable = s_raw;
+
+    /* 第 6 步：新状态是按下，且当前允许报事件，就报一次并禁止连发。 */
+    if (s_stable == 0 && s_press_allowed) {
+        s_press_allowed = false;
+        return true;
+    }
+    return false;
 }
-if (now_us - s_changed_at < DEBOUNCE_US) return false;
 ```
 
-`DEBOUNCE_US` 为 20000，即 20 ms。轮询连续读到稳定电平达到这个时长后，才更新稳定状态。稳定下降沿产生一次按下事件；稳定松开后才允许下一次按下。这样，松开时的抖动不会立即让程序接受下一次按下。代码还避免把上电时已经按住的键当成新按下。
+| 步骤 | 一句话 |
+| --- | --- |
+| 1 | 电平刚变化，重新计时 |
+| 2 | 没稳够 20 ms，本轮不算数 |
+| 3 | 读到稳定高电平，说明键已松开，重新允许按下 |
+| 4 | 和上次确认的稳定值一样，没有新事件 |
+| 5 | 稳定值变了，记录新状态 |
+| 6 | 新状态是按下且允许报事件，就报一次并禁止连发 |
+
+其中 `BOOT_KEY_GPIO` 是 `GPIO_NUM_0` 的宏名，`DEBOUNCE_US` 为 20000 微秒（即 20 ms）。完整定义见 BSP 的 `key.c`。
+
+轮询连续读到稳定电平达到 20 ms 后，才更新稳定状态。稳定下降沿产生一次按下事件；稳定松开后才允许下一次按下。这样，松开时的抖动不会立即让程序接受下一次按下。代码还避免把上电时已经按住的键当成新按下。
 
 `key_poll()` 必须定期调用，不能两秒才检查一次。它的内部状态由扫描任务独占，不允许多个任务同时调用。
 
