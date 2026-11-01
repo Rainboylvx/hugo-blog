@@ -9,7 +9,7 @@ tags: ["ESP32-S3", "ESP-IDF", "FreeRTOS", "esp_timer", "定时器", "LED", "BSP"
 
 [第 05 课](./05-freertos-task-queue-notify.md)已经让普通任务通过通知协作。这一课跟学《DNESP32S3 使用指南（IDF 版）》第 14 章，使用 `esp_timer` 每隔 1 秒调度一次 LED 翻转。
 
-教材和官方 `05_esptim` 工程直接在回调中执行 `LED_TOGGLE()`。这个实验可以运行，但它没有体现默认 ESP Timer 回调共享同一个高优先级任务的约束。本课保留同样的闪灯结果，同时把职责拆开：
+教材和官方 `05_esptim` 工程直接在回调中执行 `LED_TOGGLE()`。这个实验可以运行，但默认 ESP Timer 回调共用一个高优先级任务，这一点在示例中不明显。本课保持相同的闪灯效果，将定时、通知和 LED 处理分开：
 
 1. `esp_timer` 负责产生稳定的周期事件；
 2. 回调只调用 `xTaskNotifyGive()`，不阻塞、不打印日志；
@@ -18,11 +18,31 @@ tags: ["ESP32-S3", "ESP-IDF", "FreeRTOS", "esp_timer", "定时器", "LED", "BSP"
 配套工程位于 [`examples/06-esp-timer-periodic-led/`](https://github.com/Rainboylvx/esp32-learning-code/tree/main/examples/06-esp-timer-periodic-led/)。
 
 > [!INFO] 验证范围
-> 工程已在 macOS、ESP-IDF v5.5.5 下编译，并通过 `/dev/cu.usbmodem31101` 烧录到 DNESP32S3。Monitor 连续记录 9 次周期事件，第一次间隔为 `1000090 us`，之后为 `999984～1000000 us`，没有出现累计通知。日志确认 GPIO1 的逻辑状态每秒翻转，红色 LED 的物理明灭也已人工确认正常。
+> 当前简化版已在默认配置的隔离副本中通过 ESP-IDF v5.5.5 编译，本次未重新烧录。此前版本曾通过 `/dev/cu.usbmodem31101` 烧录，Monitor 连续记录 9 次周期事件，第一次间隔为 `1000090 us`，之后为 `999984～1000000 us`，没有出现累计通知，GPIO1 每秒翻转且 LED 物理明灭已人工确认。后文保留这些旧版记录，新固件仍需重新验收。
+
+## 一图看懂关键调用
+
+实线表示同一执行路径上的顺序，虚线表示任务调度、回调触发或消息传递；它们不表示跨任务的直接函数调用。
+
+```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 24, "padding": 10, "subGraphTitleMargin": {"top": 8, "bottom": 16}}}}%%
+flowchart TB
+    A["app_main()：led_init()<br/>xTaskCreate(led_task, &quot;led_task&quot;,<br/>3072, NULL, 5, &amp;handle)"]
+    A --> B["esp_timer_create()<br/>callback = periodic_timer_callback<br/>arg = handle；ESP_TIMER_TASK<br/>esp_timer_start_periodic(timer, 1000000)"]
+    A -. "调度器运行 LED 任务" .-> R
+    B -. "每 1 秒，由公共定时器任务派发" .-> C
+    C["periodic_timer_callback(arg)<br/>xTaskNotifyGive((TaskHandle_t)arg)"]
+    C -. "累计通知次数" .-> R
+    R["led_task：阻塞等通知<br/>n = ulTaskNotifyTake(pdTRUE,<br/>portMAX_DELAY)"]
+    R --> L["按 n 次更新 led_on<br/>led_set(led_on)<br/>esp_timer_get_time() 计算处理间隔"]
+    L --> R
+```
+
+`handle` 对应 `led_task_handle`。先创建任务，再把句柄放进定时器的 `arg`。默认回调在任务上下文运行，使用普通 `xTaskNotifyGive()`；LED 任务等待通知时不轮询 GPIO。`app_main()` 返回后，这个任务和周期定时器继续运行。
 
 ## 1. 硬件目标：仍然控制 GPIO1 红色 LED
 
-ESP Timer 是 ESP32-S3 的片上资源，不需要外接信号线。本实验唯一使用的板外可见资源仍是 GPIO1 红色用户 LED。
+ESP Timer 是 ESP32-S3 的片上资源，不需要外接信号线。本实验仍只通过 GPIO1 红色用户 LED 观察结果。
 
 ![DNESP32S3 板载红色 LED 与 GPIO1 的连接](./assets/02-led/led-circuit.png)
 
@@ -47,7 +67,7 @@ ESP Timer 是 ESP32-S3 的片上资源，不需要外接信号线。本实验唯
 vTaskDelay(pdMS_TO_TICKS(1000));
 ```
 
-它表达的是“让当前任务至少阻塞约 1000 ms”。任务恢复执行后还要完成自己的工作，再次调用延时，因此循环周期会包含代码执行和调度等待时间。
+它让当前任务按 1000 ms 换算出的 tick 数阻塞，实际恢复时间还受 tick 粒度和调度影响。任务恢复执行后还要完成自己的工作，再次调用延时，因此循环周期会包含代码执行和调度等待时间。
 
 `esp_timer_start_periodic()` 则创建一条独立的周期时间线。周期参数使用微秒：
 
@@ -129,8 +149,7 @@ idf_component_register(SRCS "main.c"
 ```c
 static void periodic_timer_callback(void *arg)
 {
-    const TaskHandle_t led_task_handle = (TaskHandle_t)arg;
-    xTaskNotifyGive(led_task_handle);
+    xTaskNotifyGive((TaskHandle_t)arg);
 }
 ```
 
@@ -143,7 +162,7 @@ static void periodic_timer_callback(void *arg)
 - 不执行 `ESP_LOGI()`；
 - 不进行文件、网络或复杂计算。
 
-任务通知值相当于计数器。即使 LED 任务暂时来不及运行，多次 `xTaskNotifyGive()` 也可以先累计，而不是只保留一个布尔标志。
+任务通知值相当于计数器。即使 LED 任务暂时来不及运行，多次 `xTaskNotifyGive()` 也能先累计；如果只用布尔标志，就无法区分一次和多次通知。
 
 ## 6. LED 任务处理真正的工作
 
@@ -156,23 +175,21 @@ static void led_task(void *arg)
     int64_t previous_time_us = esp_timer_get_time();
 
     while (1) {
-        // 没有定时事件时阻塞，不占用 CPU 忙等。
-        const uint32_t expirations =
-            ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
+        /* pdTRUE：读取后清零通知计数，不占用 CPU 轮询。 */
+        const uint32_t expirations = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
         const int64_t now_us = esp_timer_get_time();
         const int64_t elapsed_us = now_us - previous_time_us;
         previous_time_us = now_us;
 
-        // 多次通知可能合并返回，因此按事件次数更新逻辑状态。
+        /* 任务来不及运行时多次通知会合并成 >1 的计数，逐次翻转才能保住奇偶。 */
         for (uint32_t i = 0; i < expirations; ++i) {
             led_on = !led_on;
         }
 
         total_expirations += expirations;
-        ESP_ERROR_CHECK(led_set(led_on));
+        led_set(led_on);
 
-        ESP_LOGI("esp_timer_demo",
+        ESP_LOGI(TAG,
                  "handled=%" PRIu32 ", total=%" PRIu32
                  ", elapsed=%" PRId64 " us, LED %s",
                  expirations,
@@ -185,29 +202,21 @@ static void led_task(void *arg)
 
 `esp_timer_get_time()` 返回 ESP Timer 初始化以来经过的微秒数。它不是日期时间，也没有时区概念；这里用相邻两次读取的差值观察实际处理间隔。
 
-正常情况下 `expirations` 为 `1`。如果它大于 `1`，说明 LED 任务开始处理前已经累计了多次到期。循环按次数翻转，能够保留事件数量的奇偶结果；日志也会直接暴露处理落后，而不是悄悄隐藏。
+正常情况下 `expirations` 为 `1`。如果它大于 `1`，说明 LED 任务开始处理前已经累计了多次到期。循环按次数翻转，保留累计翻转后的最终状态；日志中的计数也能显示任务是否处理落后。
 
 ## 7. 创建并启动周期定时器
 
-关键初始化代码如下：
+关键初始化代码如下，`s_periodic_timer` 是文件内的静态定时器句柄：
 
 ```c
-#define TIMER_PERIOD_US 1000000ULL
-
-static esp_timer_handle_t s_periodic_timer;
-
 void app_main(void)
 {
     TaskHandle_t led_task_handle = NULL;
 
-    ESP_ERROR_CHECK(led_init());
+    led_init();
 
-    // 先创建接收通知的任务，才能把有效句柄交给回调。
-    ESP_ERROR_CHECK(
-        xTaskCreate(led_task, "led_task", 3072, NULL, 5,
-                    &led_task_handle) == pdPASS
-            ? ESP_OK
-            : ESP_ERR_NO_MEM);
+    /* 必须先有任务，回调参数才能拿到有效句柄。 */
+    xTaskCreate(led_task, "led_task", 3072, NULL, 5, &led_task_handle);
 
     const esp_timer_create_args_t timer_args = {
         .callback = periodic_timer_callback,
@@ -216,13 +225,12 @@ void app_main(void)
         .name = "periodic_led",
     };
 
-    ESP_ERROR_CHECK(esp_timer_create(&timer_args, &s_periodic_timer));
-    ESP_ERROR_CHECK(
-        esp_timer_start_periodic(s_periodic_timer, TIMER_PERIOD_US));
+    esp_timer_create(&timer_args, &s_periodic_timer);
+    esp_timer_start_periodic(s_periodic_timer, 1000000ULL); /* 微秒 */
 
-    ESP_LOGI("esp_timer_demo",
-             "Started periodic timer: period=%" PRIu64 " us",
-             TIMER_PERIOD_US);
+    ESP_LOGI(TAG, "Started periodic timer: period=%" PRIu64 " us", 1000000ULL);
+
+    /* app_main 返回后由 IDF 删除；esp_timer 和 led_task 继续运行。 */
 }
 ```
 
@@ -233,7 +241,7 @@ void app_main(void)
 3. 创建 ESP Timer 实例；
 4. 启动周期定时器。
 
-如果先启动定时器，回调可能在任务句柄有效之前发生。先建立消费者，再启动事件源，可以避免这种启动竞争。
+如果先启动定时器，回调可能在任务句柄有效之前发生。先准备接收任务，再启动定时器，就能避免回调使用尚未准备好的句柄。
 
 ### 单次定时器和周期定时器
 
@@ -250,17 +258,62 @@ esp_timer_start_periodic(timer, 500000);
 已经运行的定时器不能再次调用普通 start API。要改变周期，可以：
 
 ```c
-ESP_ERROR_CHECK(esp_timer_restart(timer, 250000));
+esp_timer_restart(timer, 250000);
 ```
 
 不再使用时，按生命周期停止并删除：
 
 ```c
-ESP_ERROR_CHECK(esp_timer_stop(timer));
-ESP_ERROR_CHECK(esp_timer_delete(timer));
+esp_timer_stop(timer);
+esp_timer_delete(timer);
 ```
 
-本实验需要一直闪烁，所以定时器在程序生命周期内保持运行。
+这些是生命周期扩展示例，不在当前 `main.c` 中执行。本实验需要一直闪烁，所以定时器在程序生命周期内保持运行。
+
+## 用到的 ESP Timer 与 FreeRTOS 函数查询表
+
+名称链接到 ESP-IDF v5.5.5 官方文档或该版本源码。表中的调用环境按本课用法标注；带 `FromISR` 的接口用于中断，普通任务接口不能直接搬进 ISR。
+
+| 函数或宏 | 本课用途 | 调用环境 |
+| --- | --- | --- |
+| [`esp_timer_create()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1a74e9327734f0b5a209863df5a21d43a1) | 创建尚未启动的定时器 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_start_periodic()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1a9a7b439c818e9bda87b0101b92439686) | 启动周期定时器 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_get_time()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1ab38881d22858adab666843cee4ba6589) | 读取单调时间，单位微秒 | 本课在任务中读取；也可在 ISR 中读取 |
+| [`xTaskCreate()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/freertos_idf.html#task_8h_1a5489235b8b4658d05fc45e3cccd41ba0) | 创建应用任务 | 普通任务，不能在 ISR 中调用 |
+| [`xTaskNotifyGive()`](https://github.com/espressif/esp-idf/blob/v5.5.5/components/freertos/FreeRTOS-Kernel/include/freertos/task.h#L2348) | 将指定任务的通知计数加 1 | 普通任务，不能在 ISR 中调用 |
+| [`ulTaskNotifyTake()`](https://github.com/espressif/esp-idf/blob/v5.5.5/components/freertos/FreeRTOS-Kernel/include/freertos/task.h#L2530) | 读取并处理当前任务的通知计数 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_start_once()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1a9b7c15d78638b13ad515d9471aa4c68f) | 扩展：启动一次性定时器 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_restart()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1a71fa2f051c37750636c7c7511072af2c) | 扩展：重启正在运行的定时器 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_stop()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1ac590077ed12c097ce62cd75dec10fa46) | 扩展：停止定时器 | 普通任务，不能在 ISR 中调用 |
+| [`esp_timer_delete()`](https://docs.espressif.com/projects/esp-idf/en/v5.5.5/esp32s3/api-reference/system/esp_timer.html#esp__timer_8h_1a2f8afce187cdaf5f91f1b713ec12617f) | 扩展：释放定时器 | 普通任务，不能在 ISR 中调用 |
+
+### 创建、启动与时间单位
+
+`esp_timer_create(&timer_args, &s_periodic_timer)` 接收配置结构体地址和句柄输出地址。配置中的 `callback` 是回调函数，`arg` 是传给回调的参数，`dispatch_method=ESP_TIMER_TASK` 表示在公共定时器任务中派发。创建成功返回 `ESP_OK`；内存不足可返回 `ESP_ERR_NO_MEM`。
+
+`esp_timer_start_periodic(timer, period_us)` 的第二个参数是周期微秒数，本课的 `1000000ULL` 表示 1 秒。成功返回 `ESP_OK`，定时器已经运行时返回 `ESP_ERR_INVALID_STATE`。`esp_timer_get_time()` 无参数，返回 `int64_t` 微秒时间，用于相减求间隔，不是日历时间。
+
+### 通知与任务句柄
+
+`xTaskCreate(entry, name, stack_bytes, arg, priority, handle_out)` 的六个参数依次是任务入口、名称、栈字节数、入口参数、优先级和句柄输出地址。ESP-IDF 中 `3072` 是 **3072 字节**；优先级数值越大，优先级越高。最后一个参数传 `NULL` 表示不保存句柄，传句柄变量地址则由函数写回。成功返回 `pdPASS`，内存不足时返回 `errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY`。
+
+本课把任务句柄作为定时器的 `arg`。`xTaskNotifyGive(handle)` 使该任务的通知计数加 1，返回 `pdPASS`；`ulTaskNotifyTake(pdTRUE, portMAX_DELAY)` 阻塞等待，返回清零前累计计数。等待超时返回 `0`，但本课采用无限期等待的配置。默认定时器回调属于任务上下文，所以不使用 `FromISR` 接口。
+
+### 仅在生命周期示例中出现的接口
+
+`esp_timer_start_once(timer, timeout_us)` 在指定微秒数后触发一次；`esp_timer_restart(timer, timeout_us)` 要求定时器正在运行，周期模式下会从当前时刻按新周期重新计时。`esp_timer_stop(timer)` 停止正在运行的实例，`esp_timer_delete(timer)` 释放已停止的实例。它们成功均返回 `ESP_OK`；对运行状态使用不当会返回 `ESP_ERR_INVALID_STATE`。主工程保持周期定时器运行，未调用这些扩展接口。
+
+正文比较用的 `vTaskDelay()`、`xTaskDelayUntil()` 不属于本课定时器启动链；前者按调用时刻相对延时，后者维护计划唤醒时间，参数单位都是 tick，不能直接套用 ESP Timer 的微秒数。
+
+### 当前代码的接口与错误处理
+
+| 本工程接口 | 用途与条件 | 返回类型 |
+| --- | --- | --- |
+| `led_init() / led_set(on)` | LED 初始化与逻辑亮灭控制；均不返回驱动状态 | `void` |
+
+这些接口属于配套工程 BSP 或业务代码，不是同名的 ESP-IDF 底层 API。返回 `void` 的接口没有可检查的返回值，不能直接放进 `ESP_ERROR_CHECK()`。
+
+当前教学版省略了多项初始化、资源创建和驱动调用的返回值检查。查询表保留底层 API 的成功与失败返回值，表示接口本身的约定；不代表当前源码已经检查。若要补齐，应在 BSP 内处理底层错误、按需返回 `esp_err_t`，并单独判断 FreeRTOS 创建结果。
 
 ## 8. 编译、烧录和观察实际间隔
 
@@ -274,10 +327,10 @@ idf.py build
 
 # 查找开发板实际串口，再编译、烧录并打开 Monitor。
 find /dev -maxdepth 1 -name 'cu.*' -print | sort
-idf.py -p /dev/cu.usbmodem31101 flash monitor
+idf.py -p '/dev/cu.开发板实际端口' flash monitor
 ```
 
-本次实测启动日志：
+此前版本的实测启动日志（保留为观察参考，本次未重新烧录）：
 
 ```text
 I (...) app_init: Project name:     06-esp-timer-periodic-led
@@ -286,7 +339,7 @@ I (259) esp_timer_demo: Started periodic timer: period=1000000 us
 I (259) main_task: Returned from app_main()
 ```
 
-随后连续得到：
+当时随后连续得到：
 
 ```text
 I (1259) esp_timer_demo: handled=1, total=1, elapsed=1000090 us, LED on
@@ -311,8 +364,8 @@ I (5259) esp_timer_demo: handled=1, total=5, elapsed=1000000 us, LED on
 4. `handled` 持续为 `1`，没有周期事件积压；
 5. `elapsed` 接近 `1000000 us`，并允许存在少量调度误差。
 
-> [!INFO] 本次实机进度
-> `idf.py build` 已通过，固件大小为 `0x308a0` 字节，应用分区剩余 81%；烧录和 Flash 哈希校验通过。Monitor 已验证第 3～5 项，并连续观察到 9 次事件；红色 LED 每秒正常翻转也已人工确认。以上 5 项全部通过。
+> [!INFO] 此前版本的实机记录
+> `idf.py build` 已通过，固件大小为 `0x308a0` 字节，应用分区剩余 81%；烧录和 Flash 哈希校验通过。Monitor 已验证第 3～5 项，并连续观察到 9 次事件；红色 LED 每秒正常翻转也已人工确认。当时以上 5 项全部通过；这些数据属于此前固件，本次简化版仍需重新烧录确认。
 
 ## 9. 和教材官方工程对答案
 
@@ -323,7 +376,7 @@ I (5259) esp_timer_demo: handled=1, total=5, elapsed=1000000 us, LED on
 | 派发方式 | 未写，默认 `ESP_TIMER_TASK` | 显式写 `ESP_TIMER_TASK` | 明确回调上下文 |
 | 回调工作 | 直接 `LED_TOGGLE()` | 只发送任务通知 | 避免拖慢共享回调任务 |
 | LED 状态 | 读取 GPIO 后取反 | 由 LED 任务保存逻辑状态 | 单一任务拥有状态，更容易推理 |
-| 错误处理 | 未检查返回值 | 全部 `ESP_ERROR_CHECK()` | 创建或启动失败立即暴露 |
+| 错误处理 | 未检查返回值 | 当前教学版也未检查 | 复用时需自行补充资源与状态检查 |
 | 定时器句柄 | 初始化函数的局部变量 | 文件内静态句柄 | 后续可停止、重启或删除 |
 | 运行观测 | 无串口周期数据 | 输出通知数和实际间隔 | 可以验证调度是否积压 |
 
@@ -349,7 +402,7 @@ I (5259) esp_timer_demo: handled=1, total=5, elapsed=1000000 us, LED on
 
 ## 11. 小结
 
-本课建立了一个以后可以复用的周期调度结构：
+本课的周期调度流程可以在后续工程中复用：
 
 ```text
 ESP Timer 每 1 秒到期
