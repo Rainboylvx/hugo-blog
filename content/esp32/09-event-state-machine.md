@@ -102,11 +102,20 @@ if (now_us - s_changed_at < DEBOUNCE_US) return false;
 
 ```c
 // now 和 entered_at 的单位都是微秒。
-bool on = mode == MODE_ON ||
-    (mode == MODE_BLINK && ((now - entered_at) / 500000) % 2 == 0);
+bool on = false;
+if (mode == MODE_ON) {
+    on = true;
+} else if (mode == MODE_BLINK) {
+    int64_t elapsed = now - entered_at;      // 进入 BLINK 后经过的微秒数
+    int64_t half_periods = elapsed / 500000; // 第几个 500 ms
+    on = (half_periods % 2 == 0);            // 偶数段点亮，奇数段熄灭
+}
+// MODE_OFF 不进入任何分支，on 保持 false。
 ```
 
-进入 BLINK 后经过 0～499999 us，整数除法结果是 0，LED 点亮；经过 500000～999999 us，结果是 1，LED 熄灭；下一段结果变成 2，又点亮。
+三种模式各自走一条分支：OFF 什么都不做，LED 保持熄灭；ON 直接把 `on` 置为 `true`，LED 常亮；BLINK 才去算相位。
+
+相位怎么算：进入 BLINK 后经过 0～499999 us，整数除法结果是 0，LED 点亮；经过 500000～999999 us，结果是 1，LED 熄灭；下一段结果变成 2，又点亮。
 
 如果任务因别的工作迟到 20 ms，下次仍按真实经过时间计算，不会每次把延迟都叠加进周期。若系统迟到得太久，部分闪烁会被跳过；状态机不能恢复没有实际输出的历史边沿。
 
@@ -157,8 +166,14 @@ void app_main(void)
             ESP_LOGI("state", "mode=%d (0=OFF, 1=ON, 2=BLINK)", mode);
         }
         /* 每 500 ms 变一次状态但不阻塞 500 ms；漏拍时按实际时间求相位。 */
-        bool on = mode == MODE_ON ||
-            (mode == MODE_BLINK && ((now - entered_at) / 500000) % 2 == 0);
+        bool on = false;
+        if (mode == MODE_ON) {
+            on = true;
+        } else if (mode == MODE_BLINK) {
+            int64_t elapsed = now - entered_at;
+            int64_t half_periods = elapsed / 500000;
+            on = (half_periods % 2 == 0);
+        }
         if (on != previous_on) {
             led_set(on);
             previous_on = on;
