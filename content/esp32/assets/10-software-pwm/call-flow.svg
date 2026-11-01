@@ -1,0 +1,73 @@
+<svg width="100%" viewBox="0.00 0.00 652.00 401.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-labelledby="title desc"><title id="title">软件 PWM 的关键调用：任务换档，中断逐槽输出</title><desc id="desc">任务只调用 soft_pwm_set 更新目标并延时；GPTimer 每 500 μs 触发 on_slot 中断，锁存目标后逐槽写 GPIO，相位 0..19 循环。</desc>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 397.25)">
+<title>PWM</title>
+<polygon fill="#f8fafc" stroke="none" points="-4,4 -4,-397.25 648.36,-397.25 648.36,4 -4,4"/>
+<text xml:space="preserve" text-anchor="start" x="147.43" y="-375.05" font-family="PingFang SC" font-weight="bold" font-size="16.00" fill="#0f172a">软件 PWM 的关键调用：任务换档，中断逐槽输出</text>
+<g id="clust1" class="cluster">
+<title>cluster_task</title>
+<path fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4" stroke-dasharray="5,2" d="M20,-178C20,-178 624.36,-178 624.36,-178 630.36,-178 636.36,-184 636.36,-190 636.36,-190 636.36,-342 636.36,-342 636.36,-348 630.36,-354 624.36,-354 624.36,-354 20,-354 20,-354 14,-354 8,-348 8,-342 8,-342 8,-190 8,-190 8,-184 14,-178 20,-178"/>
+<text xml:space="preserve" text-anchor="start" x="16" y="-338.65" font-family="PingFang SC" font-weight="bold" font-size="13.00" fill="#1e3a8a">① 任务上下文 · app_main()</text>
+<text xml:space="preserve" text-anchor="start" x="22" y="-325.65" font-family="PingFang SC" font-size="13.00" fill="#1e3a8a">初始化一次，然后只管换档</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_isr</title>
+<path fill="#fff7ed" stroke="#fdba74" stroke-width="1.4" stroke-dasharray="5,2" d="M46.25,-8C46.25,-8 624.36,-8 624.36,-8 630.36,-8 636.36,-14 636.36,-20 636.36,-20 636.36,-158 636.36,-158 636.36,-164 630.36,-170 624.36,-170 624.36,-170 46.25,-170 46.25,-170 40.25,-170 34.25,-164 34.25,-158 34.25,-158 34.25,-20 34.25,-20 34.25,-14 40.25,-8 46.25,-8"/>
+<text xml:space="preserve" text-anchor="start" x="42.25" y="-154.65" font-family="PingFang SC" font-weight="bold" font-size="13.00" fill="#7c2d12">② 中断上下文 · 每 500 μs</text>
+<text xml:space="preserve" text-anchor="start" x="43.38" y="-141.65" font-family="PingFang SC" font-size="13.00" fill="#7c2d12">硬件自动触发，与任务无关</text>
+</g>
+<g id="node1" class="node">
+<title>A</title>
+<path fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.6" d="M228.93,-289.58C228.93,-289.58 36,-289.58 36,-289.58 30,-289.58 24,-283.58 24,-277.58 24,-277.58 24,-206.42 24,-206.42 24,-200.42 30,-194.42 36,-194.42 36,-194.42 228.93,-194.42 228.93,-194.42 234.93,-194.42 240.93,-200.42 240.93,-206.42 240.93,-206.42 240.93,-277.58 240.93,-277.58 240.93,-283.58 234.93,-289.58 228.93,-289.58"/>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-267.15" font-family="PingFang SC" font-size="13.00">soft_pwm_init()</text>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-248.4" font-family="PingFang SC" font-size="13.00">GPIO1 初始熄灭</text>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-229.65" font-family="PingFang SC" font-size="13.00">GPTimer 500 μs 自动重载</text>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-210.9" font-family="PingFang SC" font-size="13.00">注册 on_slot → enable → start</text>
+</g>
+<g id="node2" class="node">
+<title>T</title>
+<path fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" d="M608.36,-270.2C608.36,-270.2 425.18,-270.2 425.18,-270.2 419.18,-270.2 413.18,-264.2 413.18,-258.2 413.18,-258.2 413.18,-205.8 413.18,-205.8 413.18,-199.8 419.18,-193.8 425.18,-193.8 425.18,-193.8 608.36,-193.8 608.36,-193.8 614.36,-193.8 620.36,-199.8 620.36,-205.8 620.36,-205.8 620.36,-258.2 620.36,-258.2 620.36,-264.2 614.36,-270.2 608.36,-270.2"/>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-247.78" font-family="PingFang SC" font-size="13.00">soft_pwm_set(0/5/10/15/20)</text>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-229.03" font-family="PingFang SC" font-size="13.00">临界区写 s_pending</text>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-210.28" font-family="PingFang SC" font-size="13.00">vTaskDelay(1500 ms)</text>
+</g>
+<g id="edge1" class="edge">
+<title>A&#45;&gt;T</title>
+<path fill="none" stroke="#64748b" stroke-width="1.6" d="M241.49,-239.17C291.89,-237.86 351.88,-236.29 402.88,-234.95"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.6" points="402.77,-237.58 410.2,-234.76 402.64,-232.33 402.77,-237.58"/>
+</g>
+<g id="edge2" class="edge">
+<title>T&#45;&gt;T</title>
+<path fill="none" stroke="#64748b" stroke-width="1.6" d="M482.67,-270.63C476.87,-291.34 488.24,-310.2 516.77,-310.2 540.84,-310.2 552.7,-296.77 552.33,-280.14"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.6" points="554.97,-280.04 551.24,-273.02 549.78,-280.83 554.97,-280.04"/>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-315.5" font-family="PingFang SC" font-size="11.00" fill="#475569">每 1.5 s 换一档</text>
+</g>
+<g id="node3" class="node">
+<title>I</title>
+<path fill="#ffedd5" stroke="#ea580c" stroke-width="1.6" d="M202.68,-110.2C202.68,-110.2 62.25,-110.2 62.25,-110.2 56.25,-110.2 50.25,-104.2 50.25,-98.2 50.25,-98.2 50.25,-45.8 50.25,-45.8 50.25,-39.8 56.25,-33.8 62.25,-33.8 62.25,-33.8 202.68,-33.8 202.68,-33.8 208.68,-33.8 214.68,-39.8 214.68,-45.8 214.68,-45.8 214.68,-98.2 214.68,-98.2 214.68,-104.2 208.68,-110.2 202.68,-110.2"/>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-87.78" font-family="PingFang SC" font-size="13.00">on_slot()：ISR</text>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-69.03" font-family="PingFang SC" font-size="13.00">仅 s_phase==0 时锁存</text>
+<text xml:space="preserve" text-anchor="middle" x="132.47" y="-50.27" font-family="PingFang SC" font-size="13.00">s_pending → s_active</text>
+</g>
+<g id="edge3" class="edge">
+<title>T&#45;&gt;I</title>
+<path fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-dasharray="5,2" d="M425.69,-193.02C421.1,-189.05 416.87,-184.72 413.18,-180 371.26,-126.28 432.44,-73.01 379.18,-30.5 332.99,6.36 266.14,-7.93 213.82,-29.28"/>
+<polygon fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.6" points="213.01,-26.77 207.12,-32.11 215.05,-31.61 213.01,-26.77"/>
+<text xml:space="preserve" text-anchor="middle" x="327.06" y="-51.55" font-family="PingFang SC" font-size="11.00" fill="#6d28d9">写 s_pending 与锁存</text>
+<text xml:space="preserve" text-anchor="middle" x="327.06" y="-35.8" font-family="PingFang SC" font-size="11.00" fill="#6d28d9">共用同一把自旋锁</text>
+</g>
+<g id="node4" class="node">
+<title>G</title>
+<path fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" d="M608.36,-119.58C608.36,-119.58 425.18,-119.58 425.18,-119.58 419.18,-119.58 413.18,-113.58 413.18,-107.58 413.18,-107.58 413.18,-36.42 413.18,-36.42 413.18,-30.42 419.18,-24.42 425.18,-24.42 425.18,-24.42 608.36,-24.42 608.36,-24.42 614.36,-24.42 620.36,-30.42 620.36,-36.42 620.36,-36.42 620.36,-107.58 620.36,-107.58 620.36,-113.58 614.36,-119.58 608.36,-119.58"/>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-97.15" font-family="PingFang SC" font-size="13.00">gpio_set_level(PWM_GPIO,</text>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-78.4" font-family="PingFang SC" font-size="13.00"> &#160;s_phase &lt; s_active ? 0 : 1)</text>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-59.65" font-family="PingFang SC" font-size="13.00">s_phase = (s_phase+1) % 20</text>
+<text xml:space="preserve" text-anchor="middle" x="516.77" y="-40.9" font-family="PingFang SC" font-size="13.00">return false：不唤醒任务</text>
+</g>
+<g id="edge4" class="edge">
+<title>I&#45;&gt;G</title>
+<path fill="none" stroke="#64748b" stroke-width="1.6" d="M215.48,-72C270.14,-72 342.7,-72 402.81,-72"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.6" points="402.8,-74.63 410.3,-72 402.8,-69.38 402.8,-74.63"/>
+<text xml:space="preserve" text-anchor="middle" x="327.06" y="-77.3" font-family="PingFang SC" font-size="11.00" fill="#475569">每个报警落槽</text>
+</g>
+</g>
+</svg>

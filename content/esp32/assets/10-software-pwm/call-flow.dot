@@ -1,0 +1,34 @@
+digraph PWM {
+  rankdir=LR;
+  bgcolor="#f8fafc";
+  nodesep=0.55;
+  ranksep=0.95;
+  newrank=true;
+  fontname="PingFang SC";
+  labelloc="t";
+  label=<<b>软件 PWM 的关键调用：任务换档，中断逐槽输出</b>>;
+  fontsize=16; fontcolor="#0f172a";
+
+  node [shape=box, style="rounded,filled", fillcolor="#dbeafe", color="#2563eb",
+        fontname="PingFang SC", fontsize=13, penwidth=1.6, margin="0.22,0.14"];
+  edge [color="#64748b", penwidth=1.6, arrowsize=0.75, fontname="PingFang SC", fontsize=11, fontcolor="#475569"];
+
+  subgraph cluster_task {
+    label=<<b>① 任务上下文 · app_main()</b><br/>初始化一次，然后只管换档>; labeljust=l; fontsize=13; fontcolor="#1e3a8a";
+    style="rounded,dashed"; color="#93c5fd"; bgcolor="#eff6ff"; penwidth=1.4; margin=16;
+    A [label="soft_pwm_init()\nGPIO1 初始熄灭\nGPTimer 500 μs 自动重载\n注册 on_slot → enable → start", fillcolor="#e0e7ff", color="#4f46e5"];
+    T [label="soft_pwm_set(0/5/10/15/20)\n临界区写 s_pending\nvTaskDelay(1500 ms)"];
+  }
+
+  subgraph cluster_isr {
+    label=<<b>② 中断上下文 · 每 500 μs</b><br/>硬件自动触发，与任务无关>; labeljust=l; fontsize=13; fontcolor="#7c2d12";
+    style="rounded,dashed"; color="#fdba74"; bgcolor="#fff7ed"; penwidth=1.4; margin=16;
+    I [label="on_slot()：ISR\n仅 s_phase==0 时锁存\ns_pending → s_active", fillcolor="#ffedd5", color="#ea580c"];
+    G [label="gpio_set_level(PWM_GPIO,\n  s_phase < s_active ? 0 : 1)\ns_phase = (s_phase+1) % 20\nreturn false：不唤醒任务"];
+  }
+
+  A -> T;
+  T -> T [label="每 1.5 s 换一档", constraint=false];
+  T -> I [style=dashed, label="写 s_pending 与锁存\n共用同一把自旋锁", color="#8b5cf6", fontcolor="#6d28d9", constraint=false];
+  I -> G [label="每个报警落槽"];
+}

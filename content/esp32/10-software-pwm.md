@@ -16,20 +16,9 @@ tags: ["ESP32-S3", "ESP-IDF", "PWM", "GPTimer", "LED", "BSP"]
 
 ## 一图看懂关键调用
 
-实线表示同一执行路径上的顺序，虚线表示任务调度、回调触发或消息传递；它们不表示跨任务的直接函数调用。
+实线表示同一执行路径上的顺序，虚线表示锁共享或硬件触发；蓝色区域是任务上下文，橙色区域是中断上下文。图源为 [`call-flow.dot`](./assets/10-software-pwm/call-flow.dot)，用 `dot -Tsvg call-flow.dot -o call-flow.svg` 重新生成。
 
-```mermaid
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 24, "padding": 10, "subGraphTitleMargin": {"top": 8, "bottom": 16}}}}%%
-flowchart TB
-    A["app_main() → soft_pwm_init()<br/>GPIO1 初始熄灭<br/>配置 GPTimer：500 μs 自动重载<br/>注册 on_slot，再 enable → start"]
-    A --> T["任务：soft_pwm_set(0 / 5 / 10 / 15 / 20)<br/>临界区内写 s_pending<br/>vTaskDelay(pdMS_TO_TICKS(1500))"]
-    T --> T
-    A -. "每 500 μs 报警" .-> I
-    I["on_slot()：ISR<br/>仅在 s_phase == 0 时<br/>用 ISR 临界区锁存 s_pending → s_active"]
-    T -. "同一把锁保护待生效目标" .-> I
-    I --> G["gpio_set_level(PWM_GPIO,<br/>s_phase 小于 s_active 时输出 0)<br/>s_phase = (s_phase + 1) % 20<br/>return false：未唤醒任务"]
-    G -. "返回，等下一次硬件报警" .-> I
-```
+![软件 PWM 的关键调用：任务换档，中断逐槽输出](./assets/10-software-pwm/call-flow.svg)
 
 任务只更新目标并等待展示时间，逐槽 GPIO 输出由 ISR 持续执行。`soft_pwm_set()` 不立即改当前周期，下一次相位归零才锁存目标。每槽 500 μs、每周期 20 槽，得到 100 Hz PWM；GPTimer 中断频率是 2000 Hz。
 
