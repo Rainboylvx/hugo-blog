@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 120" width="620" height="120">
+  <rect width="620" height="120" fill="#ffffff"/>
+  <defs>
+    <g id="star"><path d="M0,-10 L2.35,-3.24 L9.51,-3.09 L3.80,1.24 L5.88,8.09 L0,4 L-5.88,8.09 L-3.80,1.24 L-9.51,-3.09 L-2.35,-3.24 Z" fill="#2b2b2b"/></g>
+  </defs>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="145" y1="16" x2="145" y2="48"/>
+  <line x1="240" y1="16" x2="240" y2="48"/>
+  <line x1="460" y1="16" x2="460" y2="48"/>
+  <line x1="490" y1="16" x2="490" y2="48"/>
+  </g>
+  <use href="#star" x="25" y="32"/>
+  <use href="#star" x="55" y="32"/>
+  <use href="#star" x="85" y="32"/>
+  <use href="#star" x="115" y="32"/>
+  <use href="#star" x="172" y="32"/>
+  <use href="#star" x="202" y="32"/>
+  <use href="#star" x="262" y="32"/>
+  <use href="#star" x="292" y="32"/>
+  <use href="#star" x="322" y="32"/>
+  <use href="#star" x="432" y="32"/>
+  <use href="#star" x="512" y="32"/>
+  <use href="#star" x="542" y="32"/>
+  <g font-family="Times New Roman, Liberation Serif, serif" font-size="16" fill="#1a1a1a" text-anchor="middle">
+    <text x="180" y="92">(a)</text>
+    <text x="487" y="92">(b)</text>
+  </g>
+</svg>

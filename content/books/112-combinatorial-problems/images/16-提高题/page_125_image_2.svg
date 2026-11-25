@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 170" width="144" height="170">
+  <rect width="144" height="170" fill="#ffffff"/>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="16" y="16" width="56" height="56"/>
+    <rect x="16" y="72" width="56" height="56"/>
+    <rect x="72" y="72" width="56" height="56"/>
+  </g>
+  <text x="72.0" y="164" font-family="Times New Roman, Liberation Serif, serif" font-size="16" fill="#1a1a1a" text-anchor="middle">(a)</text>
+</svg>

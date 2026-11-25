@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" fill="#ffffff"/>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="60" y1="60" x2="60" y2="240"/>
+    <line x1="60" y1="240" x2="240" y2="240"/>
+    <line x1="240" y1="240" x2="240" y2="60"/>
+    <line x1="240" y1="60" x2="60" y2="60"/>
+    <line x1="60" y1="60" x2="240" y2="240"/>
+    <line x1="60" y1="240" x2="240" y2="60"/>
+  </g>
+  <circle cx="60" cy="60" r="17" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.6"/>
+  <text x="60" y="66" font-family="Times New Roman, Liberation Serif, serif" font-style="italic" font-size="16" fill="#1a1a1a" text-anchor="middle">A</text>
+  <circle cx="60" cy="240" r="17" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.6"/>
+  <text x="60" y="246" font-family="Times New Roman, Liberation Serif, serif" font-style="italic" font-size="16" fill="#1a1a1a" text-anchor="middle">B</text>
+  <circle cx="240" cy="240" r="17" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.6"/>
+  <text x="240" y="246" font-family="Times New Roman, Liberation Serif, serif" font-style="italic" font-size="16" fill="#1a1a1a" text-anchor="middle">C</text>
+  <circle cx="240" cy="60" r="17" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.6"/>
+  <text x="240" y="66" font-family="Times New Roman, Liberation Serif, serif" font-style="italic" font-size="16" fill="#1a1a1a" text-anchor="middle">D</text>
+</svg>

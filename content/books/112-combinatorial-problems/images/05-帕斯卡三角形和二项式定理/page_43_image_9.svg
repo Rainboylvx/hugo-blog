@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 250" width="620" height="250">
+  <rect width="620" height="250" fill="#ffffff"/>
+  <g font-family="Times New Roman, Liberation Serif, serif" font-size="17" fill="#1a1a1a">
+    <text x="20" y="40" font-style="italic">n=0:</text>
+    <text x="300.0" y="40" text-anchor="middle">1</text>
+    <text x="20" y="84" font-style="italic">n=1:</text>
+    <text x="274.0" y="84" text-anchor="middle">1</text>
+    <text x="326.0" y="84" text-anchor="middle">1</text>
+    <text x="20" y="128" font-style="italic">n=2:</text>
+    <text x="248.0" y="128" text-anchor="middle">1</text>
+    <text x="300.0" y="128" text-anchor="middle">2</text>
+    <text x="352.0" y="128" text-anchor="middle">1</text>
+    <text x="20" y="172" font-style="italic">n=3:</text>
+    <text x="222.0" y="172" text-anchor="middle">1</text>
+    <text x="274.0" y="172" text-anchor="middle">0</text>
+    <text x="326.0" y="172" text-anchor="middle">0</text>
+    <text x="378.0" y="172" text-anchor="middle">1</text>
+    <text x="20" y="216" font-style="italic">n=4:</text>
+    <text x="196.0" y="216" text-anchor="middle">1</text>
+    <text x="248.0" y="216" text-anchor="middle">1</text>
+    <text x="300.0" y="216" text-anchor="middle">0</text>
+    <text x="352.0" y="216" text-anchor="middle">1</text>
+    <text x="404.0" y="216" text-anchor="middle">1</text>
+  </g>
+</svg>

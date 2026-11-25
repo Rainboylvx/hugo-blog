@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 130" width="400" height="130">
+  <rect width="400" height="130" fill="#ffffff"/>
+  <defs>
+    <g id="star"><path d="M0,-10 L2.35,-3.24 L9.51,-3.09 L3.80,1.24 L5.88,8.09 L0,4 L-5.88,8.09 L-3.80,1.24 L-9.51,-3.09 L-2.35,-3.24 Z" fill="#2b2b2b"/></g>
+  </defs>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="130" y1="16" x2="130" y2="48"/>
+  <line x1="260" y1="16" x2="260" y2="48"/>
+  </g>
+  <use href="#star" x="45" y="32"/>
+  <use href="#star" x="85" y="32"/>
+  <use href="#star" x="175" y="32"/>
+  <use href="#star" x="215" y="32"/>
+  <use href="#star" x="305" y="32"/>
+  <g stroke="#1a1a1a" stroke-width="1.2" fill="none">
+  <path d="M25,58 L25,66 Q25,72 31,72 L61.0,72 Q67.0,72 67.0,78 Q67.0,72 73.0,72 L103,72 Q109,72 109,66 L109,58"/>
+  <path d="M155,58 L155,66 Q155,72 161,72 L191.0,72 Q197.0,72 197.0,78 Q197.0,72 203.0,72 L233,72 Q239,72 239,66 L239,58"/>
+  <path d="M285,58 L285,66 Q285,72 291,72 L311.0,72 Q317.0,72 317.0,78 Q317.0,72 323.0,72 L343,72 Q349,72 349,66 L349,58"/>
+  </g>
+  <g font-family="Noto Sans CJK SC, Source Han Sans SC, WenQuanYi Zen Hei, sans-serif" font-size="14" fill="#1a1a1a" text-anchor="middle">
+    <text x="67" y="104">咖啡味</text>
+    <text x="197" y="104">薄荷味</text>
+    <text x="317" y="104">巧克力味</text>
+  </g>
+</svg>

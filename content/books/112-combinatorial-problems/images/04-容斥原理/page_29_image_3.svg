@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+  <rect width="300" height="250" fill="#ffffff"/>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="80" r="62"/>
+    <circle cx="196" cy="80" r="62"/>
+    <circle cx="148" cy="150" r="62"/>
+  </g>
+  <g font-family="Times New Roman, Liberation Serif, serif" font-style="italic" font-size="17" fill="#1a1a1a" text-anchor="middle">
+    <text x="70" y="52">A</text>
+    <text x="226" y="52">B</text>
+    <text x="148" y="236">C</text>
+  </g>
+  <g font-family="Times New Roman, Liberation Serif, serif" font-size="16" fill="#1a1a1a" text-anchor="middle">
+    <text x="72" y="86">1</text>
+    <text x="224" y="86">1</text>
+    <text x="148" y="196">1</text>
+    <text x="148" y="56">1</text>
+    <text x="105" y="134">1</text>
+    <text x="191" y="134">2</text>
+    <text x="148" y="108">1</text>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 145" width="760" height="145">
+  <rect width="760" height="145" fill="#ffffff"/>
+  <defs>
+    <g id="star"><path d="M0,-10 L2.35,-3.24 L9.51,-3.09 L3.80,1.24 L5.88,8.09 L0,4 L-5.88,8.09 L-3.80,1.24 L-9.51,-3.09 L-2.35,-3.24 Z" fill="#2b2b2b"/></g>
+  </defs>
+  <g stroke="#1a1a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="145" y1="14" x2="145" y2="46"/>
+  <line x1="240" y1="14" x2="240" y2="46"/>
+  <line x1="480" y1="14" x2="480" y2="46"/>
+  <line x1="520" y1="14" x2="520" y2="46"/>
+  </g>
+  <use href="#star" x="25" y="30"/>
+  <use href="#star" x="55" y="30"/>
+  <use href="#star" x="85" y="30"/>
+  <use href="#star" x="115" y="30"/>
+  <use href="#star" x="172" y="30"/>
+  <use href="#star" x="202" y="30"/>
+  <use href="#star" x="262" y="30"/>
+  <use href="#star" x="292" y="30"/>
+  <use href="#star" x="322" y="30"/>
+  <use href="#star" x="435" y="30"/>
+  <use href="#star" x="560" y="30"/>
+  <use href="#star" x="590" y="30"/>
+  <g stroke="#1a1a1a" stroke-width="1.2" fill="none">
+  <path d="M18,56 L18,64 Q18,70 24,70 L64.0,70 Q70.0,70 70.0,76 Q70.0,70 76.0,70 L116,70 Q122,70 122,64 L122,56"/>
+  <path d="M162,56 L162,64 Q162,70 168,70 L192.0,70 Q198.0,70 198.0,76 Q198.0,70 204.0,70 L228,70 Q234,70 234,64 L234,56"/>
+  <path d="M252,56 L252,64 Q252,70 258,70 L282.0,70 Q288.0,70 288.0,76 Q288.0,70 294.0,70 L318,70 Q324,70 324,64 L324,56"/>
+  <path d="M420,56 L420,64 Q420,70 426,70 L430.0,70 Q436.0,70 436.0,76 Q436.0,70 442.0,70 L446,70 Q452,70 452,64 L452,56"/>
+  <path d="M486,56 L486,64 Q486,70 492,70 L495.0,70 Q501.0,70 501.0,76 Q501.0,70 507.0,70 L510,70 Q516,70 516,64 L516,56"/>
+  <path d="M548,56 L548,64 Q548,70 554,70 L570.0,70 Q576.0,70 576.0,76 Q576.0,70 582.0,70 L598,70 Q604,70 604,64 L604,56"/>
+  </g>
+  <g font-family="Noto Sans CJK SC, Source Han Sans SC, WenQuanYi Zen Hei, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">
+    <text x="70" y="102">咖啡味</text>
+    <text x="198" y="102">薄荷味</text>
+    <text x="288" y="102">巧克力味</text>
+    <text x="436" y="102">咖啡味</text>
+    <text x="501" y="102">薄荷味</text>
+    <text x="576" y="102">巧克力味</text>
+    <text x="180" y="130" font-family="Times New Roman, Liberation Serif, serif" font-size="16">(a)</text>
+    <text x="506" y="130" font-family="Times New Roman, Liberation Serif, serif" font-size="16">(b)</text>
+  </g>
+</svg>

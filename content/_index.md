@@ -67,6 +67,9 @@ article_categories:
       - name: 算法新解-刘新宇
         icon: "books/算法新解-刘新宇/cover.jpg"
         link: "books/算法新解-刘新宇"
+      - name: 112个组合问题
+        icon: "books/112-combinatorial-problems/cover.jpg"
+        link: "books/112-combinatorial-problems"
       - name: 近世代数
         icon: "logo/Rubik's_cube_v2.svg"
         link: "books/group_theory"
